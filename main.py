@@ -5,4 +5,5 @@ from detailing import Detailing
 
 
 if __name__ == "__main__":
-    Detailing().start()
+    detailing = Detailing()
+    detailing.makeDxf()
