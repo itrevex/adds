@@ -1,11 +1,11 @@
 import ezdxf
 import sys
-
 sys.path.append("./common/")
 
-from utils import Utils
 from constants import Constants
-from center_line import CenterLine
+
+from utils import Utils
+from support import Support
 
 class Detailing:
     
@@ -15,7 +15,7 @@ class Detailing:
         self.appData = appData
         self.addLayersToModelSpace()
         self.setHeaderAttribs()
-        self.drawSupport()
+        self.drawSupports()
         pass
     
     def makeDxf(self):
@@ -37,19 +37,12 @@ class Detailing:
 
         self.drawLine(pt1, pt2, layer)
 
-    def drawSupport(self):
-        '''
-        **Routine for sorting the beam supports before plotting**
-	
-        pt1 = line beginning point                                                 
-        pt = Initial point                                                         
-        sw = column section width													
-        nos =  Number of column sections 											       
-        i = nos counter
-        '''	
-        
-        centreline = CenterLine(Constants.START_POINT, 400, 300)
-        self.drawLineObject(centreline)
+    def drawSupports(self):
+        support = Support().getSupportObjects()
+        #support can have centrelines, column lines and zigzags
+        for entity in support:
+            self.drawLineObject(entity)
+
         												
     def availableLineTypes(self):
         # iteration

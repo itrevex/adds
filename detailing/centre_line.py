@@ -2,7 +2,7 @@ import sys
 sys.path.append("./common/")
 from constants import Constants
 
-class CenterLine:
+class CentreLine:
 
     x = Constants.X
     y = Constants.Y

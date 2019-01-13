@@ -8,8 +8,9 @@ class Constants:
     Z = 2
 
     # scaling factors
+    COLUMN_LINE_FACTOR = 1.2
     CENTER_LINE_FACTOR = 1.75 
-    SCALE_FACTOR_COLUMNS = 2.2
+    SCALE_FACTOR_COLUMNS = 1
 
     #starting point
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
@@ -28,3 +29,8 @@ class Constants:
     #Header Attributes
     HEADER_ATTRIB_NAME = "attrib_name"
     HEADER_ATTRIB_VALUE = "attrib_value"
+
+    #Support constants
+    CENTRE_LINE = "centre_line"
+    SUPPORT_START = "start"
+    SUPPORT_END = "end"
