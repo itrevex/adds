@@ -4,8 +4,8 @@ from constants import Constants
 
 class CenterLine:
 
-    x = Constants.Y
-    y = Constants.X
+    x = Constants.X
+    y = Constants.Y
     z = Constants.Z
 
     def __init__(self, starting_point, beam_section_depth, 
@@ -14,6 +14,7 @@ class CenterLine:
         self.beam_section_depth = beam_section_depth
         # start point is at the centre of the drawing space
         #make point 1 of line equal to the starting point
+        self.layer = Constants.LAYER_CENTER_LINES
         self.pt1 = list(starting_point)
         self.pt2 = list(starting_point)
         self.starting_point = starting_point
@@ -44,3 +45,7 @@ class CenterLine:
         # update x points for both point and point 2
         self.pt1[self.x] = x_value
         self.pt2[self.x] = x_value
+
+    def getLayerName(self):
+        return self.layer
+

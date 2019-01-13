@@ -13,3 +13,18 @@ class Constants:
 
     #starting point
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
+
+    #Layers
+    LAYER_CENTER_LINES = "CenterLines"
+    LAYER_BEAM_LINES = "BeamLines"
+    LAYER_SUPPORT_LINES = "SupportLines"
+    LAYER_ZIGZAG_LINES = "Zigzag"
+
+    #Layer keys
+    LAYER_NAME = "layername"
+    LAYER_COLOR = "color"
+    LAYER_LINE_TYPE = "linetype"
+
+    #Header Attributes
+    HEADER_ATTRIB_NAME = "attrib_name"
+    HEADER_ATTRIB_VALUE = "attrib_value"

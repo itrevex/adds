@@ -1,0 +1,22 @@
+{
+    "CenterLines": {
+        "layername": "CenterLines",
+        "color": 4,
+        "linetype": "CENTER"
+    },
+    "BeamLines": {
+        "layername": "BeamLines",
+        "color": 5,
+        "linetype": "Continuous"
+    },
+    "SupportLines": {
+        "layername": "SupportLines",
+        "color": 1,
+        "linetype": "DASHED"
+    },
+    "Zigzag": {
+        "layername": "Zigzag",
+        "color": 7,
+        "linetype": "Continuous"
+    }
+}
