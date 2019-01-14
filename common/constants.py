@@ -10,7 +10,7 @@ class Constants:
     # scaling factors
     COLUMN_LINE_FACTOR = 1.2
     CENTER_LINE_FACTOR = 1.75 
-    SCALE_FACTOR_COLUMNS = 1
+    SCALE_FACTOR_COLUMNS = 1.
 
     #starting point
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
@@ -33,4 +33,12 @@ class Constants:
     #Support constants
     CENTRE_LINE = "centre_line"
     SUPPORT_START = "start"
+    SUPPORT_MID = "mid"
     SUPPORT_END = "end"
+
+    #Input Data
+    SUPPORTS = "supports" 
+    COLUMN_SECION_WIDTH = "column_section_widths"
+    COLUMN_CENTRE_CENTRE_LENGTHS = "column_centre_to_centre_lengths"
+    BEAM_DEPTH = "beam_depth"
+    STARTING_POINT = "starting_point"

@@ -1,0 +1,8 @@
+{
+    "starting_point": [0,0,0],
+    "supports": {
+        "column_section_widths": ["200.", "300.", "200.", "250"],
+        "column_centre_to_centre_lengths": ["4000.", "3000.", "2000."],
+        "beam_depth": "400."
+    }
+}

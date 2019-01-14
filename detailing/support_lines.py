@@ -19,7 +19,7 @@ class SupportLines:
 
     def startSupport(self):
         # 3 support lines needed
-        pt1 = self.support.starting_point
+        pt1 = list(self.support.starting_point)
         #draw full line at start
         support_line1 = SupportLine(pt1, self.support.beam_depth)
 
@@ -35,7 +35,7 @@ class SupportLines:
 
     def endSupport(self):
         #3 support lines needed
-        pt1 = self.support.starting_point
+        pt1 = list(self.support.starting_point)
         #draw 2 half lines at start
         support_line1 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
         support_line2 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
@@ -52,7 +52,7 @@ class SupportLines:
     def midSupport(self):
         #4 support lines needed
         #draw 4 half lines
-        pt1 = self.support.starting_point
+        pt1 = list(self.support.starting_point)
         support_line1 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
         support_line2 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
 

@@ -7,25 +7,37 @@ class Support:
     COLUMN_SECTION_WIDTH = "column_section_width"
     SUPPORT_LOCATION = "support_location"
 
-    def __init__(self):
-        self.support_location = "mid"
-        self.beam_depth = 400
-        self.column_section_width = 300
-        self.starting_point = [0.,0.,0.]
-        self.support_objects = []
+    def __init__(self, attribs):
+        self.support_location = attribs[Support.SUPPORT_LOCATION] #"mid"
+        self.beam_depth = attribs[Support.BEAM_DEPTH] #400
+        self.column_section_width = attribs[Support.COLUMN_SECTION_WIDTH] #300
+        self.starting_point = tuple(attribs[Support.STARTING_POINT]) #[0.,0.,0.]
         pass
 
     def getSupportObjects(self):
-      
-        centreline = CentreLine(self.starting_point, 
+        '''
+        return list of drawable support objects
+        These include the centre line, support vertical lines
+        and zigzag decoration on top of support
+        '''
+        support_objects = []
+        support_objects.append(self.getCentreLine())
+        support_objects.extend(self.getSupportLines())
+ 
+        return support_objects
+
+    def getCentreLine(self):
+        '''
+        return single drawable object
+        '''
+        return CentreLine(self.starting_point, 
             self.beam_depth, self.column_section_width)
 
-        support_lines = SupportLines(self)
-
-        self.support_objects.append(centreline)
-        self.support_objects.extend(support_lines.support_lines)
- 
-        return self.support_objects
+    def getSupportLines(self):
+        '''
+        return list of drawable objects
+        '''
+        return SupportLines(self).support_lines
 
     def setStartingPoint(self, starting_point):
         self.starting_point = starting_point

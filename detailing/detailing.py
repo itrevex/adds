@@ -5,7 +5,7 @@ sys.path.append("./common/")
 from constants import Constants
 
 from utils import Utils
-from support import Support
+from supports import Supports
 
 class Detailing:
     
@@ -38,10 +38,12 @@ class Detailing:
         self.drawLine(pt1, pt2, layer)
 
     def drawSupports(self):
-        support = Support().getSupportObjects()
+        support_entities = Supports(self.appData).getSupportEntites()
+        #support = Support().getSupportObjects()
         #support can have centrelines, column lines and zigzags
-        for entity in support:
-            self.drawLineObject(entity)
+        for entity in support_entities:
+           self.drawLineObject(entity)
+            
 
         												
     def availableLineTypes(self):

@@ -1,6 +1,5 @@
 import json
 import os
-from collections import OrderedDict
 
 class LoadData:
     def __init__(self):
@@ -21,6 +20,10 @@ class LoadData:
 
     def getHeaderAttribs(self):
         return json.load(open(self.getFile("assests/header_attribs.json"), encoding='utf8'))
+
+    def getInputData(self):
+        return json.load(open(self.getFile("assests/input_data.json"), encoding='utf8'))
+
 
 
     
