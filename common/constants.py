@@ -42,3 +42,6 @@ class Constants:
     COLUMN_CENTRE_CENTRE_LENGTHS = "column_centre_to_centre_lengths"
     BEAM_DEPTH = "beam_depth"
     STARTING_POINT = "starting_point"
+
+    #Entities
+    ENTITY_LINE = "line"

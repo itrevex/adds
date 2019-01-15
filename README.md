@@ -4,6 +4,7 @@
 
 Run the following command
 
+* rem `py -h` to show help
 * `./py37.bat` or any other python versions
 
 ## INSTALLING LIBRARIES USING PY37.BAT

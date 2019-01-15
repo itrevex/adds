@@ -1,51 +1,25 @@
 import sys
 sys.path.append("./common/")
 from constants import Constants
+from support_line import SupportLine
 
-class CentreLine:
+class CentreLine(SupportLine):
 
-    x = Constants.X
-    y = Constants.Y
-    z = Constants.Z
-
-    def __init__(self, starting_point, beam_section_depth, 
-        column_section_width):
-    
-        self.beam_section_depth = beam_section_depth
+    def __init__(self, support_props):
         # start point is at the centre of the drawing space
         #make point 1 of line equal to the starting point
-        self.layer = Constants.LAYER_CENTER_LINES
-        self.pt1 = list(starting_point)
-        self.pt2 = list(starting_point)
-        self.starting_point = starting_point
-        self.column_section_width = column_section_width
-        
-        self.lowerPoint1()
-        self.elevatePoint2()
+        super().__init__(support_props)
+        self.column_section_width = support_props.column_section_width
         self.centerPointsAlongX()
 
-    def lowerPoint1(self):
-
-        #change the y value of the starting point to put at bottom
-        self.pt1[self.y] -= (self.beam_section_depth * \
-            Constants.CENTER_LINE_FACTOR) * \
-            Constants.SCALE_FACTOR_COLUMNS
-
-    def elevatePoint2(self):
-        #change the y value of the starting point to put at bottom
-        self.pt2[self.y] += (self.beam_section_depth * \
-            Constants.CENTER_LINE_FACTOR) * \
-            Constants.SCALE_FACTOR_COLUMNS
 
     def centerPointsAlongX(self):
 
         ## move point by half of the column section width
-        x_value = self.starting_point[self.x] + self.column_section_width * 0.5
+        x_value = self.starting_point[Constants.X] + self.column_section_width * 0.5
 
         # update x points for both point and point 2
-        self.pt1[self.x] = x_value
-        self.pt2[self.x] = x_value
+        self.pt1[Constants.X] = x_value
+        self.pt2[Constants.X] = x_value
 
-    def getLayerName(self):
-        return self.layer
 

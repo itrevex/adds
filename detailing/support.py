@@ -1,5 +1,10 @@
+import sys
+sys.path.append("./common/")
+from constants import Constants
+
 from centre_line import CentreLine
 from support_lines import SupportLines
+from support_properties import SupportProps
 
 class Support:
     STARTING_POINT = "starting_point"
@@ -30,8 +35,13 @@ class Support:
         '''
         return single drawable object
         '''
-        return CentreLine(self.starting_point, 
-            self.beam_depth, self.column_section_width)
+
+        support_props = SupportProps(self.beam_depth, Constants.LAYER_CENTER_LINES, 
+            Constants.CENTER_LINE_FACTOR, self.starting_point, 
+            column_section_width=self.column_section_width)
+        centreLine =  CentreLine(support_props)
+        
+        return centreLine
 
     def getSupportLines(self):
         '''

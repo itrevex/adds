@@ -1,12 +1,17 @@
 import sys
 sys.path.append("./common/")
 from support_line import SupportLine
+from support_properties import SupportProps
 from constants import Constants
 
 class SupportLines:
     def __init__(self, support):
         self.support_lines = []
         self.support = support
+
+        self.suppport_props = SupportProps(support.beam_depth,
+            Constants.LAYER_SUPPORT_LINES, Constants.COLUMN_LINE_FACTOR)
+
         self.getSupportLines()
         
     def getSupportLines(self):
@@ -21,13 +26,20 @@ class SupportLines:
         # 3 support lines needed
         pt1 = list(self.support.starting_point)
         #draw full line at start
-        support_line1 = SupportLine(pt1, self.support.beam_depth)
+        self.suppport_props.setStartingPoint(pt1)
+        self.suppport_props.setCondition("")
+        support_line1 = SupportLine(self.suppport_props)
 
         #move the x point of starting by column section width
         pt1[Constants.X] += self.support.column_section_width * Constants.SCALE_FACTOR_COLUMNS
         #draw 2 half lines at end
-        support_line2 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
-        support_line3 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
+        self.suppport_props.setStartingPoint(pt1)
+
+        self.suppport_props.setCondition(SupportLine.ELEVATE)
+        support_line2 = SupportLine(self.suppport_props)
+
+        self.suppport_props.setCondition(SupportLine.LOWER)
+        support_line3 = SupportLine(self.suppport_props)
 
         self.support_lines.append(support_line1)
         self.support_lines.append(support_line2)
@@ -37,13 +49,20 @@ class SupportLines:
         #3 support lines needed
         pt1 = list(self.support.starting_point)
         #draw 2 half lines at start
-        support_line1 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
-        support_line2 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
+        self.suppport_props.setStartingPoint(pt1)
+        
+        self.suppport_props.setCondition(SupportLine.ELEVATE)
+        support_line1 = SupportLine(self.suppport_props)
+
+        self.suppport_props.setCondition(SupportLine.LOWER)
+        support_line2 = SupportLine(self.suppport_props)
 
         #move the x point of starting by column section width
         #draw full line at end
         pt1[Constants.X] += self.support.column_section_width * Constants.SCALE_FACTOR_COLUMNS
-        support_line3 = SupportLine(pt1, self.support.beam_depth)
+        
+        self.suppport_props.setCondition("")
+        support_line3 = SupportLine(self.suppport_props)
 
         self.support_lines.append(support_line1)
         self.support_lines.append(support_line2)
@@ -53,13 +72,22 @@ class SupportLines:
         #4 support lines needed
         #draw 4 half lines
         pt1 = list(self.support.starting_point)
-        support_line1 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
-        support_line2 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
+        self.suppport_props.setStartingPoint(pt1)
+        
+        self.suppport_props.setCondition(SupportLine.ELEVATE)
+        support_line1 = SupportLine(self.suppport_props)
+
+        self.suppport_props.setCondition(SupportLine.LOWER)
+        support_line2 = SupportLine(self.suppport_props)
 
         pt1[Constants.X] += self.support.column_section_width * Constants.SCALE_FACTOR_COLUMNS
+        self.suppport_props.setStartingPoint(pt1)
         
-        support_line3 = SupportLine(pt1, self.support.beam_depth, SupportLine.ELEVATE)
-        support_line4 = SupportLine(pt1, self.support.beam_depth, SupportLine.LOWER)
+        self.suppport_props.setCondition(SupportLine.ELEVATE)
+        support_line3 = SupportLine(self.suppport_props)
+
+        self.suppport_props.setCondition(SupportLine.LOWER)
+        support_line4 = SupportLine(self.suppport_props)
 
         self.support_lines.append(support_line1)
         self.support_lines.append(support_line2)
