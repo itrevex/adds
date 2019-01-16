@@ -4,5 +4,118 @@
         "column_section_widths": ["200.", "300.", "200.", "250"],
         "column_centre_to_centre_lengths": ["4000.", "3000.", "2000."],
         "beam_depth": "400."
+    },
+    "sections":{
+        "section_1":{
+            "bf_top": "500",
+            "bf_bottom": "",
+            "bw": "200",
+            "d": "350",
+            "df": "250",
+            "w_offset": "150"
+        },
+        "section_2":{
+            "bf_top": "350",
+            "bf_bottom": "",
+            "bw": "200",
+            "d": "350",
+            "df": "250",
+            "w_offset": "0"
+        },
+        "section_3": {
+            "bf_top": "350",
+            "bf_bottom": "",
+            "bw": "200",
+            "d": "350",
+            "df": "250",
+            "w_offset": "150"
+        }
+    },
+    "supports_types":{
+        "support_type_1":{
+            "top": {
+                "b": "200",
+                "w": "200",
+                "h_m": "3"
+            },
+            "bottom": {
+                "b": "200",
+                "w": "200",
+                "h_m": "3"
+            }
+        },
+        "support_type_2":{
+            "bottom": {
+                "b": "200",
+                "w": "300",
+                "h_m": "3"
+            }
+        }
+    },
+    "beams":{
+        "beams_1": {
+            "beam_depth": "400.",
+            "spans":{
+                "span_1":{
+                    "length_m": "4.15",
+                    "section_left": "section_2",
+                    "section_right": "section_1"
+                },
+                "span_2":{
+                    "length_m": "3",
+                    "section_left": "section_1",
+                    "section_right": "section_1"
+                },
+                "span_3":{
+                    "length_m": "3.2",
+                    "section_left": "section_1",
+                    "section_right": "section_1"
+                },
+                "span_4":{
+                    "length_m": "2",
+                    "section_left": "section_3",
+                    "section_right": "section_1"
+                }
+            },
+            "supports_":{
+                "support_1": "support_type_1",
+                "support_2": "support_type_2",
+                "support_3": "support_type_1",
+                "support_4": "support_type_2",
+                "support_5": "support_type_1"
+            }
+        },
+        "beam_2": {
+            "beam_depth": "400.",
+            "spans":{
+                "span_1":{
+                    "length_m": "4.15",
+                    "section_left": "section_2",
+                    "section_right": "section_1"
+                },
+                "span_2":{
+                    "length_m": "3",
+                    "section_left": "section_1",
+                    "section_right": "section_1"
+                },
+                "span_3":{
+                    "length_m": "3.2",
+                    "section_left": "section_1",
+                    "section_right": "section_1"
+                },
+                "span_4":{
+                    "length_m": "2",
+                    "section_left": "section_3",
+                    "section_right": "section_1"
+                }
+            },
+            "supports_":{
+                "support_1": "support_type_1",
+                "support_2": "support_type_2",
+                "support_3": "support_type_1",
+                "support_4": "support_type_2",
+                "support_5": "support_type_1"
+            }
+        }
     }
 }

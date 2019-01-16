@@ -9,6 +9,6 @@ appData = LoadData()
 
 if __name__ == "__main__":
     detailing = Detailing(appData)
-    detailing.makeDxf()
+    detailing.trials()
     # detailing.availableLineTypes()
     

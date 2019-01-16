@@ -45,3 +45,13 @@ class Constants:
 
     #Entities
     ENTITY_LINE = "line"
+
+    #BEAM SECTIONS
+    SECTIONS = "sections"
+    SECTIONS_B = "b" #b - total width of section
+    SECTIONS_BF_TOP = "bf_top" #bf_top - width  of flange on top
+    SECTIONS_BF_BOTTOM = "bf_bottom" #bf_bottom - width of flange at the bottom
+    SECTIONS_BW = "bw" #bw - width of web
+    SECTIONS_D = "d" #d - total depth of section
+    SECTIONS_DF = "df" #df - depth of flange
+    SECTIONS_W_OFFSET = "w_offset" #w_offset - off set of web from left starting point of section
