@@ -6,6 +6,7 @@ from constants import Constants
 
 from utils import Utils
 from supports import Supports
+from beams.beams import Beams
 
 class Detailing:
     
@@ -79,7 +80,7 @@ class Detailing:
             self.dwg.header.__setitem__(attribName, attribValue)
 
     def trials(self):
-        Supports(self.app_data).loadSections()
+        Beams(self.app_data.getInputData()).getStartingPoint()
         
 
 

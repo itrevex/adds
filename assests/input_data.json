@@ -33,22 +33,22 @@
     },
     "supports_types":{
         "support_type_1":{
-            "top": {
-                "b": "200",
-                "w": "200",
-                "h_m": "3"
+            "column_top": {
+                "section_d": "200",
+                "section_b": "200",
+                "column_h_m": "3"
             },
-            "bottom": {
-                "b": "200",
-                "w": "200",
-                "h_m": "3"
+            "column_bottom": {
+                "section_d": "200",
+                "section_b": "200",
+                "column_h_m": "3"
             }
         },
         "support_type_2":{
-            "bottom": {
-                "b": "200",
-                "w": "300",
-                "h_m": "3"
+            "column_bottom": {
+                "section_d": "200",
+                "section_b": "300",
+                "column_h_m": "3"
             }
         }
     },
@@ -77,7 +77,7 @@
                     "section_right": "section_1"
                 }
             },
-            "supports_":{
+            "supports":{
                 "support_1": "support_type_1",
                 "support_2": "support_type_2",
                 "support_3": "support_type_1",
@@ -86,7 +86,7 @@
             }
         },
         "beam_2": {
-            "beam_depth": "400.",
+            "beam_depth": "450.",
             "spans":{
                 "span_1":{
                     "length_m": "4.15",
@@ -109,7 +109,7 @@
                     "section_right": "section_1"
                 }
             },
-            "supports_":{
+            "supports":{
                 "support_1": "support_type_1",
                 "support_2": "support_type_2",
                 "support_3": "support_type_1",
@@ -118,4 +118,4 @@
             }
         }
     }
-}
+} 

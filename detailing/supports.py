@@ -54,13 +54,8 @@ class Supports:
         self.column_section_widths = list(map(float, self.supports_attribs[Constants.COLUMN_SECION_WIDTH]))
         self.column_centre_centre_lengths \
             = list(map(float, self.supports_attribs[Constants.COLUMN_CENTRE_CENTRE_LENGTHS]))
-        self.loadSections()
+        # self.loadSections()
 
-
-    def loadSections(self):
-        self.sections = {}
-        for name, props in self.input_data[Constants.SECTIONS].items():
-            sections[name] = Section(name, props)
 
     def getSupportEntites(self):
         '''

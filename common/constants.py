@@ -13,6 +13,7 @@ class Constants:
     SCALE_FACTOR_COLUMNS = 1.
 
     #starting point
+    STARTING_POINT = "starting_point"
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
 
     #Layers
@@ -37,11 +38,8 @@ class Constants:
     SUPPORT_END = "end"
 
     #Input Data
-    SUPPORTS = "supports" 
     COLUMN_SECION_WIDTH = "column_section_widths"
     COLUMN_CENTRE_CENTRE_LENGTHS = "column_centre_to_centre_lengths"
-    BEAM_DEPTH = "beam_depth"
-    STARTING_POINT = "starting_point"
 
     #Entities
     ENTITY_LINE = "line"
@@ -55,3 +53,22 @@ class Constants:
     SECTIONS_D = "d" #d - total depth of section
     SECTIONS_DF = "df" #df - depth of flange
     SECTIONS_W_OFFSET = "w_offset" #w_offset - off set of web from left starting point of section
+
+    #SPANS
+    SPAN_LENGTH = "length_m"
+    SPAN_SECTION_LEFT = "section_left"
+    SPAN_SECTION_RIGHT = "section_right"
+
+    #SUPPORT TYPES AND COLUMNS
+    SUPPORT_TYPES = "supports_types"
+    COLUMN_TOP = "column_top"
+    COLUMN_BOTTOM = "column_bottom"
+    COLUMN_B = "section_b"
+    COLUMN_D = "section_d"
+    COLUMN_H_M = "column_h_m"
+
+    #BEAMS
+    BEAMS = "beams"
+    BEAM_DEPTH = "beam_depth"
+    SUPPORTS = "supports" 
+    SPANS = "spans"
