@@ -7,6 +7,7 @@ from constants import Constants
 from utils import Utils
 from supports import Supports
 from beams.beams import Beams
+from coordinates.section_coord import SectionCoordinates
 
 class Detailing:
     
@@ -80,7 +81,15 @@ class Detailing:
             self.dwg.header.__setitem__(attribName, attribValue)
 
     def trials(self):
-        Beams(self.app_data.getInputData()).getStartingPoint()
+        beams_data = Beams(self.app_data.getInputData())
+        beams = beams_data.getBeams()
+        sections = beams_data.getSections()
+        for name, beam in beams.items():
+            beam_sectoins = beam.getSections()
+            for name in beam_sectoins:
+                section = sections[name]
+                sec_coords = SectionCoordinates((0,0,0), section, beam.beam_depth)
+                print(sec_coords.getVertices())
         
 
 
