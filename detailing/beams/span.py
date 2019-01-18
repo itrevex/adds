@@ -1,8 +1,3 @@
-import sys
-sys.path.append("../common/")
-
-from constants import Constants
-
 class Span:
     '''
     defines span with the span centre to centre length as span_length
@@ -10,11 +5,16 @@ class Span:
     The section on the left of the span and the section on the right of the span
     '''
 
+        #SPANS
+    SPAN_LENGTH = "length_m"
+    SPAN_SECTION_LEFT = "section_left"
+    SPAN_SECTION_RIGHT = "section_right"
+
     def __init__(self, name, props):
         self.name = name
-        self.span_length = props[Constants.SPAN_LENGTH]
-        self.section_left = props[Constants.SPAN_SECTION_LEFT]
-        self.section_right = props[Constants.SPAN_SECTION_RIGHT]
+        self.span_length = props[Span.SPAN_LENGTH]
+        self.section_left = props[Span.SPAN_SECTION_LEFT]
+        self.section_right = props[Span.SPAN_SECTION_RIGHT]
 
     def setSpanLength(self, span_length):
         self.span_length = span_length

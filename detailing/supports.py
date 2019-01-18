@@ -1,6 +1,5 @@
 from support import Support
 from constants import Constants
-from section import Section
 
 class Supports:
     def __init__(self, app_data):

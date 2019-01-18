@@ -1,8 +1,3 @@
-import sys
-sys.path.append("../common/")
-
-from constants import Constants
-
 class Column:
     '''
     Column has the column section properties
@@ -13,11 +8,15 @@ class Column:
 
     '''
 
+    COLUMN_B = "section_b"
+    COLUMN_D = "section_d"
+    COLUMN_H_M = "column_h_m"
+
     def __init__(self, type, props):
         self.type = type
-        self.column_b = props[Constants.COLUMN_B]
-        self.column_d = props[Constants.COLUMN_D]
-        self.column_h_m = props[Constants.COLUMN_H_M]
+        self.column_b = props[Column.COLUMN_B]
+        self.column_d = props[Column.COLUMN_D]
+        self.column_h_m = props[Column.COLUMN_H_M]
 
     def setB(self, column_b):
         self.column_b = column_b

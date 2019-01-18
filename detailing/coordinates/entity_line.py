@@ -8,6 +8,7 @@ class EntityLine:
     it is initialized with pt1(x,y,z), pt2(x,y,z)
     and the layer on which the point is sitting
     '''
+    ENTITY_LINE = "entity_line"
 
     X = 0
     Y = 1
