@@ -7,6 +7,7 @@ class Beam:
         self.beam_depth = float(beam_depth)
         self.spans = spans
         self.supports = supports
+        self.sections = self.getSections()
         self.name = name
     
 
@@ -16,9 +17,6 @@ class Beam:
             sections.add(span.section_left)
             sections.add(span.section_right)
         
-        print()
-        print(self.name)
-        print(sections)
         return sections
 
     def setBeamDepth(self, beam_depth):

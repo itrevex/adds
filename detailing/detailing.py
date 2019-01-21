@@ -7,7 +7,7 @@ from constants import Constants
 from utils import Utils
 from supports import Supports
 from beams.beams import Beams
-from coordinates.section_coord import SectionCoordinates
+from coordinates.span_coord import SpanCoordinates
 
 class Detailing:
     
@@ -17,7 +17,7 @@ class Detailing:
         self.app_data = app_data
         self.addLayersToModelSpace()
         self.setHeaderAttribs()
-        self.drawSupports()
+        # self.drawSupports()
         pass
     
     def makeDxf(self):
@@ -36,7 +36,6 @@ class Detailing:
         pt1 = lineObject.pt1
         pt2 = lineObject.pt2
         layer = lineObject.layer
-
         self.drawLine(pt1, pt2, layer)
 
     def drawSupports(self):
@@ -80,17 +79,48 @@ class Detailing:
             attribValue = attrib[Constants.HEADER_ATTRIB_VALUE]
             self.dwg.header.__setitem__(attribName, attribValue)
 
+    def drawEntities(self, entities):
+        if (entities == None):
+            return
+
+        for entity in entities:
+            self.drawLineObject(entity)
+
     def trials(self):
         beams_data = Beams(self.app_data.getInputData())
         beams = beams_data.getBeams()
         sections = beams_data.getSections()
+        entry_point = (0,0,0)
+        starting_point = list(entry_point)
         for name, beam in beams.items():
-            beam_sectoins = beam.getSections()
-            for name in beam_sectoins:
-                section = sections[name]
-                sec_coords = SectionCoordinates((0,0,0), section, beam.beam_depth)
-                print(sec_coords.getVertices())
-        
+            beam_spans = beam.spans
+            print()
+            print(name)
+            for span in beam.spans.values():
+                span_coords = SpanCoordinates(starting_point,span.span_length)
+                
+                self.drawLineObject(span_coords.getSpanLine())
+
+                #draw left section
+                section = sections[span.section_left]
+                self.drawSectionEntities(span_coords.start_point, beam, section)
+
+                #draw right section
+                section = sections[span.section_right]
+                self.drawSectionEntities(span_coords.end_point, beam, section)
+
+                starting_point = list(span_coords.end_point)
+
+            starting_point[1] += 1500
+            starting_point[0] = entry_point[0]
+
+        self.makeDxf()
+
+    def drawSectionEntities(self, starting_point, beam, section):
+        sec_coords = section.getCoordinates(starting_point,beam.beam_depth)
+        entities = sec_coords.getEntities()
+        self.drawEntities(entities)
+            
 
 
 

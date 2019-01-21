@@ -1,6 +1,4 @@
 import sys
-sys.path.append("./common/")
-from constants import Constants
 
 class EntityLine:
     '''
@@ -14,12 +12,12 @@ class EntityLine:
     Y = 1
     Z = 2
     
-    def __init__(self, pt1, pt2, layer):
+    def __init__(self, pt1, pt2, layer="0"):
 
-        self.pt1 = pt1
-        self.pt2 = pt2
+        self.pt1 = tuple(pt1)
+        self.pt2 = tuple(pt2)
         self.layer = layer
-        self.type = Constants.ENTITY_LINE
+        self.type = EntityLine.ENTITY_LINE
 
     def setPt1(self, pt):
         self.pt1 = pt

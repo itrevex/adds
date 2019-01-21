@@ -1,8 +1,6 @@
+from coordinates.section_coord import SectionCoordinates
+
 class Section:
-    L_RIGHT_SECTION = "l_right_section"
-    L_LEFT_SECTION = "l_left_section"
-    T_SECTION = "t_section"
-    SQUARE_SECTION = "square_section"
 
     SECTIONS_B = "b" #b - total width of section
     SECTIONS_BF_TOP = "bf_top" #bf_top - width  of flange on top
@@ -53,16 +51,16 @@ class Section:
         # T, L and square
         if (self.df == 0.):
             #this is a square section, it has no flange depth
-            return Section.SQUARE_SECTION
+            return SectionCoordinates.SQUARE_SECTION
         else:
             if (self.w_offset == 0.):
                 #this is an L section with flange protruding to the right
-                return Section.L_RIGHT_SECTION
+                return SectionCoordinates.L_RIGHT_SECTION
             elif (self.w_offset + self.bw >= self.bf):
                 #this is still an L section with flange protruding to the left
-                return Section.L_LEFT_SECTION
+                return SectionCoordinates.L_LEFT_SECTION
             else:
-                return Section.T_SECTION
+                return SectionCoordinates.T_SECTION
                 #L flanged section
             
 
@@ -96,7 +94,6 @@ class Section:
     def setWOffset(self, w_offset):
         self.w_offset = float(w_offset)
 
-    def getVertices(self, starting_point):
-
-        pass
+    def getCoordinates(self, starting_point, beam_depth):
+        return SectionCoordinates(starting_point, self, beam_depth)
 
