@@ -10,11 +10,13 @@ class Span:
     SPAN_SECTION_LEFT = "section_left"
     SPAN_SECTION_RIGHT = "section_right"
 
-    def __init__(self, name, props):
+    def __init__(self, name, props, index = 0):
         self.name = name
         self.span_length = float(props[Span.SPAN_LENGTH])
         self.section_left = props[Span.SPAN_SECTION_LEFT]
         self.section_right = props[Span.SPAN_SECTION_RIGHT]
+        self.index = index
+        
 
     def setSpanLength(self, span_length):
         self.span_length = float(span_length)
@@ -24,6 +26,12 @@ class Span:
 
     def setSectionRight(self, section_right):
         self.section_right = section_right
+
+    def setColumnRight(self, column):
+        self.column_right = column
+
+    def setColumnLeft(self, column):
+        self.column_left = column
 
     def setName(self, name):
         self.name = name

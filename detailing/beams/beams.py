@@ -28,8 +28,8 @@ class Beams:
         beams_raw_data = self.app_data[Beams.BEAMS]
         for beam_name, beam_raw_data in beams_raw_data.items():
             beam_depth = beam_raw_data[Beams.BEAM_DEPTH]
-            spans = self.getBeamSpans(beam_raw_data[Beams.SPANS])
             supports = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
+            spans = self.getBeamSpans(beam_raw_data[Beams.SPANS])
 
             beams[beam_name] = Beam(beam_depth, spans, supports, beam_name)
 
@@ -37,8 +37,10 @@ class Beams:
 
     def getBeamSpans(self, spans_raw_data):
         spans = {}
+        counter = 0
         for span_name, span_raw_data in spans_raw_data.items():
-            spans[span_name] = Span(span_name, span_raw_data)
+            spans[span_name] = Span(span_name, span_raw_data, counter)
+            counter += 1
 
         return spans
 
@@ -61,7 +63,7 @@ class Beams:
         for name, props in self.app_data[Beams.SUPPORT_TYPES].items():
             column_top = self.getColumn(props, Beams.COLUMN_TOP)
             column_bottom = self.getColumn(props, Beams.COLUMN_BOTTOM)
-            self.support_types[name] = SupportType(column_top, column_bottom)
+            support_types[name] = SupportType(column_top, column_bottom)
 
         return support_types
 

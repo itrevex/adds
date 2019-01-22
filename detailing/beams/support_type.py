@@ -15,3 +15,17 @@ class SupportType:
 
     def setColumnBottom(self, column_bottom):
         self.column_bottom = column_bottom
+
+    def getColumnTopWidth(self):
+        if self.column_top == None:
+            return 0.0
+        return self.column_top.column_b
+
+    def getColumnBottomWidth(self):
+        if self.column_bottom == None:
+            return 0.0
+        return self.column_bottom.column_b
+
+
+
+        
