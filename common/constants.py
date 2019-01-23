@@ -12,15 +12,21 @@ class Constants:
     CENTER_LINE_FACTOR = 1.75 
     SCALE_FACTOR_COLUMNS = 1.
 
+    #ZIGZAG AS FACTORS OF THE COLUMN WIDTH
+    Z_OUTER_SEGMENT = 0.15
+    Z_INNER_SEGMENT = 0.3125
+    Z_TIP_DEPTH = 0.2576
+    Z_TIP_LENGTH = 0.40625
+
     #starting point
     STARTING_POINT = "starting_point"
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
 
     #Layers
-    LAYER_CENTER_LINES = "CenterLines"
-    LAYER_BEAM_LINES = "BeamLines"
-    LAYER_SUPPORT_LINES = "SupportLines"
-    LAYER_ZIGZAG_LINES = "Zigzag"
+    LAYER_CENTER_LINES = "S-CENTRE"
+    LAYER_BEAM_LINES = "S-CONCRETE"
+    LAYER_SUPPORT_LINES = "S-CONCRETE"
+    LAYER_ZIGZAG_LINES = "S-18"
 
     #Layer keys
     LAYER_NAME = "layername"

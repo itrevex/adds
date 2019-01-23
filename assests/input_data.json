@@ -10,15 +10,15 @@
             "bf_top": "500",
             "bf_bottom": "",
             "bw": "200",
-            "d": "350",
-            "df": "250",
+            "d": "450",
+            "df": "200",
             "w_offset": "150"
         },
         "section_2":{
             "bf_top": "350",
             "bf_bottom": "",
             "bw": "200",
-            "d": "350",
+            "d": "450",
             "df": "250",
             "w_offset": "0"
         },
@@ -26,15 +26,15 @@
             "bf_top": "350",
             "bf_bottom": "",
             "bw": "200",
-            "d": "350",
-            "df": "250",
+            "d": "450",
+            "df": "200",
             "w_offset": "150"
         },
         "section_4": {
             "bf_top": "350",
             "bf_bottom": "",
             "bw": "200",
-            "d": "350",
+            "d": "450",
             "w_offset": "150"
         }
     },
@@ -61,7 +61,7 @@
     },
     "beams":{
         "beams_1": {
-            "beam_depth": "400.",
+            "beam_depth": "450.",
             "spans":{
                 "span_1":{
                     "length_m": "4.15",
@@ -75,8 +75,8 @@
                 },
                 "span_3":{
                     "length_m": "3.2",
-                    "section_left": "section_1",
-                    "section_right": "section_1"
+                    "section_left": "section_4",
+                    "section_right": "section_4"
                 },
                 "span_4":{
                     "length_m": "2",

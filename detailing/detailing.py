@@ -94,42 +94,102 @@ class Detailing:
 
         entry_point = (0,0,0)
         starting_point = list(entry_point)
-        for name, beam in beams.items():
+        for beam_name, beam in beams.items():
             beam_supports = list(beam.supports.values())
             total_spans = len(beam.spans)
+            total_span_length = 0.
+            beam_start_point = tuple(starting_point)
+            columns_widths = []
             print()
-            print(name)
-
+            print(beam_name)
+            
             for span in beam.spans.values():
                 
                 span_lines = []
-                span_coords = SpanCoordinates(starting_point,span.span_length)
+                total_span_length += span.span_length
+                span_coords = SpanCoordinates(starting_point,span.span_length, 
+                    beam.beam_depth)
+
+                Detailing.loadEndColumnWidth(span, support_types, beam_supports, 
+                    total_spans, columns_widths)
 
                 column_lines = Detailing.getColumnLines(support_types, beam_supports, 
-                    span, span_coords, beam, total_spans)
+                    span, span_coords, total_spans)
 
                 span_lines.extend(column_lines)
-                span_lines.append(span_coords.getSpanLine())
+
+                if span.index == total_spans - 1:
+                    beam_lines = span_coords.getBeamLines(beam_start_point,
+                        total_span_length, columns_widths)
+
+                    span_lines.extend(beam_lines)
+
+                section_lines = Detailing.getSectionLines(sections, span,support_types, 
+                    beam_supports, span_coords)
+
+                span_lines.extend(section_lines)  
+                # span_lines.append(span_coords.getSpanLine())
 
                 #draw left section
-                section = sections[span.section_left]
-                # self.drawSectionEntities(span_coords.start_point, beam, section)
+                
 
-                #draw right section
-                section = sections[span.section_right]
+                
+
+                #can draw out section but this will be for later when showing
+                #section details
+                #section = sections[span.section_left]
                 # self.drawSectionEntities(span_coords.end_point, beam, section)
 
                 self.drawEntities(span_lines)
                 starting_point = list(span_coords.end_point)
 
-            starting_point[1] += 3500
+            starting_point[1] -= 3500
             starting_point[0] = entry_point[0]
 
         self.makeDxf()
 
-    def getSupportLines(support_types, support, span_coords, beam, left_column = True):
+    def getSectionLines(sections, span,support_types, beam_supports, span_coords):
+        left_section = sections[span.section_left]
+        right_section = sections[span.section_right]
+
+        column_widths = Detailing.spanColumnWidths(span, 
+            support_types, beam_supports)
+
+        return span_coords.getSectionLines(column_widths, 
+            left_section, right_section)
+
+
+    def loadEndColumnWidth(span, support_types, beam_supports, 
+        total_spans, columns_widths):
+        if (span.index == 0):
+            start_column_widths = Detailing.getEndColumnWidth(support_types, 
+                beam_supports, span.index)
+            columns_widths.extend(start_column_widths)
+
+        if span.index == total_spans - 1:
+            end_column_widths = Detailing.getEndColumnWidth(support_types, 
+                beam_supports, total_spans)
+            columns_widths.extend(end_column_widths)
+
+    def spanColumnWidths(span, support_types, beam_supports):
+        columns_widths = []
+        start_column_widths = Detailing.getEndColumnWidth(support_types, 
+                beam_supports, span.index)
+        columns_widths.extend(start_column_widths)
+            
+        end_column_widths = Detailing.getEndColumnWidth(support_types, 
+                beam_supports, span.index + 1)
+        columns_widths.extend(end_column_widths)
+
+        return columns_widths
+            
+    
+
+    def getSupportLines(support_types, support, span_coords, left_column = True):
         '''
         support could be support left or support right
+
+        layer = supports
         '''
 
         column_top_width = support_types[support].getColumnTopWidth()
@@ -137,15 +197,27 @@ class Detailing:
 
         
         return span_coords.getColumnLines(column_top_width, 
-            column_bottom_width, beam.beam_depth, left_column)
+            column_bottom_width, left_column)
 
-    
+    def getEndColumnWidth(support_types, beam_supports, index):
+        left_support = beam_supports[index]
+        column_top_width = support_types[left_support].getColumnTopWidth()
+        column_bottom_width = support_types[left_support].getColumnBottomWidth()
+
+        if column_top_width == 0.:
+                column_top_width = column_bottom_width
+        
+        if column_bottom_width == 0.:
+            column_bottom_width = column_top_width
+
+        return [column_top_width, column_bottom_width]
+
     def getColumnLines(support_types, beam_supports, span, 
-        span_coords, beam, total_spans):
+        span_coords, total_spans):
         support_lines = []
         left_support = beam_supports[span.index]
         column_lines = Detailing.getSupportLines(support_types,
-            left_support, span_coords, beam)
+            left_support, span_coords)
 
         support_lines.extend(column_lines)
         # do I need the right support, yes; if it is the last span
@@ -153,7 +225,7 @@ class Detailing:
         if (span.index == total_spans - 1):
             right_support = beam_supports[span.index + 1]
             column_lines = Detailing.getSupportLines(support_types,
-            right_support, span_coords, beam, False)
+            right_support, span_coords, False)
 
             support_lines.extend(column_lines)
 

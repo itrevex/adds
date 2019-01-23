@@ -1,22 +1,17 @@
 {
     "CenterLines": {
-        "layername": "CenterLines",
-        "color": 4,
+        "layername": "S-CENTRE",
+        "color": 1,
         "linetype": "CENTER"
     },
     "BeamLines": {
-        "layername": "BeamLines",
-        "color": 5,
+        "layername": "S-CONCRETE",
+        "color": 150,
         "linetype": "Continuous"
     },
-    "SupportLines": {
-        "layername": "SupportLines",
-        "color": 1,
-        "linetype": "DASHED"
-    },
     "Zigzag": {
-        "layername": "Zigzag",
-        "color": 7,
+        "layername": "S-18",
+        "color": 1,
         "linetype": "Continuous"
     }
 }

@@ -1,6 +1,7 @@
 from .entity_line import EntityLine
+from .coord_change import ChoordChange
 
-class SectionCoordinates:
+class SectionCoordinates(ChoordChange):
 
     '''
     starting_point is a tuple representing with
@@ -30,9 +31,10 @@ class SectionCoordinates:
 
     def __init__(self, starting_point, section, beam_depth = None, scale_factor = 1.):
         
+        super().__init__(scale_factor)
+
         self.starting_point = list(map(float, starting_point))
         self.section = section
-        self.scale_factor = float(scale_factor)
         self.section_depth = self.getSectionDepth(beam_depth)
         self.vertices = self.getVertices()
         
@@ -80,30 +82,6 @@ class SectionCoordinates:
             lines.append(line)
             
         return lines
-
-    def changeY(self, coord, value):
-    
-        '''
-        change y coordinate of coord by the value sent in.
-        A scale factor is applied if it is a user preference
-        '''
-
-        new_coord = list(coord)
-        new_coord[EntityLine.Y] += (value * self.scale_factor)
-
-        return new_coord
-
-    def changeX(self, coord, value):
-
-        '''
-        change x coordinate of coord by the value sent in.
-        A scale factor is applied if it is a user preference
-        '''
-
-        new_coord = list(coord)
-        new_coord[EntityLine.X] += (value * self.scale_factor)
-
-        return new_coord
 
     def getSquareVertices(self):
         '''
