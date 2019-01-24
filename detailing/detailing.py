@@ -100,7 +100,7 @@ class Detailing:
             total_span_length = 0.
             beam_start_point = tuple(starting_point)
             columns_widths = []
-            print()
+            print("")
             print(beam_name)
             
             for span in beam.spans.values():
@@ -148,6 +148,7 @@ class Detailing:
 
         self.makeDxf()
 
+    @staticmethod
     def getSectionLines(sections, span,support_types, beam_supports, span_coords):
         left_section = sections[span.section_left]
         right_section = sections[span.section_right]
@@ -158,7 +159,7 @@ class Detailing:
         return span_coords.getSectionLines(column_widths, 
             left_section, right_section)
 
-
+    @staticmethod
     def loadEndColumnWidth(span, support_types, beam_supports, 
         total_spans, columns_widths):
         if (span.index == 0):
@@ -170,7 +171,7 @@ class Detailing:
             end_column_widths = Detailing.getEndColumnWidth(support_types, 
                 beam_supports, total_spans)
             columns_widths.extend(end_column_widths)
-
+    @staticmethod
     def spanColumnWidths(span, support_types, beam_supports):
         columns_widths = []
         start_column_widths = Detailing.getEndColumnWidth(support_types, 
@@ -184,7 +185,7 @@ class Detailing:
         return columns_widths
             
     
-
+    @staticmethod
     def getSupportLines(support_types, support, span_coords, left_column = True):
         '''
         support could be support left or support right
@@ -199,6 +200,7 @@ class Detailing:
         return span_coords.getColumnLines(column_top_width, 
             column_bottom_width, left_column)
 
+    @staticmethod
     def getEndColumnWidth(support_types, beam_supports, index):
         left_support = beam_supports[index]
         column_top_width = support_types[left_support].getColumnTopWidth()
@@ -212,6 +214,7 @@ class Detailing:
 
         return [column_top_width, column_bottom_width]
 
+    @staticmethod
     def getColumnLines(support_types, beam_supports, span, 
         span_coords, total_spans):
         support_lines = []

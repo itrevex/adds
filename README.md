@@ -11,3 +11,8 @@ Run the following command
 
 * add command to `py37.bat` for example
   * `py -3.7-64 -m pip install ezdxf`
+
+* `pyinstaller --add-data 'assests/README.txt:assests' main.py`
+
+* put a wrong py python to show you a list of working python installations
+  `py -2.7-32 main.py` will give a list of available installations

@@ -1,11 +1,11 @@
 from .entity_line import EntityLine
 
-class ChoordChange:
+class ChoordChange(object):
     def __init__(self, scale_factor):
         self.scale_factor = float(scale_factor)
         pass
 
-
+ 
     
     def changeY(self, coord, value):
     

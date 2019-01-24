@@ -1,4 +1,5 @@
 import json
+import io
 import os
 
 class LoadData:
@@ -16,13 +17,13 @@ class LoadData:
         print("tail: " + self.tail)
 
     def getLayers(self):
-        return json.load(open(self.getFile("assests/layers.json"), encoding='utf8'))
+        return json.load(io.open(self.getFile("assests/layers.json"), encoding='utf8'))
 
     def getHeaderAttribs(self):
-        return json.load(open(self.getFile("assests/header_attribs.json"), encoding='utf8'))
+        return json.load(io.open(self.getFile("assests/header_attribs.json"), encoding='utf8'))
 
     def getInputData(self):
-        return json.load(open(self.getFile("assests/input_data.json"), encoding='utf8'))
+        return json.load(io.open(self.getFile("assests/input_data.json"), encoding='utf8'))
 
 
 

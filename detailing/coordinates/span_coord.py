@@ -20,7 +20,7 @@ class SpanCoordinates(ChoordChange):
 
     def __init__(self, starting_point, span_length, beam_depth, scale_factor = 1):
         
-        super().__init__(scale_factor)
+        super(SpanCoordinates, self).__init__(scale_factor)
 
         self.beam_depth = float(beam_depth)
         self.span_length = span_length * SpanCoordinates.ONE_M_IN_MM
@@ -44,7 +44,6 @@ class SpanCoordinates(ChoordChange):
 
             z_lines = self.drawZ(top_width, left_line.pt2, right_line.pt2)
 
-            print(left_line.layer)
             column_lines.append(left_line)
             column_lines.append(right_line)
             column_lines.extend(z_lines)

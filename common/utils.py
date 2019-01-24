@@ -26,6 +26,7 @@ class Utils:
         now = datetime.datetime.now()
         return "%02d%02d" %(Utils.now.hour, Utils.now.minute)
 
+    @staticmethod
     def dateTimeString():
         '''
         Return time string 

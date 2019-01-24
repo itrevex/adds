@@ -10,5 +10,5 @@ appData = LoadData()
 if __name__ == "__main__":
     detailing = Detailing(appData)
     detailing.trials()
-    detailing.availableLineTypes()
+    # detailing.availableLineTypes()
     
