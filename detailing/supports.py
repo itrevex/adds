@@ -1,5 +1,5 @@
-from support import Support
-from constants import Constants
+from .support import Support
+from common.constants import Constants
 
 class Supports:
     def __init__(self, app_data):

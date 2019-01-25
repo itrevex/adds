@@ -1,13 +1,11 @@
 import ezdxf
-import sys
-sys.path.append("./common/")
 
-from constants import Constants
+from common.constants import Constants
 
-from utils import Utils
-from supports import Supports
-from beams.beams import Beams
-from coordinates.span_coord import SpanCoordinates
+from common.utils import Utils
+from .supports import Supports
+from .beams.beams import Beams
+from .coordinates.span_coord import SpanCoordinates
 
 class Detailing:
     

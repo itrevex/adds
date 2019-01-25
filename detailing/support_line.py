@@ -1,7 +1,6 @@
-import sys
-sys.path.append("./common/")
-from constants import Constants
-from entity_line import EntityLine
+
+from common.constants import Constants
+from .entity_line import EntityLine
 
 class SupportLine(EntityLine):
 

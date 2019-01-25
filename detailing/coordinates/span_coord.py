@@ -1,7 +1,5 @@
-import sys
-sys.path.append('../common/')
 
-from constants import Constants
+from common.constants import Constants
 from .entity_line import EntityLine
 from .coord_change import ChoordChange
 

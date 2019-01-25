@@ -1,10 +1,8 @@
-import sys
-sys.path.append("./common/")
-from constants import Constants
+from common.constants import Constants
 
-from centre_line import CentreLine
-from support_lines import SupportLines
-from support_properties import SupportProps
+from .centre_line import CentreLine
+from .support_lines import SupportLines
+from .support_properties import SupportProps
 
 class Support:
     STARTING_POINT = "starting_point"

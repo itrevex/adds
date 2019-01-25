@@ -1,4 +1,4 @@
-from coordinates.section_coord import SectionCoordinates
+from ..coordinates.section_coord import SectionCoordinates
 
 class Section:
 

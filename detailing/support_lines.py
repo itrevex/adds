@@ -1,8 +1,7 @@
-import sys
-sys.path.append("./common/")
-from support_line import SupportLine
-from support_properties import SupportProps
-from constants import Constants
+
+from .support_line import SupportLine
+from .support_properties import SupportProps
+from common.constants import Constants
 
 class SupportLines:
     def __init__(self, support):

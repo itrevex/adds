@@ -1,9 +1,6 @@
-import sys
-sys.path.append("./detailing/")
-sys.path.append("./common/")
 
-from detailing import Detailing
-from load_data import LoadData
+from detailing.detailing import Detailing
+from common.load_data import LoadData
 
 appData = LoadData()
 

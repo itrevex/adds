@@ -1,7 +1,6 @@
-import sys
-sys.path.append("./common/")
-from constants import Constants
-from support_line import SupportLine
+
+from common.constants import Constants
+from .support_line import SupportLine
 
 class CentreLine(SupportLine):
 
