@@ -1,4 +1,6 @@
-class ErrorMessage:
+import sys
+
+class Messages:
     '''
     Possible errors and warnings
 
@@ -12,10 +14,18 @@ class ErrorMessage:
         self.message
 
     def promptUser(self, response):
-        print(ErrorMessage.CONTINUE)
+        print(Messages.CONTINUE)
         if (response == 'YES'):
             #continue to detail with the errors
             pass
 
     def showWarning(message):
         print(message)
+
+    def showError(message):
+        print()
+        print("ERROR!")
+        print(message)
+        print()
+        print("Program terminated")
+        sys.exit()

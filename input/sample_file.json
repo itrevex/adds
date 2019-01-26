@@ -1,10 +1,5 @@
 {
     "starting_point": [0,0,0],
-    "supports": {
-        "column_section_widths": ["200.", "300.", "200.", "250"],
-        "column_centre_to_centre_lengths": ["4000.", "3000.", "2000."],
-        "beam_depth": "400."
-    },
     "sections":{
         "section_1":{
             "bf_top": "500",
@@ -16,11 +11,9 @@
         },
         "section_2":{
             "bf_top": "350",
-            "bf_bottom": "",
             "bw": "200",
             "d": "450",
-            "df": "250",
-            "w_offset": "0"
+            "df": "250"
         },
         "section_3": { 
             "bf_top": "350",
@@ -31,11 +24,8 @@
             "w_offset": "150"
         },
         "section_4": {
-            "bf_top": "350",
-            "bf_bottom": "",
             "bw": "200",
-            "d": "450",
-            "w_offset": "150"
+            "d": "450"
         }
     },
     "supports_types":{

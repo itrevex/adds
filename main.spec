@@ -2,11 +2,19 @@
 
 block_cipher = None
 
+allFiles = [
+    ('./assests/', 'assests'),
+    ('./input/', 'input'),
+    ( './read_me.*/', '.' ),
+    ( './run.bat/', '.' ),
+    ( './generated/', 'generated' ),
+    ( 'C:\\Users\\treve\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages\\ezdxf\\templates', 'ezdxf/templates' ),
+    ]
 
 a = Analysis(['main.py'],
              pathex=['E:\\Projects\\ESAI\\PROGRAMMING\\PYTHON\\adds'],
              binaries=[],
-             datas=[],
+             datas=allFiles,
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

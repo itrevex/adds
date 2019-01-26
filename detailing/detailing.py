@@ -3,24 +3,24 @@ import ezdxf
 from common.constants import Constants
 
 from common.utils import Utils
-from .supports import Supports
+from common.messages import Messages
 from .beams.beams import Beams
 from .coordinates.span_coord import SpanCoordinates
 
 class Detailing:
-    
+    _beam_name = ""
     def __init__(self, app_data):
         self.dwg = ezdxf.new('R2010')  # create a new DXF R2010 drawing, official DXF version name: 'AC1024'
         self.msp = self.dwg.modelspace()  # add new entities to the model space
         self.app_data = app_data
         self.addLayersToModelSpace()
         self.setHeaderAttribs()
-        # self.drawSupports()
+
         pass
     
     def makeDxf(self):
         name = self.getFileName()
-        self.dwg.saveas('output\%s'%name)
+        self.dwg.saveas('generated\%s'%name)
         print (name + " generated ...")
 
     def getFileName(self):
@@ -35,12 +35,6 @@ class Detailing:
         pt2 = lineObject.pt2
         layer = lineObject.layer
         self.drawLine(pt1, pt2, layer)
-
-    def drawSupports(self):
-        support_entities = Supports(self.app_data).getSupportEntites()
-        for entity in support_entities:
-           self.drawLineObject(entity)
-            
 
         												
     def availableLineTypes(self):
@@ -92,14 +86,16 @@ class Detailing:
 
         entry_point = (0,0,0)
         starting_point = list(entry_point)
+        print()
         for beam_name, beam in beams.items():
+            global _beam_name 
+            _beam_name = beam_name
             beam_supports = list(beam.supports.values())
             total_spans = len(beam.spans)
             total_span_length = 0.
             beam_start_point = tuple(starting_point)
             columns_widths = []
-            print("")
-            print(beam_name)
+            print("Working on beam %s ..."%beam_name)
             
             for span in beam.spans.values():
                 
@@ -169,6 +165,7 @@ class Detailing:
             end_column_widths = Detailing.getEndColumnWidth(support_types, 
                 beam_supports, total_spans)
             columns_widths.extend(end_column_widths)
+    
     @staticmethod
     def spanColumnWidths(span, support_types, beam_supports):
         columns_widths = []
@@ -181,8 +178,7 @@ class Detailing:
         columns_widths.extend(end_column_widths)
 
         return columns_widths
-            
-    
+             
     @staticmethod
     def getSupportLines(support_types, support, span_coords, left_column = True):
         '''
@@ -200,17 +196,25 @@ class Detailing:
 
     @staticmethod
     def getEndColumnWidth(support_types, beam_supports, index):
-        left_support = beam_supports[index]
-        column_top_width = support_types[left_support].getColumnTopWidth()
-        column_bottom_width = support_types[left_support].getColumnBottomWidth()
+        try:
+            left_support = beam_supports[index]
+            column_top_width = support_types[left_support].getColumnTopWidth()
+            column_bottom_width = support_types[left_support].getColumnBottomWidth()
 
-        if column_top_width == 0.:
-                column_top_width = column_bottom_width
-        
-        if column_bottom_width == 0.:
-            column_bottom_width = column_top_width
+            if column_top_width == 0.:
+                    column_top_width = column_bottom_width
+            
+            if column_bottom_width == 0.:
+                column_bottom_width = column_top_width
 
-        return [column_top_width, column_bottom_width]
+            return [column_top_width, column_bottom_width]
+
+        except IndexError:
+            message = "Please check number of supports provided for %s" %_beam_name
+            message += "\n\nThe number of supports should = spans + 1. Make sure the "
+            message += "\nnumber of supports are 1 greater than the number of spans"
+
+            Messages.showError(message)
 
     @staticmethod
     def getColumnLines(support_types, beam_supports, span, 
