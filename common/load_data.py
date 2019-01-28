@@ -2,6 +2,7 @@ import json
 import io
 import os
 import re
+import sys
 
 from .messages import Messages
 
@@ -26,7 +27,10 @@ class LoadData:
         return self.loadJson("assests/header_attribs.json")
 
     def getInputData(self):
-        return self.loadJson("input/input_data.json")
+        self.path = self.getInputFilePath()
+        if (self.path == ""):
+            Messages.showError("Please check file path and try again")
+        return self.loadJson(self.path)
 
     def loadJson(self, file_name):
         try:
@@ -45,4 +49,22 @@ class LoadData:
             message += "\nCross check with sample input and make sure inputs are of a similar format"
             Messages.showError(message)
 
-    
+    def getInputFilePath(self):
+        # if called with no arguments, call app data pick file from there
+        path = ""
+        if (len(sys.argv) > 1):
+            path = self.getFile(sys.argv[1])
+            
+        else:
+            path = self.getFile(os.getenv('LOCALAPPDATA') + "\Trevexs Adds\data\input_data.trad")
+        
+        return path
+
+    def getOutPutFile(self):
+        try: 
+            head, tail = os.path.split(self.path)
+            file_name = tail.split('.')[0] + ".dxf"
+            return os.path.join(head, file_name)
+
+        except AttributeError:
+            Messages.showError("There is no data to use to generate output file")

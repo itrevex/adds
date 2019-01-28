@@ -5,6 +5,7 @@ from common.load_data import LoadData
 appData = LoadData()
 
 if __name__ == "__main__":
+    # appData.getInputFilePath()
     detailing = Detailing(appData)
     detailing.trials()
     # detailing.availableLineTypes()

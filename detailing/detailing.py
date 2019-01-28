@@ -19,9 +19,9 @@ class Detailing:
         pass
     
     def makeDxf(self):
-        name = self.getFileName()
-        self.dwg.saveas('generated\%s'%name)
-        print (name + " generated ...")
+        output_path = self.app_data.getOutPutFile()
+        self.dwg.saveas(output_path)
+        print ("Generated \"%s\" file"%output_path)
 
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"
