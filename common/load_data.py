@@ -52,7 +52,6 @@ class LoadData:
     def getInputFilePath(self):
         # if called with no arguments, call app data pick file from there
         path = ""
-        print(sys.argv)
         if (len(sys.argv) > 1):
             path = self.getFile(sys.argv[1])
             

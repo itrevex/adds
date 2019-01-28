@@ -7,13 +7,13 @@
 #define MyAppExeName "main.exe"
 #define MyAppIcoName "icon.ico"
 #define SourcePath "E:\Projects\ESAI\PROGRAMMING\PYTHON\adds\dist\main"
-
+;
 [Setup]
 AppName={#MyAppName}
 AppVersion=1.0.1
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-UninstallDisplayIcon={app}\run.bat
+UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2
 SolidCompression=yes
 OutputDir=userdocs:Adds Project
@@ -22,7 +22,7 @@ ChangesAssociations = yes
 [Registry]
 Root: HKCR; Subkey: ".trad";                            ValueData: "{#MyAppName}";          Flags: uninsdeletevalue; ValueType: string;  ValueName: ""
 Root: HKCR; Subkey: "{#MyAppName}";                     ValueData: "{#MyAppName}";          Flags: uninsdeletekey;   ValueType: string;  ValueName: ""
-Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";         ValueData: """{app}\icon.ico""";                     ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";         ValueData: """{app}\icon.ico""";                             ValueType: string;  ValueName: ""
 Root: HKCR; Subkey: "{#MyAppName}\shell\open\command";  ValueData: """{app}\{#MyAppExeName}"" ""%1""";               ValueType: string;  ValueName: ""
 
 [Tasks]
@@ -62,13 +62,13 @@ Source: "{#SourcePath}\VCRUNTIME140.dll"; DestDir: "{app}"; CopyMode: alwaysskip
 Source: "{#SourcePath}\main.exe"; DestDir: "{app}"
 Source: "{#SourcePath}\main.exe.manifest"; DestDir: "{app}"
 Source: "{#SourcePath}\pyexpat.pyd"; DestDir: "{app}"
-Source: "{#SourcePath}\run.bat"; DestDir: "{app}"
+Source: "{#SourcePath}\{#MyAppExeName}"; DestDir: "{app}"
 Source: "{#SourcePath}\select.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\unicodedata.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\win32wnet.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\read_me.pdf"; DestDir: "{app}\docs"; Flags: isreadme
 
 [Icons]
-Name: "{group}\Trevexs Adds"; Filename: "{app}\run.bat"; IconFilename: "{app}\icon.ico"
+Name: "{group}\Trevexs Adds"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"
 Name: "{group}\Uninstall {#MyAppName}"; Filename: "{uninstallexe}"; IconFilename: "{app}\icon.ico"
-Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\run.bat"; Tasks: desktopicon; IconFilename: "{app}\icon.ico"
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; IconFilename: "{app}\icon.ico"
