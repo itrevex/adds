@@ -1,6 +1,6 @@
 # DATA INPUT
 
-Open `input_data.json` to start editing your input
+Open `sample1.trad` to start editing your input
 
 ## 1. Starting point
 
@@ -42,7 +42,7 @@ When no `df` is specified, section is assumed to be square or rectangular
     '''
 ```
 
-* example input for square section. See `section_4` in `sample_file.json`
+* example input for square section. See `section_4` in `sample1.trad`
 
 ```json
         "section_x": {
@@ -72,7 +72,7 @@ L Right secctions have no web offset (`w_offset`) and `bw` is smaller than `bf`
         '''
 ```
 
-* example input for L right flanged section. See `section_2` in `sample_file.json`
+* example input for L right flanged section. See `section_2` in `sample1.trad`
 
 ```json
         "section_x": {
@@ -106,7 +106,7 @@ L Left secctions' `w_offset` and `bw` total up to `bf`.
         '''
 ```
 
-* example input for L right flanged section. See `section_3` in `sample_file.json`
+* example input for L right flanged section. See `section_3` in `sample1.trad`
 * `bw + w_offset = 350` and `bf_top = 350` meaning it's an L right section
 
 ```json
@@ -142,7 +142,7 @@ if it is not a square or L section, then it is a T section. T sections `w_offset
         '''
 ```
 
-* example input for T flanged section. See `section_1` in `sample_file.json`
+* example input for T flanged section. See `section_1` in `sample1.trad`
 
 ```json
         "section_x": {
@@ -172,7 +172,7 @@ Support types specify these properties including the section properties of the c
 
 **NOTE:** Only column section width (_section_b_) is being used in beam detailing the time of writing this text. Other parameters will be used when column detailing has been added to the _"adds"_ project.
 
-* example input for support type with both column on top and the bottom. See `support_type_1` in `sample_file.json`
+* example input for support type with both column on top and the bottom. See `support_type_1` in `sample1.trad`
 
 ```json
         "support_type_x":{
@@ -189,7 +189,7 @@ Support types specify these properties including the section properties of the c
         }
 ```
 
-* example input for support type with only the bottom bottom column. See `support_type_2` in `sample_file.json`
+* example input for support type with only the bottom bottom column. See `support_type_2` in `sample1.trad`
 
 ```json
         "support_type_x":{
@@ -213,7 +213,7 @@ Beams sections is where the beams are specified using both the **sections data**
   * _section_left_: The is the section to the left of the span as specified in the sections section. The section is specified using the name of the section.
   * _section_right_: The is the section to the right of the span as specified in the sections section. The section is specified using the name of the section.
 
-  * example input for span parameters. See `span_1` of `beam_1` in `sample_file.json`
+  * example input for span parameters. See `span_1` of `beam_1` in `sample1.trad`
 
 ```json
         "span_x":{
