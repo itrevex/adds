@@ -22,6 +22,8 @@ class Detailing:
         output_path = self.app_data.getOutPutFile()
         self.dwg.saveas(output_path)
         print ("Generated \"%s\" file"%output_path)
+        print()
+        input("Press any key to continue . . .")
 
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"

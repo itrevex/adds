@@ -5,9 +5,8 @@ block_cipher = None
 allFiles = [
     ('./assests/', 'assests'),
     ('./input/', 'input'),
-    ( './read_me.*/', '.' ),
+    ( './read_me.pdf/', '.' ),
     ( './run.bat/', '.' ),
-    ( './generated/', 'generated' ),
     ( 'C:\\Users\\treve\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages\\ezdxf\\templates', 'ezdxf/templates' ),
     ]
 

@@ -4,8 +4,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 
 #define MyAppName "Trevexs Adds"
-#define MyAppExeName "adds.exe"
-#define MyAppIcoName "adds.ico"
+#define MyAppExeName "main.exe"
+#define MyAppIcoName "icon.ico"
 #define SourcePath "E:\Projects\ESAI\PROGRAMMING\PYTHON\adds\dist\main"
 
 [Setup]
@@ -17,6 +17,13 @@ UninstallDisplayIcon={app}\run.bat
 Compression=lzma2
 SolidCompression=yes
 OutputDir=userdocs:Adds Project
+ChangesAssociations = yes
+
+[Registry]
+Root: HKCR; Subkey: ".trad";                            ValueData: "{#MyAppName}";          Flags: uninsdeletevalue; ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}";                     ValueData: "{#MyAppName}";          Flags: uninsdeletekey;   ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\DefaultIcon";         ValueData: """{app}\icon.ico""";                     ValueType: string;  ValueName: ""
+Root: HKCR; Subkey: "{#MyAppName}\shell\open\command";  ValueData: """{app}\{#MyAppExeName}"" ""%1""";               ValueType: string;  ValueName: ""
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; \
@@ -34,13 +41,10 @@ Source: "{#SourcePath}\assests\layers.json"; DestDir: "{app}\assests"
 ;Files in ezdxf folder
 Source: "{#SourcePath}\ezdxf\templates\AC1024.dxf"; DestDir: "{app}\ezdxf\templates"
 ;
-;Files in generated folder
-Source: "{#SourcePath}\generated\read_me.pdf"; DestDir: "{app}\generated"; Flags: isreadme
-;
 ;Files in input folder
-Source: "{#SourcePath}\input\read_me.pdf"; DestDir: "{app}\input"; Flags: isreadme
-Source: "{#SourcePath}\input\input_data.json"; DestDir: "{app}\input"
-Source: "{#SourcePath}\input\sample_file.json"; DestDir: "{app}\input"
+Source: "{#SourcePath}\input\sample1.trad"; DestDir: "{userdesktop}\{#MyAppName}"
+Source: "{#SourcePath}\input\sample1.trad"; DestDir: "{localappdata}\{#MyAppName}\data"
+
 ;
 ;Files in main Folder
 Source: "{#SourcePath}\_bz2.pyd"; DestDir: "{app}"
@@ -62,7 +66,7 @@ Source: "{#SourcePath}\run.bat"; DestDir: "{app}"
 Source: "{#SourcePath}\select.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\unicodedata.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\win32wnet.pyd"; DestDir: "{app}"
-Source: "{#SourcePath}\read_me.pdf"; DestDir: "{app}"; Flags: isreadme
+Source: "{#SourcePath}\read_me.pdf"; DestDir: "{app}\docs"; Flags: isreadme
 
 [Icons]
 Name: "{group}\Trevexs Adds"; Filename: "{app}\run.bat"; IconFilename: "{app}\icon.ico"
