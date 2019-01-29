@@ -4,20 +4,23 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
 
 #define MyAppName "Trevexs Adds"
+#define MyAppSetUpName "adds_setup-"
 #define MyAppExeName "main.exe"
 #define MyAppIcoName "icon.ico"
+#define MyAppVersion "1.0.1"
 #define SourcePath "E:\Projects\ESAI\PROGRAMMING\PYTHON\adds\dist\main"
 ;
 [Setup]
 AppName={#MyAppName}
-AppVersion=1.0.1
+AppVersion={#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma2
 SolidCompression=yes
-OutputDir=userdocs:Adds Project
+OutputDir=setups
 ChangesAssociations = yes
+OutputBaseFilename={#MyAppSetUpName}{#MyAppVersion}
 
 [Registry]
 Root: HKCR; Subkey: ".trad";                            ValueData: "{#MyAppName}";          Flags: uninsdeletevalue; ValueType: string;  ValueName: ""

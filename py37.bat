@@ -8,6 +8,6 @@ REM py -3.7-64 -m pip install docopt
 REM py -3.7-64 -m pypi main.spec
 REM py -3.7-64 hello.py
 REM py -3.7-64 -c "import site; print(site.getsitepackages())"
-py -3.7-64 -m PyInstaller main.spec
-REM py -3.7-64 main.py
+REM py -3.7-64 -m PyInstaller main.spec
+py -3.7-64 main.py "input/input_data.json"
 

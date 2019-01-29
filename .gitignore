@@ -14,6 +14,7 @@ detailing/__pycache__/
 
 # Distribution / packaging
 bin/
+setup/setups
 build/
 develop-eggs/
 dist/
