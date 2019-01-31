@@ -48,7 +48,7 @@
         }
     },
     "beams":{
-        "beams_1": {
+        "beam_1": {
             "beam_depth": "450.",
             "spans":{
                 "span_1":{
