@@ -1,71 +1,7 @@
 from common.messages import Messages
-from .beams.beams import Beams
-from .coordinates.span_coord import SpanCoordinates
+from detailing.coordinates.span_coord import SpanCoordinates
 
-class AllBeamsDetails:
-
-    def __init__(self, app_data):
-        
-        beams_data = Beams(app_data.getInputData())
-        self.beams = beams_data.getBeams()
-        self.sections = beams_data.getSections()
-        self.support_types = beams_data.getSupportTypes()
-        entry_point = (0,0,0)
-        self.starting_point = list(entry_point)
-        self.all_beams = {}
-        self.getBeamDetails()
-    
-    def getBeamDetails(self):
-        beam_start_point = list(self.starting_point)
-        for beam_name, beam_data in self.beams.items():
-            beam = self.BeamDetails(self, beam_name, beam_data, beam_start_point)
-            self.all_beams[beam_name] = beam
-            #draw next beam below current beam, change the y value 
-            beam_start_point[1] -= 3500
-
-    def getAllBeamsEntities(self):
-        all_beams_entities = []
-        for beam in self.all_beams.values():
-            all_beams_entities.extend(beam.getBeamEntities())
-
-        return all_beams_entities
-
-    class BeamDetails:
-        def __init__(self, all_beams_data, beam_name, beam_data, start_point):
-            self.all_beams_data = all_beams_data
-            self.data = beam_data
-            self.name = beam_name
-            self.beam_supports = list(beam_data.supports.values()) #
-            self.total_spans = len(beam_data.spans) #
-            self.total_span_length = 0.
-            self.starting_point = tuple(start_point)
-            self.columns_widths = []
-            self.beam_entities = []
-            self.lines = []
-            self.all_spans = {}
-            self.getSpanDetails()
-            
-
-        def getSpanDetails(self):
-            span_starting_point = self.starting_point
-            for span_name, span_data in self.data.spans.items():
-                span = self.all_beams_data.SpanDetails(self, span_name, span_data, span_starting_point)
-                self.all_spans[span_name] = span
-                #End of current span is start point of next span
-                span_starting_point = list(span.span_coords.end_point)
-
-        def getBeamEntities(self):
-            '''
-            add each spans entities and the beam lines
-            '''
-            beam_entities = []
-            beam_entities.extend(self.lines)
-            for span in self.all_spans.values():
-                beam_entities.extend(span.getSpanEntities())
-
-            return beam_entities
-
-    class SpanDetails:
+class SpanDetails:
         '''
         Class for calculating column lines, section_lines and beam_lines
         beam lines are stored on the beam object
@@ -204,13 +140,3 @@ class AllBeamsDetails:
             
             return self.span_coords.getColumnLines(column_top_width, 
                 column_bottom_width, left_column)
-
-    def drawSectionEntities(self, starting_point, beam, section):
-        sec_coords = section.getCoordinates(starting_point,beam.beam_depth)
-        entities = sec_coords.getEntities()
-        self.drawEntities(entities)
-            
-
-
-
-
