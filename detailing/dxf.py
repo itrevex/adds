@@ -27,17 +27,28 @@ class DxfDraw:
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"
 
-    def drawLine(self, pt1, pt2, layer = '0'):
+    def addDxfLine(self, pt1, pt2, layer_name = '0'):
         # add a LINE entity
+        layer = self.getLayer(layer_name)
         self.msp.add_line(pt1, pt2, dxfattribs={'layer': layer})  
 
-    def drawLineObject(self, lineObject):
-        pt1 = lineObject.pt1
-        pt2 = lineObject.pt2
-        layer = lineObject.layer
-        self.drawLine(pt1, pt2, layer)
+    def addDxfCircle(self, center, radius, layer_name = '0'):
+        # add a LINE entity
+        layer = self.getLayer(layer_name)
+        self.msp.add_circle(center, radius,  dxfattribs={'layer': layer})  
 
-        												
+    def drawLine(self, line):
+        pt1 = line.pt1
+        pt2 = line.pt2
+        layer = self.getLayer(line.layer)
+        self.addDxfLine(pt1, pt2, layer)
+
+    def getLayer(self, layer_name):
+        try:
+            return self.layers[layer_name][Constants.LAYER_NAME]
+        except KeyError:
+            return '0'
+
     def availableLineTypes(self):
         # iteration
         print('available line types:')
@@ -60,10 +71,14 @@ class DxfDraw:
         return name, layerAttributes
 
     def addLayersToModelSpace(self):
-        layers = self.app_data.getLayers()
-        for layer in layers.values():
+        self.layers = self.app_data.getLayers()
+        for layer in self.layers.values():
             name, attribs = self.getLayerAttributes(layer)
-            self.dwg.layers.new(name=name, dxfattribs=attribs)
+            try:
+                self.dwg.layers.new(name=name, dxfattribs=attribs)
+            except ezdxf.lldxf.const.DXFTableEntryError:
+                #log error already exists
+                pass
 
     def setHeaderAttribs(self):
         headerAttribs = self.app_data.getHeaderAttribs()
@@ -77,4 +92,9 @@ class DxfDraw:
             return
 
         for entity in entities:
-            self.drawLineObject(entity)
+            #check to see if entity is line
+            if entity.type == Constants.ENTITY_LINE:
+                self.addDxfLine(entity.pt1, entity.pt2, entity.layer)
+            elif entity.type == Constants.ENTITY_CIRCLE:
+                #draw circle
+                self.addDxfCircle(entity.centre, entity.radius, entity.layer)

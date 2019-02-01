@@ -18,15 +18,20 @@ class Constants:
     Z_TIP_DEPTH = 0.2576
     Z_TIP_LENGTH = 0.40625
 
+    #GRID CIRCLE FACTORS
+    GRID_CIRCLE_RADIUS = 150.0
+    GRID_CIRCLE_FACTOR = 1.0
+
     #starting point
     STARTING_POINT = "starting_point"
     START_POINT = (0.,0.,0.) #tupple becomes by list(START_POINT)
 
     #Layers
-    LAYER_CENTER_LINES = "S-CENTRE"
-    LAYER_BEAM_LINES = "S-CONCRETE"
-    LAYER_SUPPORT_LINES = "S-CONCRETE"
-    LAYER_ZIGZAG_LINES = "S-18"
+    LAYER_CENTER_LINES = "CenterLines"
+    LAYER_BEAM_LINES = "BeamLines"
+    LAYER_SUPPORT_LINES = "SupportLines"
+    LAYER_ZIGZAG_LINES = "Zigzag"
+    LAYER_GRID_LINES = "GridLines"
 
     #Layer keys
     LAYER_NAME = "layername"
@@ -53,3 +58,7 @@ class Constants:
     #BEAMS
     SUPPORTS = "supports" 
     BEAM_DEPTH = "beam_depth"
+
+    #Entities
+    ENTITY_CIRCLE = "entity_circle"
+    ENTITY_LINE = "entity_line"

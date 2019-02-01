@@ -1,6 +1,7 @@
 
 from common.constants import Constants
-from .entity_line import EntityLine
+from detailing.dxf_entities.entity_line import EntityLine
+from detailing.dxf_entities.entity_circle import EntityCircle
 from .coord_change import ChoordChange
 
 class SpanCoordinates(ChoordChange):
@@ -35,19 +36,23 @@ class SpanCoordinates(ChoordChange):
 
     def getColumnLines(self, top_width, bottom_width, left_column = True):
         column_lines = []
+
+        #check to see if there is a top column
         if top_width != 0.0:
-            #check to see if there is a top column
+            #draw left and right lines of the column
             left_line = self.getColumnTopLine(-top_width/2, left_column)
             right_line = self.getColumnTopLine(top_width/2, left_column)
 
+            #draw zigzag lines on top of column
             z_lines = self.drawZ(top_width, left_line.pt2, right_line.pt2)
 
             column_lines.append(left_line)
             column_lines.append(right_line)
             column_lines.extend(z_lines)
 
+        #check to see if there is a bottom column
         if bottom_width != 0.0:
-            #check to see if there is a bottom column
+            
             left_line = self.getColumnBottomLine(-bottom_width/2, left_column)
             right_line = self.getColumnBottomLine(bottom_width/2, left_column)
 
@@ -57,11 +62,27 @@ class SpanCoordinates(ChoordChange):
             column_lines.append(right_line)
             column_lines.extend(z_lines)
 
+        #get the centerline for column
         center_line = self.getCenterLine(left_column)
+
+        #get circle on top of centre line. EntityLine pt1 is top and pt2 is bottom
+        circle = self.getCentreLineCircle(center_line)
+
         column_lines.append(center_line)
+        column_lines.append(circle)
 
         return column_lines
         
+    def getCentreLineCircle(self, centre_line):
+        '''
+        centre_line.pt1 - top point,
+        centre_line.pt2 - bottom point
+        circle is drawn on the top point
+        '''
+        # EntityCircle
+        radius = Constants.GRID_CIRCLE_RADIUS * Constants.GRID_CIRCLE_FACTOR
+        pt1 = self.changeY(centre_line.pt1, radius)
+        return EntityCircle(pt1, radius, Constants.LAYER_GRID_LINES)
 
     def getColumnTopLine(self, value, left_column):
         if left_column:

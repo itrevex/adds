@@ -1,4 +1,4 @@
-from .entity_line import EntityLine
+from detailing.dxf_entities.entity_line import EntityLine
 
 class ChoordChange(object):
     def __init__(self, scale_factor):

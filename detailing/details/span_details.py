@@ -65,16 +65,24 @@ class SpanDetails:
             '''
             self is the span object
             self.data gives the span input data
+
+            Column lines include the the lines to indicate the columns,
+            the centre lines and other properties that may be on those items
+
             '''
 
             support_lines = []
-            left_support = self.beam.beam_supports[self.data.index]
+            #support at index as indicated in the input data. This on gives
+            #the support name, the support data will got from support_types
+            #present on all beams data pool
+            left_support = self.beam.beam_supports[self.data.index] 
             column_lines = self.getSupportLines(left_support)
 
             support_lines.extend(column_lines)
             # do I need the right support, yes; if it is the last span
             
             if (self.data.index == self.beam.total_spans - 1):
+                #the very last support is got with last span index + 1
                 right_support = self.beam.beam_supports[self.data.index + 1]
                 column_lines = self.getSupportLines(right_support, False)
 
@@ -130,6 +138,7 @@ class SpanDetails:
         def getSupportLines(self, support, left_column = True):
             '''
             support could be support left or support right
+            support is the support name and it is stored in the beams data
 
             layer = supports
             '''

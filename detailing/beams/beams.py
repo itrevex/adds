@@ -19,6 +19,7 @@ class Beams:
     SUPPORTS = "supports" 
     SPANS = "spans"
     SECTIONS = "sections"
+    STARTING_POINT = "starting_point"
 
     def __init__(self, app_data):
         self.app_data = app_data
@@ -28,10 +29,10 @@ class Beams:
         beams_raw_data = self.app_data[Beams.BEAMS]
         for beam_name, beam_raw_data in beams_raw_data.items():
             beam_depth = beam_raw_data[Beams.BEAM_DEPTH]
-            supports = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
+            supports, grids = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
             spans = self.getBeamSpans(beam_raw_data[Beams.SPANS])
 
-            beams[beam_name] = Beam(beam_depth, spans, supports, beam_name)
+            beams[beam_name] = Beam(beam_depth, spans, supports, grids, beam_name)
 
         return beams
 
@@ -46,10 +47,12 @@ class Beams:
 
     def getBeamSupports(self, supports_raw_data):
         supports = {}
+        grids = {}
         for support_name, support_type in supports_raw_data.items():
-            supports[support_name] = support_type
+            supports[support_name] = list(support_type)[0]
+            grids[support_name] = list(support_type)[1]
 
-        return supports
+        return supports, grids
 
     def getSections(self):
         sections = {}
