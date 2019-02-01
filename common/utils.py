@@ -34,3 +34,7 @@ class Utils:
         '''
 
         return Utils.dateString() + "_" + Utils.timeString()
+
+    @staticmethod
+    def checkBuild(app_data):
+        pass

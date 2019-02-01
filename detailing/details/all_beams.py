@@ -1,5 +1,7 @@
 from detailing.beams.beams import Beams
 from .beam_details import BeamDetails
+from common.constants import Constants
+from common.messages import Messages
 
 class AllBeamsDetails:
 
@@ -9,10 +11,26 @@ class AllBeamsDetails:
         self.beams = beams_data.getBeams()
         self.sections = beams_data.getSections()
         self.support_types = beams_data.getSupportTypes()
-        entry_point = (0,0,0)
-        self.starting_point = list(entry_point)
+        self.starting_point = list(beams_data.starting_point)
+        self.build = beams_data.build
+        self.checkBuild()
         self.all_beams = {}
         self.getBeamDetails()
+
+    def checkBuild(self):
+        if self.build > Constants.CURRENT_BUILD:
+            message = "File you are trying to run is from a later version of Trevexs Adds "
+            message += "\nPlease install the latest version to be able to run this file"
+            Messages.showError(message)
+        elif self.build < Constants.CURRENT_BUILD:
+            message = "File you are trying to run is not updated work fully with the current version"
+            message += "\nApplication is running in compatible mode"
+            message += "\n\nPlease consider updating your file to the latest version"
+            
+            Messages.showWarning(message)
+        else:
+            #build number and file being run are compatible
+            pass
     
     def getBeamDetails(self):
         beam_start_point = list(self.starting_point)

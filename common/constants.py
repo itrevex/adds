@@ -7,6 +7,10 @@ class Constants:
     Y = 1
     Z = 2
 
+    #Build and app version
+    CURRENT_BUILD = 1001
+    APP_VERSION = "1.0.1"
+
     # scaling factors
     COLUMN_LINE_FACTOR = 1.2
     CENTER_LINE_FACTOR = 1.75 

@@ -20,9 +20,19 @@ class Beams:
     SPANS = "spans"
     SECTIONS = "sections"
     STARTING_POINT = "starting_point"
+    BUILD = "build"
 
     def __init__(self, app_data):
         self.app_data = app_data
+        self.starting_point = tuple(app_data[Beams.STARTING_POINT])
+        self.getBuildNumber()
+
+    def getBuildNumber(self):
+        try:
+            self.build = self.app_data[Beams.BUILD]
+        except KeyError:
+            self.build = 1000
+        
 
     def getBeams(self):
         beams = {}
@@ -49,8 +59,12 @@ class Beams:
         supports = {}
         grids = {}
         for support_name, support_type in supports_raw_data.items():
-            supports[support_name] = list(support_type)[0]
-            grids[support_name] = list(support_type)[1]
+            if self.build == 1000:
+                supports[support_name] = support_type
+                grids = []
+            else:
+                supports[support_name] = list(support_type)[0]
+                grids[support_name] = list(support_type)[1]
 
         return supports, grids
 

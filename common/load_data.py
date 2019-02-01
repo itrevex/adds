@@ -23,6 +23,9 @@ class LoadData:
     def getLayers(self):
         return self.loadJson("assests/layers.json")
 
+    def getTextStyles(self):
+        return self.loadJson("assests/text_styles.json")
+        
     def getHeaderAttribs(self):
         return self.loadJson("assests/header_attribs.json")
 
@@ -56,7 +59,7 @@ class LoadData:
             path = self.getFile(sys.argv[1])
             
         else:
-            path = self.getFile(os.getenv('LOCALAPPDATA') + "\Trevexs Adds\data\sample1.trad")
+            path = self.getFile(os.getenv('LOCALAPPDATA') + "\\Trevexs Adds\\data\\sample1.trad")
         
         return path
 

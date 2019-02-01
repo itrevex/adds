@@ -68,10 +68,15 @@ class SpanCoordinates(ChoordChange):
         #get circle on top of centre line. EntityLine pt1 is top and pt2 is bottom
         circle = self.getCentreLineCircle(center_line)
 
+        #get grid letter/number to add inside circle
+
         column_lines.append(center_line)
         column_lines.append(circle)
 
         return column_lines
+
+    def getGridText(self):
+        pass
         
     def getCentreLineCircle(self, centre_line):
         '''

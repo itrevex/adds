@@ -1,4 +1,4 @@
-from detailing.details.details import AllBeamsDetails
+from detailing.details.all_beams import AllBeamsDetails
 from detailing.dxf import DxfDraw
 from common.load_data import LoadData
 
