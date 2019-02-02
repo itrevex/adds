@@ -1,5 +1,5 @@
-# Source repeated output
-generated/*.dxf
+# Generated dxf files
+*.dxf
 
 #docs
 .docs/
