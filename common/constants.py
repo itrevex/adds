@@ -72,3 +72,4 @@ class Constants:
     ENTITY_CIRCLE = "entity_circle"
     ENTITY_LINE = "entity_line"
     ENTITY_TEXT = "entity_text"
+    ENTITY_HATCH = "entity_hatch"
