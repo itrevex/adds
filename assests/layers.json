@@ -28,5 +28,11 @@
         "layername": "S-GRID",
         "color": 1,
         "linetype": "CENTER" 
+    },
+    "BeamHatches": {
+        "layername": "S-FILL",
+        "color": 252,
+        "linetype": "Continuous"
     }
+
 }
