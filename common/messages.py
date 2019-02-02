@@ -32,9 +32,24 @@ class Messages:
         Messages.promptUser()
         
     @staticmethod
-    def showWarningNoPrompt(message):
+    def w(message):
         print()
         print(message)
+
+    @staticmethod
+    def i(message):
+        print()
+        print(message)
+
+    @staticmethod
+    def d(message):
+        print()
+        print(message)
+
+    @staticmethod
+    def continuePrompt(message):
+        print()
+        input(message)
 
     @staticmethod
     def showError(message):

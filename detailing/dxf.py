@@ -21,9 +21,9 @@ class DxfDraw:
     def makeDxf(self):
         output_path = self.app_data.getOutPutFile()
         self.dwg.saveas(output_path)
-        print ("Generated \"%s\" file"%output_path)
-        print()
-        input("Press any key to continue . . .")
+        Messages.i("Generated \"%s\" file"%output_path)
+        
+        Messages.continuePrompt("Press any key to continue . . .")
 
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"
@@ -45,6 +45,7 @@ class DxfDraw:
 
         # self.msp .add_circle(center, radius,  dxfattribs={'layer': layer}) 
         layer = self.getLayer(text.layer)
+
         self.msp.add_text(text.text, dxfattribs={'style': text.style, 
             'height': text.height, 'layer': layer }).set_pos(text.pos, align=text.align)
 

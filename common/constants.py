@@ -13,7 +13,7 @@ class Constants:
 
     #Text factors
     # GRID_LABEL_STYLE = "GridLabels"
-    GRID_LABEL_STYLE = "Annotative"
+    GRID_LABEL_STYLE = "GridLabels"
     GRID_TEXT_HEIGHT = 111.25
 
     # scaling factors

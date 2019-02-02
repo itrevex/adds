@@ -2,6 +2,10 @@
     "GridLabels": {
         "height": 111.25,
         "width": 1,
-        "font": "times.ttf"
+        "font": "romans.ttf",
+        "oblique": 0
+    },
+    "175": {
+        
     }
 }
