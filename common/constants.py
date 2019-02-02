@@ -43,6 +43,7 @@ class Constants:
     LAYER_ZIGZAG_LINES = "Zigzag"
     LAYER_GRID_LINES = "GridLines"
     LAYER_GRID_LABELS = "GridLabels"
+    LAYER_BEAM_HATCHES = "BeamHatches"
 
     #Layer keys
     LAYER_NAME = "layername"
