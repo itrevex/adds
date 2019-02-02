@@ -129,3 +129,6 @@ class DxfDraw:
             elif entity.type == Constants.ENTITY_TEXT: 
                 #draw circle
                 self.addDxfTexT(entity)
+            elif entity.type == Constants.ENTITY_HATCH: 
+                #draw circle
+                self.addDxfHatch(entity)
