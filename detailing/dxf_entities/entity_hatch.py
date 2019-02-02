@@ -6,7 +6,7 @@ class EntityHatch:
     has type, poly_line_point and layer
     '''
     
-    def __init__(self, path = [], layer="0"):
+    def __init__(self, path = [], layer=Constants.LAYER_BEAM_HATCHES):
 
         self.path = path
         self.layer = layer
