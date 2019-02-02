@@ -13,6 +13,7 @@ class DxfDraw:
         self.msp = self.dwg.modelspace()  # add new entities to the model space
         self.app_data = app_data
         self.addLayersToModelSpace()
+        self.addStylesToModelSpace()
         self.setHeaderAttribs()
 
         pass
@@ -27,21 +28,28 @@ class DxfDraw:
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"
 
-    def addDxfLine(self, pt1, pt2, layer_name = '0'):
+    def addDxfLine(self, line):
         # add a LINE entity
-        layer = self.getLayer(layer_name)
-        self.msp.add_line(pt1, pt2, dxfattribs={'layer': layer})  
+        layer = self.getLayer(line.layer)
+        self.msp.add_line(line.pt1, line.pt2, 
+            dxfattribs={'layer': layer})  
 
-    def addDxfCircle(self, center, radius, layer_name = '0'):
-        # add a LINE entity
-        layer = self.getLayer(layer_name)
-        self.msp.add_circle(center, radius,  dxfattribs={'layer': layer})  
+    def addDxfCircle(self, circle):
+        # add a Circle entity
+        layer = self.getLayer(circle.layer)
+        self.msp.add_circle(circle.centre, circle.radius,  
+            dxfattribs={'layer': layer})  
+
+    def addDxfTexT(self, text):
+        # add a Text entity
+
+        # self.msp .add_circle(center, radius,  dxfattribs={'layer': layer}) 
+        layer = self.getLayer(text.layer)
+        self.msp.add_text(text.text, dxfattribs={'style': text.style, 
+            'height': text.height, 'layer': layer }).set_pos(text.pos, align=text.align)
 
     def drawLine(self, line):
-        pt1 = line.pt1
-        pt2 = line.pt2
-        layer = self.getLayer(line.layer)
-        self.addDxfLine(pt1, pt2, layer)
+        self.addDxfLine(line)
 
     def getLayer(self, layer_name):
         try:
@@ -70,6 +78,15 @@ class DxfDraw:
 
         return name, layerAttributes
 
+    def addStylesToModelSpace(self):
+        self.styles = self.app_data.getTextStyles()
+        for name, attribs in self.styles.items():
+            try:
+                self.dwg.styles.new(name=name, dxfattribs=attribs)
+            except ezdxf.lldxf.const.DXFTableEntryError:
+                #log error already exists
+                pass
+
     def addLayersToModelSpace(self):
         self.layers = self.app_data.getLayers()
         for layer in self.layers.values():
@@ -94,7 +111,10 @@ class DxfDraw:
         for entity in entities:
             #check to see if entity is line
             if entity.type == Constants.ENTITY_LINE:
-                self.addDxfLine(entity.pt1, entity.pt2, entity.layer)
+                self.addDxfLine(entity)
             elif entity.type == Constants.ENTITY_CIRCLE:
                 #draw circle
-                self.addDxfCircle(entity.centre, entity.radius, entity.layer)
+                self.addDxfCircle(entity)
+            elif entity.type == Constants.ENTITY_TEXT: 
+                #draw circle
+                self.addDxfTexT(entity)

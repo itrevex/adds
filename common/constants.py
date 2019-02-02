@@ -11,10 +11,16 @@ class Constants:
     CURRENT_BUILD = 1001
     APP_VERSION = "1.0.1"
 
+    #Text factors
+    # GRID_LABEL_STYLE = "GridLabels"
+    GRID_LABEL_STYLE = "Annotative"
+    GRID_TEXT_HEIGHT = 111.25
+
     # scaling factors
     COLUMN_LINE_FACTOR = 1.2
     CENTER_LINE_FACTOR = 1.75 
     SCALE_FACTOR_COLUMNS = 1.
+    CIRCLE_TEXT_OFFSET_FACTOR = 0.3333
 
     #ZIGZAG AS FACTORS OF THE COLUMN WIDTH
     Z_OUTER_SEGMENT = 0.15
@@ -36,6 +42,7 @@ class Constants:
     LAYER_SUPPORT_LINES = "SupportLines"
     LAYER_ZIGZAG_LINES = "Zigzag"
     LAYER_GRID_LINES = "GridLines"
+    LAYER_GRID_LABELS = "GridLabels"
 
     #Layer keys
     LAYER_NAME = "layername"
@@ -56,9 +63,6 @@ class Constants:
     COLUMN_SECION_WIDTH = "column_section_widths"
     COLUMN_CENTRE_CENTRE_LENGTHS = "column_centre_to_centre_lengths"
 
-    #Entities
-    ENTITY_LINE = "line"
-
     #BEAMS
     SUPPORTS = "supports" 
     BEAM_DEPTH = "beam_depth"
@@ -66,3 +70,4 @@ class Constants:
     #Entities
     ENTITY_CIRCLE = "entity_circle"
     ENTITY_LINE = "entity_line"
+    ENTITY_TEXT = "entity_text"

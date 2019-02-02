@@ -3,11 +3,11 @@ class Beam:
     Beam has a beam depth, it has spans dictionary
     and a supports dictionary
     '''
-    def __init__(self, beam_depth, spans, supports, grids, name = ""):
+    def __init__(self, beam_depth, spans, supports, grid_labels, name = ""):
         self.beam_depth = float(beam_depth)
         self.spans = spans
         self.supports = supports
-        self.grids = grids
+        self.grid_labels = grid_labels
         self.sections = self.getSections()
         self.name = name
     

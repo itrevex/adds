@@ -6,6 +6,7 @@ class BeamDetails:
             self.data = beam_data
             self.name = beam_name
             self.beam_supports = list(beam_data.supports.values()) #
+            self.beam_grid_labels = list(beam_data.grid_labels.values())
             self.total_spans = len(beam_data.spans) #
             self.total_span_length = 0.
             self.starting_point = tuple(start_point)

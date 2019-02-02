@@ -106,11 +106,11 @@
                 }
             },
             "supports":{
-                "support_1": ["support_type_1", "A"],
-                "support_2": ["support_type_2", "B"],
-                "support_3": ["support_type_1", "C"],
-                "support_4": ["support_type_2", "D"],
-                "support_5": ["support_type_1", "E"]
+                "support_1": ["support_type_1", "2"],
+                "support_2": ["support_type_2", "3"],
+                "support_3": ["support_type_1", "4"],
+                "support_4": ["support_type_2", "5"],
+                "support_5": ["support_type_1", "6"]
             }
         }
     }

@@ -75,8 +75,9 @@ class SpanDetails:
             #support at index as indicated in the input data. This on gives
             #the support name, the support data will got from support_types
             #present on all beams data pool
-            left_support = self.beam.beam_supports[self.data.index] 
-            column_lines = self.getSupportLines(left_support)
+            left_support = self.beam.beam_supports[self.data.index]
+            grid_label = self.beam.beam_grid_labels[self.data.index]
+            column_lines = self.getSupportLines(left_support, grid_label)
 
             support_lines.extend(column_lines)
             # do I need the right support, yes; if it is the last span
@@ -84,7 +85,8 @@ class SpanDetails:
             if (self.data.index == self.beam.total_spans - 1):
                 #the very last support is got with last span index + 1
                 right_support = self.beam.beam_supports[self.data.index + 1]
-                column_lines = self.getSupportLines(right_support, False)
+                grid_label = self.beam.beam_grid_labels[self.data.index + 1]
+                column_lines = self.getSupportLines(right_support, grid_label, False)
 
                 support_lines.extend(column_lines)
 
@@ -135,7 +137,7 @@ class SpanDetails:
 
                 Messages.showError(message)
 
-        def getSupportLines(self, support, left_column = True):
+        def getSupportLines(self, support, grid_label, left_column = True):
             '''
             support could be support left or support right
             support is the support name and it is stored in the beams data
@@ -148,4 +150,4 @@ class SpanDetails:
 
             
             return self.span_coords.getColumnLines(column_top_width, 
-                column_bottom_width, left_column)
+                column_bottom_width, grid_label, left_column)

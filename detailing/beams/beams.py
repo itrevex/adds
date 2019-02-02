@@ -39,10 +39,10 @@ class Beams:
         beams_raw_data = self.app_data[Beams.BEAMS]
         for beam_name, beam_raw_data in beams_raw_data.items():
             beam_depth = beam_raw_data[Beams.BEAM_DEPTH]
-            supports, grids = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
+            supports, grid_labels = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
             spans = self.getBeamSpans(beam_raw_data[Beams.SPANS])
 
-            beams[beam_name] = Beam(beam_depth, spans, supports, grids, beam_name)
+            beams[beam_name] = Beam(beam_depth, spans, supports, grid_labels, beam_name)
 
         return beams
 

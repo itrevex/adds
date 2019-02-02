@@ -1,6 +1,7 @@
 {
-    "GridLines": {
+    "GridLabels": {
         "height": 111.25,
-        "width": 1
+        "width": 1,
+        "font": "times.ttf"
     }
 }

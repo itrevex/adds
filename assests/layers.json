@@ -23,5 +23,10 @@
         "layername": "S-CONCRETE",
         "color": 1,
         "linetype": "CENTER" 
+    },
+    "GridLabels": {
+        "layername": "S-GRID",
+        "color": 1,
+        "linetype": "CENTER" 
     }
 }

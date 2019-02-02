@@ -2,6 +2,7 @@
 from common.constants import Constants
 from detailing.dxf_entities.entity_line import EntityLine
 from detailing.dxf_entities.entity_circle import EntityCircle
+from detailing.dxf_entities.entity_text import EntityText
 from .coord_change import ChoordChange
 
 class SpanCoordinates(ChoordChange):
@@ -34,49 +35,66 @@ class SpanCoordinates(ChoordChange):
     def getSpanLine(self):
         return EntityLine(self.start_point, self.end_point)
 
-    def getColumnLines(self, top_width, bottom_width, left_column = True):
+    def getColumnLines(self, top_width, bottom_width, grid_text, is_left_column = True):
         column_lines = []
 
         #check to see if there is a top column
         if top_width != 0.0:
             #draw left and right lines of the column
-            left_line = self.getColumnTopLine(-top_width/2, left_column)
-            right_line = self.getColumnTopLine(top_width/2, left_column)
-
-            #draw zigzag lines on top of column
-            z_lines = self.drawZ(top_width, left_line.pt2, right_line.pt2)
-
-            column_lines.append(left_line)
-            column_lines.append(right_line)
-            column_lines.extend(z_lines)
+            left_right_lines = self.getTopLeftRightColumnLines(top_width, is_left_column)
+            column_lines.extend(left_right_lines)
 
         #check to see if there is a bottom column
         if bottom_width != 0.0:
             
-            left_line = self.getColumnBottomLine(-bottom_width/2, left_column)
-            right_line = self.getColumnBottomLine(bottom_width/2, left_column)
-
-            z_lines = self.drawZ(bottom_width, left_line.pt2, right_line.pt2)
-
-            column_lines.append(left_line)
-            column_lines.append(right_line)
-            column_lines.extend(z_lines)
+            left_right_lines = self.getLeftRightColumnLines(bottom_width, is_left_column)
+            column_lines.extend(left_right_lines)
 
         #get the centerline for column
-        center_line = self.getCenterLine(left_column)
+        center_line = self.getCenterLine(is_left_column)
 
         #get circle on top of centre line. EntityLine pt1 is top and pt2 is bottom
         circle = self.getCentreLineCircle(center_line)
 
         #get grid letter/number to add inside circle
+        label = self.getGridText(grid_text, circle)
 
         column_lines.append(center_line)
         column_lines.append(circle)
+        column_lines.append(label)
 
         return column_lines
 
-    def getGridText(self):
-        pass
+    def getLeftRightColumnLines(self, column_width, is_left_column):
+        left_right_lines = []
+        left_line = self.getColumnBottomLine(-column_width/2, is_left_column)
+        right_line = self.getColumnBottomLine(column_width/2, is_left_column)
+
+        z_lines = self.drawZ(column_width, left_line.pt2, right_line.pt2)
+
+        left_right_lines.append(left_line)
+        left_right_lines.append(right_line)
+        left_right_lines.extend(z_lines)
+
+        return left_right_lines
+
+    def getTopLeftRightColumnLines(self, column_width, is_left_column):
+        left_right_lines = []
+        left_line = self.getColumnTopLine(-column_width/2, is_left_column)
+        right_line = self.getColumnTopLine(column_width/2, is_left_column)
+
+        z_lines = self.drawZ(column_width, left_line.pt2, right_line.pt2)
+
+        left_right_lines.append(left_line)
+        left_right_lines.append(right_line)
+        left_right_lines.extend(z_lines)
+
+        return left_right_lines
+
+    def getGridText(self, text, circle):
+        x_value = -circle.radius * Constants.CIRCLE_TEXT_OFFSET_FACTOR
+        pos = self.changeXY(circle.centre, x_value, x_value)
+        return EntityText(text, pos, layer=Constants.LAYER_GRID_LABELS)
         
     def getCentreLineCircle(self, centre_line):
         '''
@@ -89,8 +107,8 @@ class SpanCoordinates(ChoordChange):
         pt1 = self.changeY(centre_line.pt1, radius)
         return EntityCircle(pt1, radius, Constants.LAYER_GRID_LINES)
 
-    def getColumnTopLine(self, value, left_column):
-        if left_column:
+    def getColumnTopLine(self, value, is_left_column):
+        if is_left_column:
             start_point = list(self.start_point)
         else:
             start_point = list(self.end_point)
@@ -100,8 +118,8 @@ class SpanCoordinates(ChoordChange):
 
         return EntityLine(pt1, pt2, Constants.LAYER_SUPPORT_LINES)
 
-    def getColumnBottomLine(self, value, left_column):
-        if left_column:
+    def getColumnBottomLine(self, value, is_left_column):
+        if is_left_column:
             start_point = self.changeY(self.start_point, -self.beam_depth)
         else:
             start_point = self.changeY(self.end_point, -self.beam_depth)
@@ -111,8 +129,8 @@ class SpanCoordinates(ChoordChange):
 
         return EntityLine(pt1, pt2, Constants.LAYER_SUPPORT_LINES)
 
-    def getCenterLine(self, left_column):
-        if left_column:
+    def getCenterLine(self, is_left_column):
+        if is_left_column:
             start_point = list(self.start_point)
         else:
             start_point = list(self.end_point)
