@@ -49,6 +49,16 @@ class DxfDraw:
         self.msp.add_text(text.text, dxfattribs={'style': text.style, 
             'height': text.height, 'layer': layer }).set_pos(text.pos, align=text.align)
 
+    def addDxfHatch(self, hatch):
+        '''
+        hatch has a list of the polyline path.
+        Path should be closed
+        '''
+
+        dxf_hatch = self.msp.add_hatch(dxfattribs={'layer': hatch.layer})
+        with dxf_hatch.edit_boundary() as boundary:
+            boundary.add_polyline_path(hatch.path, is_closed=1)
+
     def drawLine(self, line):
         self.addDxfLine(line)
 
