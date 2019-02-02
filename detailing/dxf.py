@@ -54,8 +54,9 @@ class DxfDraw:
         hatch has a list of the polyline path.
         Path should be closed
         '''
+        layer = self.getLayer(hatch.layer)
 
-        dxf_hatch = self.msp.add_hatch(dxfattribs={'layer': hatch.layer})
+        dxf_hatch = self.msp.add_hatch(dxfattribs={'layer': layer})
         with dxf_hatch.edit_boundary() as boundary:
             boundary.add_polyline_path(hatch.path, is_closed=1)
 
