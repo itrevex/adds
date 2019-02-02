@@ -42,9 +42,9 @@ class Messages:
         print(message)
 
     @staticmethod
-    def d(message):
+    def d(*arg):
         print()
-        print(message)
+        print(*arg)
 
     @staticmethod
     def continuePrompt(message):
