@@ -1,6 +1,9 @@
 # Generated dxf files
 *.dxf
 
+#batch files
+*.bat
+
 #docs
 .docs/
 
