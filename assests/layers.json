@@ -38,6 +38,11 @@
         "layername": "S-CONCRETE",
         "color": 1,
         "linetype": "CENTER" 
+    }, 
+    "Dimesion":{
+        "layername": "S-DIM-FAKE",
+        "color": 1,
+        "linetype": "Continuous" 
     }
 
 }
