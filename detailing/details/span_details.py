@@ -76,7 +76,10 @@ class SpanDetails:
             #the support name, the support data will got from support_types
             #present on all beams data pool
             left_support = self.beam.beam_supports[self.data.index]
-            grid_label = self.beam.beam_grid_labels[self.data.index]
+            grid_label = ""
+            if len(self.beam.beam_grid_labels) != 0:     
+                grid_label = self.beam.beam_grid_labels[self.data.index]
+
             column_lines = self.getSupportLines(left_support, grid_label)
 
             support_lines.extend(column_lines)
@@ -86,8 +89,10 @@ class SpanDetails:
                 #the very last support is got with last span index + 1
                 right_support = self.beam.beam_supports[self.data.index + 1]
                 # if self.beam.beam_grid_labels != []:
-                     
-                grid_label = self.beam.beam_grid_labels[self.data.index + 1]
+                grid_label = ""
+                if len(self.beam.beam_grid_labels) != 0:     
+                    grid_label = self.beam.beam_grid_labels[self.data.index + 1]
+
                 column_lines = self.getSupportLines(right_support, grid_label, False)
 
                 support_lines.extend(column_lines)
