@@ -33,6 +33,11 @@
         "layername": "S-FILL",
         "color": 252,
         "linetype": "Continuous"
+    }, 
+    "SectionLines":{
+        "layername": "S-CONCRETE",
+        "color": 1,
+        "linetype": "CENTER" 
     }
 
 }

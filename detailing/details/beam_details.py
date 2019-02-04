@@ -1,4 +1,7 @@
 from .span_details import SpanDetails
+from detailing.dxf_entities.entity_hatch import EntityHatch
+from detailing.dxf_entities.entity_line import EntityLine
+from common.messages import Messages
 
 class BeamDetails:
         def __init__(self, all_beams_data, beam_name, beam_data, start_point):
@@ -30,10 +33,92 @@ class BeamDetails:
             add each spans entities and the beam lines
             '''
             beam_entities = []
-            beam_entities.extend(self.lines)
+            span_entities = []
+            bottom_pts_2 = []
+            top_pts_5 = []
             for span in self.all_spans.values():
-                beam_entities.extend(span.getSpanEntities())
-
+                span_entities.extend(span.getSpanEntities())
+                coords = span.hatch_coords
+                bottom_pts_2.extend(coords.getBottomList())
+                top_pts_5.extend(coords.getTopList())
+                
+            hatch_path = self.getHatchPath(bottom_pts_2, top_pts_5)
+            
+            beam_entities.append(EntityHatch(hatch_path))
+            beam_entities.extend(span_entities)
+            beam_entities.extend(self.lines)
             return beam_entities
+            
+        def getHatchPath(self, bottom_pts_2, top_pts_5):
+            '''
+            1. add left beam line bottom point: pt_1
+            2. add bottom span lines: bottom_pts_2
+            3. add right beam line bottom point: pt_3
+            4. add right beam line bottom point: pt_4
+            5. add top span lines: top_pts_5
+            6. add left beam line top point: pt_6
+            '''
+            hatch_path = []
+            pt_1 = self.lines[2].pt2
+            pt_3 = self.lines[3].pt2
+            pt_4 = self.lines[3].pt1
+            pt_6 = self.lines[2].pt1
 
-    
+            hatch_path.append(pt_1)
+            hatch_path.extend(bottom_pts_2)
+            hatch_path.append(pt_3)
+            hatch_path.append(pt_4)
+            hatch_path.extend(top_pts_5)
+            hatch_path.append(pt_6)
+
+            return hatch_path
+
+
+            
+        def sortPoints(self, pts):
+            '''
+            Sorting points from left bottom corner
+            Meaning left most -x comes before bottom most point
+            But points sharing a similar x will be sorted according to y 
+            '''
+
+            x_sorted = self.insertionSort(list(pts), EntityLine.X)
+            return self.levelTwoSort(x_sorted, EntityLine.X, EntityLine.Y)
+
+        def insertionSort(self, pts, pt_index, simulation=False):
+            for i, pt in enumerate(pts):
+                cursor = pt[pt_index]
+                pos = i
+                
+                while pos > 0 and pts[pos - 1][pt_index] > cursor:
+                    # Swap the number down the list
+                    pts[pos] = pts[pos - 1]
+                    pos = pos - 1
+                # Break and do the final swap
+                pts[pos] = pt
+
+            return pts
+
+        def levelTwoSort(self, pts, sorted_index, to_sort_index):
+            '''
+            Sorts Y values where x values are similar
+            '''
+            last_pos = -1 #there is no last position at the start
+            for i, pt in enumerate(pts):
+                cursor = pt[sorted_index]
+                pos = i
+                if (pos < last_pos):
+                    pos = last_pos
+
+                pts_similar_x = [pt]
+                while pos < len(pts) - 1 and pts[pos+1][sorted_index] == cursor:
+                    pts_similar_x.append(pts[pos+1])
+                    pos += 1
+                    last_pos = pos + 1
+                    pass
+
+                if len(pts_similar_x) > 1:
+                    #sort this sub list
+                    pts[i:last_pos] = self.insertionSort(pts_similar_x, to_sort_index)
+            
+            return pts

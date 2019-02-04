@@ -61,7 +61,6 @@ class Beams:
         for support_name, support_type in supports_raw_data.items():
             if self.build == 1000:
                 supports[support_name] = support_type
-                grids = []
             else:
                 supports[support_name] = list(support_type)[0]
                 grids[support_name] = list(support_type)[1]

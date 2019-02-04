@@ -44,6 +44,7 @@ class Constants:
     LAYER_GRID_LINES = "GridLines"
     LAYER_GRID_LABELS = "GridLabels"
     LAYER_BEAM_HATCHES = "BeamHatches"
+    LAYER_SECTION_LINES = "SectionLines"
 
     #Layer keys
     LAYER_NAME = "layername"

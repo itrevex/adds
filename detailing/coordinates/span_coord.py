@@ -177,7 +177,7 @@ class SpanCoordinates(ChoordChange):
 
     def getBeamLines(self, beam_start_point, total_span_length, 
         column_widths):
-        
+        layer = Constants.LAYER_BEAM_LINES
         #set up input data
         column_start_top_width = column_widths[0]
         column_start_bottom_width = column_widths[1]
@@ -190,7 +190,7 @@ class SpanCoordinates(ChoordChange):
         top_start_point = self.changeX(beam_start_point, -column_start_top_width/2)
         top_end_point = self.changeX(beam_start_point, total_length + column_end_top_width/2)
         top_line = EntityLine(top_start_point, top_end_point, 
-            Constants.LAYER_BEAM_LINES)
+            layer)
 
         #beam bottom line
         bottom_start_point = self.changeXY(beam_start_point, 
@@ -200,13 +200,13 @@ class SpanCoordinates(ChoordChange):
             total_length + column_end_bottom_width/2, -self.beam_depth)
 
         bottom_line = EntityLine(bottom_start_point, bottom_end_point, 
-            Constants.LAYER_BEAM_LINES)
+            layer)
 
         #left and right closing line
         left_line = EntityLine(top_start_point, bottom_start_point, 
-            Constants.LAYER_BEAM_LINES)
+            layer)
         right_line = EntityLine(top_end_point, bottom_end_point, 
-            Constants.LAYER_BEAM_LINES)
+            layer)
 
         return [top_line, bottom_line, left_line, right_line]
 
@@ -230,6 +230,11 @@ class SpanCoordinates(ChoordChange):
         if points 3 or 7 above 4 or 8 at start of beam depth,
         don't draw 3 to 7
         '''
+        #define hatch coords
+        hatches_cords = SpanCoordinates.HatchCoords()
+
+        #define layer for these lines
+        layer = Constants.LAYER_SECTION_LINES
 
         #set up in put data
         left_column_top_width = column_widths[0]
@@ -255,9 +260,9 @@ class SpanCoordinates(ChoordChange):
 
         self.showWarning(pt2, pt4, pt3, pt6, pt7, pt8, 
             left_section, right_section)
-
-        line_1_2 = EntityLine(pt1, pt2, Constants.LAYER_BEAM_LINES)
-        line_5_6 = EntityLine(pt5, pt6, Constants.LAYER_BEAM_LINES)
+        
+        line_1_2 = EntityLine(pt1, pt2, layer)
+        line_5_6 = EntityLine(pt5, pt6, layer)
 
         #add created lines to lines pool
         section_lines.append(line_1_2)
@@ -268,27 +273,66 @@ class SpanCoordinates(ChoordChange):
         #line 2 to 6 if both 2 and 6 are not above or equal to 4 and 8
         #respectively
         if pt2[EntityLine.Y] < pt4[EntityLine.Y] or pt6[EntityLine.Y] < pt8[EntityLine.Y]:
-            line_2_6 = EntityLine(pt2, pt6, Constants.LAYER_BEAM_LINES)
+            line_2_6 = EntityLine(pt2, pt6, layer)
             section_lines.append(line_2_6)
-
+            hatches_cords.setPointsBottom(pt1, pt2, pt5, pt6)
+        
         #same logic as above for line 3 to 7
         if pt3[EntityLine.Y] < pt4[EntityLine.Y] or pt7[EntityLine.Y] < pt8[EntityLine.Y]:
-            line_3_7 = EntityLine(pt3, pt7, Constants.LAYER_BEAM_LINES)
+            line_3_7 = EntityLine(pt3, pt7, layer)
             section_lines.append(line_3_7)
+            hatches_cords.setPointsTop(pt3, pt4, pt7, pt8)
 
         
         #Lines 3 to 4 and 7 to 8 will the logic above but each independently
         #Draw line 3 to 4 if pt3 is below pt4 vertically
         if pt3[EntityLine.Y] < pt4[EntityLine.Y]:
-            line_3_4 = EntityLine(pt3, pt4, Constants.LAYER_BEAM_LINES)
+            line_3_4 = EntityLine(pt3, pt4, layer)
             section_lines.append(line_3_4)
 
         #Use similar logic for line 7 to 8
         if pt7[EntityLine.Y] < pt8[EntityLine.Y]:
-            line_7_8 = EntityLine(pt7, pt8, Constants.LAYER_BEAM_LINES)
+            line_7_8 = EntityLine(pt7, pt8, layer)
             section_lines.append(line_7_8)
         
-        return section_lines
+        return section_lines, hatches_cords
+
+    class HatchCoords:
+        def __init__(self):
+            self.pt1 = None
+            self.pt2 = None
+            self.pt3 = None
+            self.pt4 = None
+            self.pt5 = None
+            self.pt6 = None
+            self.pt7 = None
+            self.pt8 = None
+            self.bottom = False
+            self.top = False
+        
+        def setPointsBottom(self, pt1, pt2, pt5, pt6):
+            self.pt1 = tuple(pt1)
+            self.pt2 = tuple(pt2)
+            self.pt5 = tuple(pt5)
+            self.pt6 = tuple(pt6)
+            self.bottom = True
+
+        def setPointsTop(self, pt3, pt4, pt7, pt8):
+            self.pt3 = tuple(pt3)
+            self.pt4 = tuple(pt4)
+            self.pt7 = tuple(pt7)
+            self.pt8 = tuple(pt8)
+            self.top = True
+
+        def getBottomList(self):
+            if (self.bottom == True):
+                return [self.pt1, self.pt2, self.pt6, self.pt5]
+            return []
+           
+        def getTopList(self):
+            if (self.top == True):
+                return [self.pt8, self.pt7, self.pt3, self.pt4]
+            return []
 
     def showWarning(self, pt2, pt4, pt3, pt6, pt7, pt8, left_section, right_section):
         #check to see if left section is deeper than beam 

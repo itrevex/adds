@@ -55,8 +55,8 @@ class DxfDraw:
         Path should be closed
         '''
         layer = self.getLayer(hatch.layer)
-
-        dxf_hatch = self.msp.add_hatch(dxfattribs={'layer': layer})
+        color = self.getLayerColor(hatch.layer)
+        dxf_hatch = self.msp.add_hatch(color=color, dxfattribs={'layer': layer})
         with dxf_hatch.edit_boundary() as boundary:
             boundary.add_polyline_path(hatch.path, is_closed=1)
 
@@ -68,6 +68,12 @@ class DxfDraw:
             return self.layers[layer_name][Constants.LAYER_NAME]
         except KeyError:
             return '0'
+        
+    def getLayerColor(self, layer_name):
+        try:
+            return self.layers[layer_name][Constants.LAYER_COLOR]
+        except KeyError:
+            return '7'
 
     def availableLineTypes(self):
         # iteration
@@ -77,7 +83,6 @@ class DxfDraw:
 
     def printLayers(self):
         print(self.app_data.getLayers())
-
 
     def getLayerAttributes(self, layer):
         

@@ -16,7 +16,7 @@ class SpanDetails:
             self.span_coords = self.getSpanCoords()
             self.addColumnWidths()
             self.column_lines = self.getColumnLines()
-            self.section_lines = self.getSectionLines()
+            self.section_lines, self.hatch_coords = self.getSectionLines()
             self.beam.lines = self.getBeamLines()
         
         def getSpanEntities(self):
@@ -85,6 +85,8 @@ class SpanDetails:
             if (self.data.index == self.beam.total_spans - 1):
                 #the very last support is got with last span index + 1
                 right_support = self.beam.beam_supports[self.data.index + 1]
+                # if self.beam.beam_grid_labels != []:
+                     
                 grid_label = self.beam.beam_grid_labels[self.data.index + 1]
                 column_lines = self.getSupportLines(right_support, grid_label, False)
 
