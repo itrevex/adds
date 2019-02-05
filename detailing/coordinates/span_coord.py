@@ -63,7 +63,7 @@ class SpanCoordinates(ChoordChange):
         column_lines.append(circle)
         column_lines.append(label)
 
-        return column_lines
+        return column_lines, center_line.pt1
 
     def getLeftRightColumnLines(self, column_width, is_left_column):
         left_right_lines = []
@@ -143,6 +143,7 @@ class SpanCoordinates(ChoordChange):
         return EntityLine(top_point, bottom_line, Constants.LAYER_CENTER_LINES)
 
     def drawZ(self, column_width, end_left, end_right):
+
         '''
         Z is the the zizzag that closes up or breaks the column at the end
 
