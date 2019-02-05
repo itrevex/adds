@@ -21,7 +21,6 @@ class Span:
     
     def getSectionLeft(self, props):
         section = ""
-        Messages.d(props)
         try:
            section = props[Span.SPAN_SECTION_LEFT]
         except KeyError:

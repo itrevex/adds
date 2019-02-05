@@ -1,10 +1,11 @@
 import ezdxf
-
+from ezdxf.addons import dimstyles, LinearDimension
 from common.constants import Constants
 
 from common.utils import Utils
 from common.messages import Messages
 
+SHOW_DIMENSIONS = False
 
 class DxfDraw:
     _beam_name = ""
@@ -16,6 +17,8 @@ class DxfDraw:
         self.addStylesToModelSpace()
         self.setHeaderAttribs()
 
+        #setup dimstyles
+        dimstyles.setup(self.dwg)
         pass
     
     def makeDxf(self):
@@ -45,7 +48,6 @@ class DxfDraw:
 
         # self.msp .add_circle(center, radius,  dxfattribs={'layer': layer}) 
         layer = self.getLayer(text.layer)
-
         self.msp.add_text(text.text, dxfattribs={'style': text.style, 
             'height': text.height, 'layer': layer }).set_pos(text.pos, align=text.align)
 
@@ -60,8 +62,16 @@ class DxfDraw:
         with dxf_hatch.edit_boundary() as boundary:
             boundary.add_polyline_path(hatch.path, is_closed=1)
 
-    def drawLine(self, line):
-        self.addDxfLine(line)
+    def addDimEntity(self, dim):
+        '''
+        add dimesion
+        '''
+        if SHOW_DIMENSIONS:
+            layer = self.getLayer(dim.layer)
+            Messages.d("dxf.py", dim.points, dim.starting_point, dim.angle)
+            dimline = LinearDimension(dim.starting_point, 
+                dim.points, dim.angle, layer=layer)
+            dimline.render(self.msp)
 
     def getLayer(self, layer_name):
         try:
@@ -128,13 +138,21 @@ class DxfDraw:
         for entity in entities:
             #check to see if entity is line
             if entity.type == Constants.ENTITY_LINE:
-                self.addDxfLine(entity)
+                # self.addDxfLine(entity)
+                pass
             elif entity.type == Constants.ENTITY_CIRCLE:
                 #draw circle
-                self.addDxfCircle(entity)
+                # self.addDxfCircle(entity)
+                pass
             elif entity.type == Constants.ENTITY_TEXT: 
                 #draw circle
-                self.addDxfTexT(entity)
+                # self.addDxfTexT(entity)
+                pass
             elif entity.type == Constants.ENTITY_HATCH: 
                 #draw circle
-                self.addDxfHatch(entity)
+                # self.addDxfHatch(entity)
+                pass
+            elif entity.type == Constants.ENTITY_DIMENSION: 
+                #draw circle
+                self.addDimEntity(entity)
+                pass
