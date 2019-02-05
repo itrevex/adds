@@ -32,18 +32,21 @@ class Messages:
         Messages.promptUser()
         
     @staticmethod
-    def w(message):
+    def w(TAG, *arg):
         print()
-        print(message)
+        print("Tag: ", TAG)
+        print(*arg)
 
     @staticmethod
-    def i(message):
+    def i(TAG, *arg):
         print()
-        print(message)
+        print("Tag: ", TAG)
+        print(*arg)
 
     @staticmethod
-    def d(*arg):
+    def d(TAG, *arg):
         print()
+        print("Tag: ", TAG)
         print(*arg)
 
     @staticmethod
