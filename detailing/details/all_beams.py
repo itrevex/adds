@@ -1,4 +1,4 @@
-from detailing.beams.beams import Beams
+from detailing.beams_input.beams import Beams
 from .beam_details import BeamDetails
 from common.constants import Constants
 from common.messages import Messages
