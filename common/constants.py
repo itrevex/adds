@@ -45,6 +45,7 @@ class Constants:
     LAYER_GRID_LABELS = "GridLabels"
     LAYER_BEAM_HATCHES = "BeamHatches"
     LAYER_SECTION_LINES = "SectionLines"
+    LAYER_DIMENSIONS = "Dimensions"
 
     #Layer keys
     LAYER_NAME = "layername"
@@ -74,3 +75,4 @@ class Constants:
     ENTITY_LINE = "entity_line"
     ENTITY_TEXT = "entity_text"
     ENTITY_HATCH = "entity_hatch"
+    ENTITY_DIMENSION = "entity_dimension"
