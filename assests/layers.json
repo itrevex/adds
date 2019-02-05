@@ -39,7 +39,7 @@
         "color": 1,
         "linetype": "CENTER" 
     }, 
-    "Dimesion":{
+    "Dimensions":{
         "layername": "S-DIM-FAKE",
         "color": 1,
         "linetype": "Continuous" 
