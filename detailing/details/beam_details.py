@@ -34,6 +34,7 @@ class BeamDetails:
             '''
             beam_entities = []
             span_entities = []
+            dim_entities = []
             bottom_pts_2 = []
             top_pts_5 = []
             for span in self.all_spans.values():
@@ -72,8 +73,6 @@ class BeamDetails:
             hatch_path.append(pt_6)
 
             return hatch_path
-
-
             
         def sortPoints(self, pts):
             '''

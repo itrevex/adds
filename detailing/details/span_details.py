@@ -1,7 +1,8 @@
 from common.messages import Messages
 from detailing.coordinates.span_coord import SpanCoordinates
+from detailing.dxf_entities.entity_dimension import EntityDimension
 
-class SpanDetails:
+class SpanDetails: 
         '''
         Class for calculating column lines, section_lines and beam_lines
         beam lines are stored on the beam object
@@ -72,6 +73,8 @@ class SpanDetails:
             '''
 
             support_lines = []
+            #dimension points pool for each section
+            dim_points = []
             #support at index as indicated in the input data. This on gives
             #the support name, the support data will got from support_types
             #present on all beams data pool
@@ -80,22 +83,28 @@ class SpanDetails:
             if len(self.beam.beam_grid_labels) != 0:     
                 grid_label = self.beam.beam_grid_labels[self.data.index]
 
-            column_lines = self.getSupportLines(left_support, grid_label)
-
+            column_lines, dim_point = self.getSupportLines(left_support, grid_label)
+            
+            dim_points.append(dim_point)
             support_lines.extend(column_lines)
             # do I need the right support, yes; if it is the last span
             
             if (self.data.index == self.beam.total_spans - 1):
                 #the very last support is got with last span index + 1
                 right_support = self.beam.beam_supports[self.data.index + 1]
+
                 # if self.beam.beam_grid_labels != []:
                 grid_label = ""
                 if len(self.beam.beam_grid_labels) != 0:     
                     grid_label = self.beam.beam_grid_labels[self.data.index + 1]
 
-                column_lines = self.getSupportLines(right_support, grid_label, False)
+                column_lines, dim_point = self.getSupportLines(right_support, grid_label, False)
+                dim_points.append(dim_point)
+                dim = EntityDimension(dim_points)
+                #create dim entity and add it to column_lines
 
                 support_lines.extend(column_lines)
+                support_lines.append(dim)
 
             return support_lines
 

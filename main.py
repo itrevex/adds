@@ -1,14 +1,15 @@
 from detailing.details.all_beams import AllBeamsDetails
 from detailing.dxf import DxfDraw
 from common.load_data import LoadData
+# import detailing.dimensions.trial_dim 
 
 app_data = LoadData()
 
 if __name__ == "__main__":
     # appData.getInputFilePath()
-    all_beams = AllBeamsDetails(app_data);
+    all_beams = AllBeamsDetails(app_data)
     dxfDraw = DxfDraw(app_data)
     dxfDraw.drawEntities(all_beams.getAllBeamsEntities())
     dxfDraw.makeDxf()
     # detailing.availableLineTypes()
-    
+    pass
