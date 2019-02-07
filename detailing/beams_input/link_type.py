@@ -37,14 +37,14 @@ class LinkType:
     
     def getLength(self):
         try:
-            return self.links_input(LinkType.LENGTH)
+            return self.links_input[LinkType.LENGTH]
         except KeyError:
             return None
         
 
     def getOffset(self):
         try:
-            return self.links_input(LinkType.OFFSET)
+            return self.links_input[LinkType.OFFSET]
         except KeyError:
             return Constants.LINKS_DEFAULT_OFFSET 
 
