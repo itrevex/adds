@@ -216,7 +216,16 @@ Support types specify these properties including the section properties of the c
         }
 ```
 
-### 4. Beams data
+### 4. Stirrups / Links Input
+
+Links represent share reinforcement in the beam. This section in the input file is dedicated to entering shear reinforcement data.
+At this point, only the parameters below are required.
+
+1. The `bar diameter` entered as `diameter`. Since no mathematics is done using this value, it is entered as a string literal (text). For example `H8` means an 8mm high strength bar.
+2. The `shape code` of the bar entered as `shape_code`. Refer to `BS 8666: 2005` for standard shape codes used in detailing.
+3. The `bar mark`; This is important for dimensioning, the bar bending schedule and when making the sections
+
+### 5. Beams data
 
 Beams sections is where the beams are specified using both the **sections data** and **support types data** plus other beam parameters required to exaustively specify a beam.
 
@@ -238,7 +247,20 @@ Beams sections is where the beams are specified using both the **sections data**
         },
 ```
 
-**NOTE:** span key words `length_m`, `section_left` and `section_right` can not be changed to other names
+#### Specifying a single sectoin per span
+
+* Two or one section(s) can be specified for a span. If the beam requires two sections for a single span, represent them as shown above. If the beam only requires a single section, simply specify either of the sections, left or right or specify a section parameter as shown below.
+
+#### For single section span
+
+```json
+        "span_x":{
+                "length_m": "4.15",
+                "section": "section_2",
+        },
+```
+
+**NOTE:** span key words `length_m`, `section`, `section_left` and `section_right` can not be changed to other names
 
 * **supports**: This is specification for the support type at each support point of the beam. A beam with with 3 spans will have 4 supports. Specifying less supports will throw an error.
 
