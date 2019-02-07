@@ -1,6 +1,6 @@
 from common.constants import Constants
 
-class SupportType:
+class LinkType:
     '''
     Defines A link
     This class will be used to calculate the links labels and return
