@@ -76,3 +76,6 @@ class Constants:
     ENTITY_TEXT = "entity_text"
     ENTITY_HATCH = "entity_hatch"
     ENTITY_DIMENSION = "entity_dimension"
+
+    #LINKS DATA
+    LINKS_DEFAULT_OFFSET = 0.05 #default offset is in m
