@@ -3,6 +3,8 @@ from .span import Span
 from .column import Column
 from .support_type import SupportType
 from .section import Section
+from .link_type import LinkType
+from common.messages import Messages
 
 class Beams:
     '''
@@ -19,6 +21,7 @@ class Beams:
     SUPPORTS = "supports" 
     SPANS = "spans"
     SECTIONS = "sections"
+    LINK_TYPES = "link_types"
     STARTING_POINT = "starting_point"
     BUILD = "build"
 
@@ -73,6 +76,13 @@ class Beams:
             sections[name] = Section(name, props)
 
         return sections
+
+    def getLinks(self):
+        link_types = {}
+        for name, props in self.app_data[Beams.LINK_TYPES].items():
+            link_types[name] = LinkType(name, props)
+
+        return link_types
 
     def getSupportTypes(self):
         support_types = {}
