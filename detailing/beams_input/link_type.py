@@ -21,8 +21,9 @@ class LinkType:
     OFFSET = "offset" 
     LENGTH = "length"  
 
-    def __init__(self, links):
+    def __init__(self, name, links):
         self.links_input = links
+        self.name = name
         self.diameter = self.getValue(LinkType.DIAMETER)
         self.bar_mark = self.getValue(LinkType.BAR_MARK)
         self.shape_code = self.getValue(LinkType.SHAPE_CODE)
