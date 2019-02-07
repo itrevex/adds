@@ -11,12 +11,14 @@ class Span:
     SPAN_SECTION_LEFT = "section_left"
     SPAN_SECTION_RIGHT = "section_right"
     SPAN_SECTION = "section"
+    SPAN_LINKS = "links"
 
     def __init__(self, name, props, index = 0):
         self.name = name
         self.span_length = float(props[Span.SPAN_LENGTH])
         self.section_left = self.getSectionLeft(props)
         self.section_right = self.getSectionRight(props)
+        self.links = props[Span.SPAN_LINKS]
         self.index = index
     
     def getSectionLeft(self, props):
