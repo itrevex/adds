@@ -23,10 +23,10 @@ class LinkType:
 
     def __init__(self, links):
         self.links_input = links
-        self.diameter = self.getValue(SupportType.DIAMETER)
-        self.bar_mark = self.getValue(SupportType.BAR_MARK)
-        self.shape_code = self.getValue(SupportType.SHAPE_CODE)
-        self.spacing = self.getValue(SupportType.SPACING)
+        self.diameter = self.getValue(LinkType.DIAMETER)
+        self.bar_mark = self.getValue(LinkType.BAR_MARK)
+        self.shape_code = self.getValue(LinkType.SHAPE_CODE)
+        self.spacing = self.getValue(LinkType.SPACING)
         self.offset = self.getOffset()
         self.length = self.getLength() 
 
@@ -36,14 +36,14 @@ class LinkType:
     
     def getLength(self):
         try:
-            return self.links_input(SupportType.LENGTH)
+            return self.links_input(LinkType.LENGTH)
         except KeyError:
             return None
         
 
     def getOffset(self):
         try:
-            return self.links_input(SupportType.OFFSET)
+            return self.links_input(LinkType.OFFSET)
         except KeyError:
             return Constants.LINKS_DEFAULT_OFFSET 
 
