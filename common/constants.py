@@ -80,3 +80,4 @@ class Constants:
 
     #LINKS DATA
     LINKS_DEFAULT_OFFSET = 0.05 #default offset is in m
+    LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE = 20 # links offset from edge of beam in mm
