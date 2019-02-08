@@ -11,6 +11,7 @@ class AllBeamsDetails:
         self.beams = beams_data.getBeams()
         self.sections = beams_data.getSections()
         self.support_types = beams_data.getSupportTypes()
+        self.shear_links = beams_data.getLinks()
         self.starting_point = list(beams_data.starting_point)
         self.build = beams_data.build
         self.checkBuild()
