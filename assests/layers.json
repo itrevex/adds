@@ -43,5 +43,10 @@
         "layername": "S-DIM-FAKE",
         "color": 1,
         "linetype": "Continuous" 
+    }, 
+    "ShearLinks":{
+        "layername": "S-35",
+        "color": 3,
+        "linetype": "Continuous" 
     }
 }
