@@ -7,7 +7,7 @@ class SupportType:
     '''
 
     def __init__(self, column_top = None, column_bottom = None):
-        self.column_top = column_top
+        self.column_top = column_top #column object see column class
         self.column_bottom = column_bottom
 
     def setColumnTop(self, column_top):
