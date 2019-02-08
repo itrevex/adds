@@ -138,21 +138,21 @@ class DxfDraw:
         for entity in entities:
             #check to see if entity is line
             if entity.type == Constants.ENTITY_LINE:
-                # self.addDxfLine(entity)
+                self.addDxfLine(entity)
                 pass
             elif entity.type == Constants.ENTITY_CIRCLE:
                 #draw circle
-                # self.addDxfCircle(entity)
+                self.addDxfCircle(entity)
                 pass
             elif entity.type == Constants.ENTITY_TEXT: 
-                #draw circle
-                # self.addDxfTexT(entity)
+                #draw text
+                self.addDxfTexT(entity)
                 pass
             elif entity.type == Constants.ENTITY_HATCH: 
-                #draw circle
-                # self.addDxfHatch(entity)
+                #draw hatch
+                self.addDxfHatch(entity)
                 pass
             elif entity.type == Constants.ENTITY_DIMENSION: 
-                #draw circle
+                #draw dimension
                 self.addDimEntity(entity)
                 pass
