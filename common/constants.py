@@ -46,6 +46,7 @@ class Constants:
     LAYER_BEAM_HATCHES = "BeamHatches"
     LAYER_SECTION_LINES = "SectionLines"
     LAYER_DIMENSIONS = "Dimensions"
+    LAYER_SHEAR_LINKS = "ShearLinks"
 
     #Layer keys
     LAYER_NAME = "layername"
