@@ -18,7 +18,7 @@ class Span:
         self.span_length = float(props[Span.SPAN_LENGTH])
         self.section_left = self.getSectionLeft(props)
         self.section_right = self.getSectionRight(props)
-        self.links = props[Span.SPAN_LINKS]
+        self.link = props[Span.SPAN_LINKS]
         self.index = index
     
     def getSectionLeft(self, props):
