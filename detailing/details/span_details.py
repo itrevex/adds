@@ -1,5 +1,6 @@
 from common.messages import Messages
 from detailing.coordinates.span_coord import SpanCoordinates
+from detailing.coordinates.shear_coords import ShearCoords
 from detailing.dxf_entities.entity_dimension import EntityDimension
 
 class SpanDetails: 
@@ -10,7 +11,7 @@ class SpanDetails:
         def __init__(self, beam, span_name, span_data, start_point):
             self.span_lines = []
             self.beam = beam
-            self.data = span_data
+            self.data = span_data #Span input data object
             self.name = span_name
             self.starting_point = tuple(start_point)
             self.beam.total_span_length += span_data.span_length
@@ -19,11 +20,16 @@ class SpanDetails:
             self.column_lines = self.getColumnLines()
             self.section_lines, self.hatch_coords = self.getSectionLines()
             self.beam.lines = self.getBeamLines()
-        
+
+
+            #debug
+            self.getShearData()       
+
         def getSpanEntities(self):
             span_entities = []
             span_entities.extend(self.column_lines)
             span_entities.extend(self.section_lines)
+            span_entities.extend(self.getShearData().getLines())
             return span_entities
 
         def getSectionLines(self):
@@ -153,6 +159,22 @@ class SpanDetails:
 
                 Messages.showError(message)
 
+        def getShearData(self):
+             #column left bigger width,
+            left_column_width = max(self.getColumnWidth(self.data.index))
+
+             #column right bigger width,
+            right_column_width = max(self.getColumnWidth(self.data.index + 1))
+
+            #get link type
+            shear_link = self.beam.all_beams_data.shear_links[self.data.link]
+            
+            return ShearCoords(self.starting_point, self.data.span_length, 
+                self.beam.data.beam_depth, shear_link, left_column_width, right_column_width)
+
+            
+            
+                    
         def getSupportLines(self, support, grid_label, left_column = True):
             '''
             support could be support left or support right
