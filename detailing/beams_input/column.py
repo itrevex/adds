@@ -21,7 +21,7 @@ class Column:
     def setB(self, column_b):
         self.column_b = float(column_b)
 
-    def setD(self, d):
+    def setD(self, column_d):
         self.column_d = float(column_d)
 
     def setHm(self, column_h_m):
