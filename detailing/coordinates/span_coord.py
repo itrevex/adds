@@ -3,34 +3,12 @@ from common.constants import Constants
 from detailing.dxf_entities.entity_line import EntityLine
 from detailing.dxf_entities.entity_circle import EntityCircle
 from detailing.dxf_entities.entity_text import EntityText
-from .coord_change import ChoordChange
+from .span_points import SpanPoints
 
-class SpanCoordinates(ChoordChange):
-
-    '''
-    Span coordinate give the centre to centre coordinates of the span
-    It gives coordinate of starting_point and end point
-
-     |     |                              |     |
-     |  ___|______________________________|___  |
-     |  sta|rt                            |   en|d 
-     |     |                              |     |  
-    '''
-    ONE_M_IN_MM = 1000.
+class SpanCoordinates(SpanPoints):
 
     def __init__(self, starting_point, span_length, beam_depth, scale_factor = 1):
-        
-        super(SpanCoordinates, self).__init__(scale_factor)
-
-        self.beam_depth = float(beam_depth)
-        self.span_length = span_length * SpanCoordinates.ONE_M_IN_MM
-
-        self.start_point = tuple(starting_point)
-        self.end_point = self.changeX(self.start_point, self.span_length) #covert length to mm
-
-        
-
-        pass
+        super(SpanCoordinates, self).__init__(starting_point, span_length, beam_depth, scale_factor)
 
     def getSpanLine(self):
         return EntityLine(self.start_point, self.end_point)
