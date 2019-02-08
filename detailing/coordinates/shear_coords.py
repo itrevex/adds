@@ -17,19 +17,24 @@ class ShearCoords(SpanPoints):
         return [self.getLeftLine(), self.getRightLine()]
 
     def getLeftLine(self):
-        left_line_top_point = self.changeX(self.start_point, 
-            self.left_column_width/2 + self.link_type.offset * SpanPoints.ONE_M_IN_MM)
         
-        left_line_bottom_point =  self.changeY(left_line_top_point, -self.beam_depth)
+        left_line_top_point = self.changeXY(self.start_point, 
+            self.left_column_width/2 + self.link_type.offset * SpanPoints.ONE_M_IN_MM,
+            -Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
+        
+        left_line_bottom_point =  self.changeY(left_line_top_point, -self.beam_depth +
+            2 * Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
 
         return EntityLine(left_line_top_point, left_line_bottom_point,
             Constants.LAYER_SHEAR_LINKS)
 
     def getRightLine(self):
-        right_line_top_point = self.changeX(self.end_point, 
-            -self.right_column_width/2 - self.link_type.offset * SpanPoints.ONE_M_IN_MM)
+        right_line_top_point = self.changeXY(self.end_point, 
+            -self.right_column_width/2 - self.link_type.offset * SpanPoints.ONE_M_IN_MM,
+            -Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
         
-        right_line_bottom_point =  self.changeY(right_line_top_point, -self.beam_depth)
+        right_line_bottom_point =  self.changeY(right_line_top_point, -self.beam_depth 
+            + 2 * Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
 
         return EntityLine(right_line_top_point, right_line_bottom_point, 
             Constants.LAYER_SHEAR_LINKS)
