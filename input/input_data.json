@@ -33,7 +33,7 @@
             "bar_mark": "03",
             "shape_code": 51,
             "spacing": 200,
-            "offset": 0.2,
+            "offset": 0.05,
             "length": 2.3 
         },
         "link_type_2":{
@@ -41,7 +41,7 @@
             "bar_mark": "03",
             "shape_code": 51,
             "spacing": 200,
-            "offset": 0.2
+            "offset": 0.05
         },
         "link_type_3":{
             "diameter": "H8",
@@ -79,23 +79,23 @@
                 "span_1":{
                     "length_m": "4.15",
                     "section": "section_1",
-                    "links": "link_type_1"
+                    "links": ["link_type_1"]
                 },
                 "span_2":{
                     "length_m": "3",
                     "section_left": "section_1",
-                    "links": "link_type_3"
+                    "links": ["link_type_3"]
                 },
                 "span_3":{
                     "length_m": "3.2",
                     "section_left": "section_4",
                     "section_right": "section_4",
-                    "links": "link_type_1"
+                    "links": ["link_type_2"]
                 },
                 "span_4":{
                     "length_m": "2",
                     "section_left": "section_3",
-                    "links": "link_type_1"
+                    "links": ["link_type_3"]
                 }
             },
             "supports":{
@@ -112,22 +112,22 @@
                 "span_1":{
                     "length_m": "4.15",
                     "section_left": "section_2",
-                    "links": "link_type_1"
+                    "links": ["link_type_3"]
                 },
                 "span_2":{
                     "length_m": "3",
                     "section_right": "section_4",
-                    "links": "link_type_1"
+                    "links": ["link_type_1"]
                 },
                 "span_3":{
                     "length_m": "3.2",
                     "section": "section_1",
-                    "links": "link_type_1"
+                    "links": ["link_type_2"]
                 },
                 "span_4":{
                     "length_m": "2",
                     "section_left": "section_3",
-                    "links": "link_type_1"
+                    "links": ["link_type_3"]
                 }
             },
             "supports":{
@@ -139,4 +139,4 @@
             }
         }
     }
-} 
+}
