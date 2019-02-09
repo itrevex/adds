@@ -23,4 +23,4 @@ class SpanPoints(ChoordChange):
         self.span_length = span_length * SpanPoints.ONE_M_IN_MM
 
         self.start_point = tuple(starting_point)
-        self.end_point = self.changeX(self.start_point, self.span_length) #covert length to mm
+        self.end_point = tuple(self.changeX(self.start_point, self.span_length)) #covert length to mm
