@@ -26,7 +26,7 @@ class SpanDetails:
             span_entities.extend(self.column_lines)
             span_entities.extend(self.section_lines)
             for shear_coord in self.getShearData():
-                span_entities.extend(shear_coord.getLines())
+                span_entities.extend(shear_coord.getLinesList())
             
             return span_entities
 
@@ -165,13 +165,14 @@ class SpanDetails:
             right_column_width = max(self.getColumnWidth(self.data.index + 1))
         
             shear_coords = []
+            shear_coord = ShearCoords(self.starting_point, self.data.span_length, 
+                    self.beam.data.beam_depth, left_column_width, right_column_width)
             for link in self.data.links:
                 #get link type
                 shear_link = self.beam.all_beams_data.shear_links[link]
-                shear_coord = ShearCoords(self.starting_point, self.data.span_length, 
-                    self.beam.data.beam_depth, shear_link, left_column_width, right_column_width)
+                shear_coord.setLinkTypeLines(shear_link) 
                 shear_coords.append(shear_coord)
-            
+
             return shear_coords
 
         def getSupportLines(self, support, grid_label, left_column = True):
