@@ -79,7 +79,7 @@
                 "span_1":{
                     "length_m": "4.15",
                     "section": "section_1",
-                    "links": ["link_type_1"]
+                    "links": ["link_type_1", "link_type_2"]
                 },
                 "span_2":{
                     "length_m": "3",
