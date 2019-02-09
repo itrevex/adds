@@ -1,5 +1,6 @@
 from .span_points import SpanPoints
 from common.constants import Constants
+from common.messages import Messages
 from detailing.dxf_entities.entity_line import EntityLine
 
 class ShearCoords(SpanPoints):
@@ -14,7 +15,9 @@ class ShearCoords(SpanPoints):
         self.link_type = link_type
 
     def getLines(self):
-        return [self.getLeftLine(), self.getRightLine()]
+        left_line = self.getLeftLine()
+        left_top_point = left_line.pt1
+        return [left_line, self.getRightLine(left_top_point)]
 
     def getLeftLine(self):
         
@@ -28,10 +31,16 @@ class ShearCoords(SpanPoints):
         return EntityLine(left_line_top_point, left_line_bottom_point,
             Constants.LAYER_SHEAR_LINKS)
 
-    def getRightLine(self):
-        right_line_top_point = self.changeXY(self.end_point, 
-            -self.right_column_width/2 - self.link_type.offset * SpanPoints.ONE_M_IN_MM,
-            -Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
+    def getRightLine(self, left_top_point):
+        right_line_top_point = None
+        if self.link_type.length != None:
+            right_line_top_point = self.changeX(left_top_point, 
+                self.link_type.length * SpanPoints.ONE_M_IN_MM)
+            
+        else:
+            right_line_top_point = self.changeXY(self.end_point, 
+                -self.right_column_width/2 - self.link_type.offset * SpanPoints.ONE_M_IN_MM,
+                -Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
         
         right_line_bottom_point =  self.changeY(right_line_top_point, -self.beam_depth 
             + 2 * Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)
