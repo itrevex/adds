@@ -2,3 +2,9 @@ specify one section per span --done
 
 
 07/02/2019: Cut piece off the link and specify multiple links
+
+08/02/2019: 
+    1. get shear link text
+    2. get previous offset for shear link if any and use it as offset left
+    3. Show warning if shear link is beyond span, this is likely to happen in multiple shear link
+    4. Show warning if user specifies multiple links but length 
