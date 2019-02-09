@@ -1,7 +1,10 @@
+import copy
+
 from common.messages import Messages
 from detailing.coordinates.span_coord import SpanCoordinates
 from detailing.coordinates.shear_coords import ShearCoords
 from detailing.dxf_entities.entity_dimension import EntityDimension
+from detailing.coordinates.span_points import SpanPoints
 
 class SpanDetails: 
         '''
@@ -17,6 +20,7 @@ class SpanDetails:
             self.beam.total_span_length += span_data.span_length
             self.span_coords = self.getSpanCoords()
             self.addColumnWidths()
+            self.shear_links = copy.deepcopy(self.beam.all_beams_data.shear_links)
             self.column_lines = self.getColumnLines()
             self.section_lines, self.hatch_coords = self.getSectionLines()
             self.beam.lines = self.getBeamLines()
@@ -25,8 +29,7 @@ class SpanDetails:
             span_entities = []
             span_entities.extend(self.column_lines)
             span_entities.extend(self.section_lines)
-            for shear_coord in self.getShearData():
-                span_entities.extend(shear_coord.getLinesList())
+            span_entities.extend(self.getShearData().getLinesList())     
             
             return span_entities
 
@@ -163,17 +166,57 @@ class SpanDetails:
 
              #column right bigger width,
             right_column_width = max(self.getColumnWidth(self.data.index + 1))
-        
-            shear_coords = []
+
+            #check multiple links for lengths
+            self.setLinkLengths(left_column_width, right_column_width)
+
             shear_coord = ShearCoords(self.starting_point, self.data.span_length, 
                     self.beam.data.beam_depth, left_column_width, right_column_width)
             for link in self.data.links:
                 #get link type
-                shear_link = self.beam.all_beams_data.shear_links[link]
+                shear_link = self.shear_links[link]
                 shear_coord.setLinkTypeLines(shear_link) 
-                shear_coords.append(shear_coord)
 
-            return shear_coords
+            return shear_coord
+
+        def setLinkLengths(self, left_column_width, right_column_width):
+            '''
+            Checks multiple links, incase there are multiple links and no lengths
+            provided for some of these, this routine is responsible for assigning
+            lengths to links without lengths
+            '''
+
+            calculate_lengths, total_offset, total_none_length_links = self.calculateLengths()
+            total_offset += (left_column_width/2 + right_column_width/2) / SpanPoints.ONE_M_IN_MM
+
+            Messages.d("span_details-193", calculate_lengths, total_offset, 
+                total_none_length_links)
+
+            if calculate_lengths:
+                shear_length = (self.data.span_length - total_offset) /total_none_length_links
+                for link in self.data.links:
+                    link_type = self.shear_links[link]
+                    if link_type.length == None:
+                        link_type.setLength(shear_length)
+                
+        def calculateLengths(self):
+            calculate_lengths = False
+            total_offset = 0.
+            total_none_length_links = 0
+            for i, link in enumerate(self.data.links):
+                link_type = self.shear_links[link]
+                total_offset += link_type.offset
+                if link_type.length == None:
+                    total_none_length_links += 1
+                    calculate_lengths = True
+                else:
+                    total_offset += link_type.length
+
+                #final link
+                if i == len(self.data.links) - 1:
+                    total_offset += link_type.offset 
+
+            return calculate_lengths, total_offset, total_none_length_links
 
         def getSupportLines(self, support, grid_label, left_column = True):
             '''
