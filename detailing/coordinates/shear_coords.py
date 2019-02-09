@@ -14,7 +14,6 @@ class ShearCoords(SpanPoints):
         self.right_column_width = right_column
         self.start_point_links = self.start_point
         self.link_lines = {}
-        Messages.d("shear_coords-17", self.start_point_links, self.end_point)
 
     def setLinkTypeLines(self, link_type):
         self.link_type = link_type
