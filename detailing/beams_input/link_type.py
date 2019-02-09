@@ -40,7 +40,8 @@ class LinkType:
             return float(self.links_input[LinkType.LENGTH])
         except KeyError:
             return None
-        
+    def setLength(self, length):
+        self.length = length
 
     def getOffset(self):
         try:
