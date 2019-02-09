@@ -5,6 +5,7 @@ from .support_type import SupportType
 from .section import Section
 from .link_type import LinkType
 from common.messages import Messages
+from common.constants import Constants
 
 class Beams:
     '''
@@ -29,9 +30,25 @@ class Beams:
         self.app_data = app_data
         self.starting_point = tuple(app_data[Beams.STARTING_POINT])
         self.getBuildNumber()
+        self.checkBuild()
+
+    def checkBuild(self):
+        if self.build > Constants.CURRENT_BUILD:
+            message = "The file you are trying to run is from a later version of Trevexs Adds "
+            message += "\nPlease install the latest version to be able to run this file"
+            Messages.showError(message)
+        elif self.build < Constants.CURRENT_BUILD:
+            message = "The file you are trying to run is not updated to fully work with the current version"
+            message += "\nApplication is running in compatible mode"
+            message += "\n\nPlease consider updating your file to the latest version"
+            
+            Messages.showWarning(message)
+        else:
+            #build number and file being run are compatible
+            pass
 
     def getBuildNumber(self):
-        try:
+        try: 
             self.build = self.app_data[Beams.BUILD]
         except KeyError:
             self.build = 1000
@@ -43,17 +60,17 @@ class Beams:
         for beam_name, beam_raw_data in beams_raw_data.items():
             beam_depth = beam_raw_data[Beams.BEAM_DEPTH]
             supports, grid_labels = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
-            spans = self.getBeamSpans(beam_raw_data[Beams.SPANS])
+            spans = self.getBeamSpans(beam_raw_data[Beams.SPANS], beam_name)
 
             beams[beam_name] = Beam(beam_depth, spans, supports, grid_labels, beam_name)
 
         return beams
 
-    def getBeamSpans(self, spans_raw_data):
+    def getBeamSpans(self, spans_raw_data, beam_name):
         spans = {}
         counter = 0
         for span_name, span_raw_data in spans_raw_data.items():
-            spans[span_name] = Span(span_name, span_raw_data, counter)
+            spans[span_name] = Span(span_name, span_raw_data, beam_name, self.build, counter)
             counter += 1
 
         return spans
@@ -79,8 +96,9 @@ class Beams:
 
     def getLinks(self):
         link_types = {}
-        for name, props in self.app_data[Beams.LINK_TYPES].items():
-            link_types[name] = LinkType(name, props)
+        if self.build > 1000:
+            for name, props in self.app_data[Beams.LINK_TYPES].items():
+                link_types[name] = LinkType(name, props)
 
         return link_types
 
