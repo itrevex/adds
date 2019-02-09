@@ -20,16 +20,14 @@ class SpanDetails:
             self.column_lines = self.getColumnLines()
             self.section_lines, self.hatch_coords = self.getSectionLines()
             self.beam.lines = self.getBeamLines()
-
-
-            #debug
-            self.getShearData()       
-
+  
         def getSpanEntities(self):
             span_entities = []
             span_entities.extend(self.column_lines)
             span_entities.extend(self.section_lines)
-            span_entities.extend(self.getShearData().getLines())
+            for shear_coord in self.getShearData():
+                span_entities.extend(shear_coord.getLines())
+            
             return span_entities
 
         def getSectionLines(self):
@@ -165,16 +163,17 @@ class SpanDetails:
 
              #column right bigger width,
             right_column_width = max(self.getColumnWidth(self.data.index + 1))
+        
+            shear_coords = []
+            for link in self.data.links:
+                #get link type
+                shear_link = self.beam.all_beams_data.shear_links[link]
+                shear_coord = ShearCoords(self.starting_point, self.data.span_length, 
+                    self.beam.data.beam_depth, shear_link, left_column_width, right_column_width)
+                shear_coords.append(shear_coord)
+            
+            return shear_coords
 
-            #get link type
-            shear_link = self.beam.all_beams_data.shear_links[self.data.link]
-            
-            return ShearCoords(self.starting_point, self.data.span_length, 
-                self.beam.data.beam_depth, shear_link, left_column_width, right_column_width)
-
-            
-            
-                    
         def getSupportLines(self, support, grid_label, left_column = True):
             '''
             support could be support left or support right
