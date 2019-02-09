@@ -34,6 +34,12 @@ At this point, only the parameters below are required.
 
 Length is import if you want to specify multiple shear reinforcement in a single span.
 
+#### Multiple Links Per Span Specification
+
+* If no length is provided in the case of multiple links, the span length is shared equally among the multiple links
+* If one of many links with no lengths has a length specified, its length will be maintained and rest of the span length shared among the remaining link types
+* Multiple links are added to the span in the order they are specified in a a particular span inside the beam data. For example `links: ["link_type_2", "link_type_1", "link_type_2"]"]` would add type2 links to spans then type1 and finally type2
+
 #### links specification sample, see sample1.trad file
 
 ```json
