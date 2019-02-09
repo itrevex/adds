@@ -27,8 +27,8 @@ class LinkType:
         self.diameter = self.getValue(LinkType.DIAMETER)
         self.bar_mark = self.getValue(LinkType.BAR_MARK)
         self.shape_code = self.getValue(LinkType.SHAPE_CODE)
-        self.spacing = self.getValue(LinkType.SPACING)
-        self.offset = self.getOffset()
+        self.spacing = float(self.getValue(LinkType.SPACING))
+        self.offset = float(self.getOffset())
         self.length = self.getLength() 
 
     
@@ -37,7 +37,7 @@ class LinkType:
     
     def getLength(self):
         try:
-            return self.links_input[LinkType.LENGTH]
+            return float(self.links_input[LinkType.LENGTH])
         except KeyError:
             return None
         
@@ -47,6 +47,15 @@ class LinkType:
             return self.links_input[LinkType.OFFSET]
         except KeyError:
             return Constants.LINKS_DEFAULT_OFFSET 
+
+    def toString(self):
+        return ("\nName = " + str(self.name)  +
+        "\nDiameter = " + str(self.diameter) +
+        "\nBar mark = " + str(self.bar_mark)  +
+        "\nShape code = " + str(self.shape_code)  +
+        "\nSpacing = " + str(self.spacing)  +
+        "\nOffset = " + str(self.offset) +
+        "\nLength = " + str(self.length))
 
 
         
