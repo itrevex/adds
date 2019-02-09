@@ -14,24 +14,8 @@ class AllBeamsDetails:
         self.shear_links = beams_data.getLinks()
         self.starting_point = list(beams_data.starting_point)
         self.build = beams_data.build
-        self.checkBuild()
         self.all_beams = {}
         self.getBeamDetails()
-
-    def checkBuild(self):
-        if self.build > Constants.CURRENT_BUILD:
-            message = "File you are trying to run is from a later version of Trevexs Adds "
-            message += "\nPlease install the latest version to be able to run this file"
-            Messages.showError(message)
-        elif self.build < Constants.CURRENT_BUILD:
-            message = "File you are trying to run is not updated work fully with the current version"
-            message += "\nApplication is running in compatible mode"
-            message += "\n\nPlease consider updating your file to the latest version"
-            
-            Messages.showWarning(message)
-        else:
-            #build number and file being run are compatible
-            pass
     
     def getBeamDetails(self):
         beam_start_point = list(self.starting_point)
