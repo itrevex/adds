@@ -34,7 +34,7 @@
             "shape_code": 51,
             "spacing": 200,
             "offset": 0.05,
-            "length": 2.3 
+            "length": 1
         },
         "link_type_2":{
             "diameter": "H8",
@@ -79,7 +79,7 @@
                 "span_1":{
                     "length_m": "4.15",
                     "section": "section_1",
-                    "links": ["link_type_1", "link_type_2"]
+                    "links": ["link_type_1", "link_type_2", "link_type_3"]
                 },
                 "span_2":{
                     "length_m": "3",
