@@ -1,4 +1,6 @@
 from common.messages import Messages
+from common.constants import Constants
+
 class Span:
     '''
     defines span with the span centre to centre length as span_length
@@ -13,12 +15,13 @@ class Span:
     SPAN_SECTION = "section"
     SPAN_LINKS = "links"
 
-    def __init__(self, name, props, index = 0):
+    def __init__(self, name, props, beam_name, build, index = 0):
         self.name = name
+        self.beam_name = beam_name
         self.span_length = float(props[Span.SPAN_LENGTH])
         self.section_left = self.getSectionLeft(props)
         self.section_right = self.getSectionRight(props)
-        self.links = props[Span.SPAN_LINKS]
+        self.links = self.getSpanLinks(props, build)
         self.index = index
     
     def getSectionLeft(self, props):
@@ -36,6 +39,17 @@ class Span:
 
 
         return section
+
+    def getSpanLinks(self, props, build):
+        links = []
+        if (build < Constants.CURRENT_BUILD):
+            return links
+        try:
+            links = props[Span.SPAN_LINKS]
+        except KeyError:
+            Messages.showWarning("%s %s links were not provided"%(self.beam_name, self.name))
+
+        return links
 
     def getSectionRight(self, props):
         section = ""
