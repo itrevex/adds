@@ -189,9 +189,6 @@ class SpanDetails:
             calculate_lengths, total_offset, total_none_length_links = self.calculateLengths()
             total_offset += (left_column_width/2 + right_column_width/2) / SpanPoints.ONE_M_IN_MM
 
-            Messages.d("span_details-193", calculate_lengths, total_offset, 
-                total_none_length_links)
-
             if calculate_lengths:
                 shear_length = (self.data.span_length - total_offset) /total_none_length_links
                 for link in self.data.links:
