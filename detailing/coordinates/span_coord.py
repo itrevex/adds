@@ -1,5 +1,6 @@
 
 from common.constants import Constants
+from common.messages import Messages
 from detailing.dxf_entities.entity_line import EntityLine
 from detailing.dxf_entities.entity_circle import EntityCircle
 from detailing.dxf_entities.entity_text import EntityText
@@ -226,13 +227,26 @@ class SpanCoordinates(SpanPoints):
 
         pt1 = self.changeXY(self.start_point, self.getHalfWidth(left_column_bottom_width), 
             -self.beam_depth)
-        pt3 = self.changeY(pt1, left_section.d)
+        # if section depth is greater than beam depth, then point should be got
+        # using the section depth
+        if left_section.d > self.beam_depth:
+            pt3 = self.changeY(pt1, self.beam_depth)
+        else:    
+            pt3 = self.changeY(pt1, left_section.d)
+
         pt2 = self.changeY(pt3, -left_section.df)
         pt4 = self.changeX(self.start_point, self.getHalfWidth(left_column_top_width))
         
         pt5 = self.changeXY(self.start_point, self.span_length 
             - self.getHalfWidth(right_column_bottom_width),-self.beam_depth)
         pt7 = self.changeY(pt5, right_section.d)
+
+        # same logic as point 2 for point 6
+        if right_section.d > self.beam_depth:
+            pt7 = self.changeY(pt5, self.beam_depth)
+        else:    
+            pt7 = self.changeY(pt5, right_section.d)
+
         pt6 = self.changeY(pt7, -right_section.df)
         pt8 = self.changeX(self.start_point, self.span_length 
             - self.getHalfWidth(right_column_top_width))
@@ -252,9 +266,13 @@ class SpanCoordinates(SpanPoints):
         #line 2 to 6 if both 2 and 6 are not above or equal to 4 and 8
         #respectively
         if pt2[EntityLine.Y] < pt4[EntityLine.Y] or pt6[EntityLine.Y] < pt8[EntityLine.Y]:
-            line_2_6 = EntityLine(pt2, pt6, layer)
-            section_lines.append(line_2_6)
-            hatches_cords.setPointsBottom(pt1, pt2, pt5, pt6)
+            #check to make sure this is not a square section, this line will be drawn as 
+            #a bottom line if this is square section
+            if pt2[EntityLine.Y] != pt3[EntityLine.Y] and \
+                pt6[EntityLine.Y] != pt7[EntityLine.Y]:
+                line_2_6 = EntityLine(pt2, pt6, layer)
+                section_lines.append(line_2_6)
+                hatches_cords.setPointsBottom(pt1, pt2, pt5, pt6)
         
         #same logic as above for line 3 to 7
         if pt3[EntityLine.Y] < pt4[EntityLine.Y] or pt7[EntityLine.Y] < pt8[EntityLine.Y]:
@@ -318,14 +336,14 @@ class SpanCoordinates(SpanPoints):
         if pt2[EntityLine.Y] > pt4[EntityLine.Y] or \
             pt3[EntityLine.Y] > pt4[EntityLine.Y]:
         
-            print("Waring! %s deeper than beam" 
+            Messages.w("%s deeper than beam" 
                 %(left_section.name))
 
         #check to see if right section is deeper than beam 
         if pt6[EntityLine.Y] > pt8[EntityLine.Y] or \
             pt7[EntityLine.Y] > pt8[EntityLine.Y]: 
 
-            print("Waring! %s deeper than beam" %(right_section.name))
+            Messages.w("%s deeper than beam" %(right_section.name))
             pass
 
     def getHalfWidth(self, column_width):
