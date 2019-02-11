@@ -23,8 +23,13 @@ class DxfDraw:
     
     def makeDxf(self):
         output_path = self.app_data.getOutPutFile()
-        self.dwg.saveas(output_path)
-        Messages.i("Generated \"%s\" file"%output_path)
+        try:
+            self.dwg.saveas(output_path)
+            Messages.i("Generated \"%s\" file"%output_path)
+        except PermissionError:
+            message = "Dxf your are trying to create is being used by another program"
+            message += "\nPlease close the open dxf file or rename your input file to something else"
+            Messages.showError(message)
         
         Messages.continuePrompt("Press any key to continue . . .")
 
