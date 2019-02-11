@@ -17,9 +17,35 @@ class BeamDetails:
             self.beam_entities = []
             self.lines = []
             self.all_spans = {}
+            # check deepest section against beam depth before getting span details
+            self.checkBeamDepth()
             self.getSpanDetails()
+
+        def checkBeamDepth(self):
+            deepest_section_depth = 0
+            for section in self.data.sections:
+                deepest_section_depth = self.getDeepestSection(section, deepest_section_depth)
+
+            if self.data.beam_depth > deepest_section_depth:
+                self.data.beam_depth = deepest_section_depth
+                message = "Beam depth has been adjusted to the deepest section depth."
+                message += "\nIf this was the intended behaviour, please contact developer"
+                Messages.w(message)
             
 
+        def getDeepestSection(self, section, deepest_section_depth):
+            '''
+            Method to get deepest section. If the deepest section is less
+            than the beam depth the the beam depth has to be adjusted to the deepest 
+            section
+            '''
+            new_section_depth  = self.all_beams_data.sections[section].d
+
+            if new_section_depth > deepest_section_depth:
+                deepest_section_depth = new_section_depth
+
+            return deepest_section_depth
+            
         def getSpanDetails(self):
             span_starting_point = self.starting_point
             for span_name, span_data in self.data.spans.items():
