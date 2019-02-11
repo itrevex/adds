@@ -28,25 +28,25 @@ class Messages:
     @staticmethod
     def showWarning(message):
         print()
+        print("WARNING!")
         print(message)
         Messages.promptUser()
         
     @staticmethod
-    def w(TAG, *arg):
+    def w(*arg):
         print()
-        print("Tag: ", TAG)
+        print("WARNING!")
         print(*arg)
 
     @staticmethod
-    def i(TAG, *arg):
+    def i(*arg):
         print()
-        print("Tag: ", TAG)
         print(*arg)
 
     @staticmethod
     def d(TAG, *arg):
         print()
-        print("Tag: ", TAG)
+        print("Debug-Tag: ", TAG)
         print(*arg)
 
     @staticmethod
