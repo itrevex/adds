@@ -5,19 +5,31 @@ from detailing.dxf_entities.entity_line import EntityLine
 
 class ShearCoords(SpanPoints):
 
-    def __init__(self, starting_point, span_length, beam_depth,
-        left_column, right_column, scale_factor = 1):
-        super(ShearCoords, self).__init__(starting_point, span_length, 
-            beam_depth, scale_factor)
+    def __init__(self, span_data, left_column, right_column, scale_factor = 1):
+        super(ShearCoords, self).__init__(span_data.starting_point, span_data.data.span_length, 
+            span_data.beam.data.beam_depth, scale_factor)
 
         self.left_column_width = left_column
         self.right_column_width = right_column
-        self.start_point_links = self.start_point
+        self.start_point_links = span_data.starting_point
+        self.span_data = span_data
         self.link_lines = {}
+        self.shear_links = {}
 
-    def setLinkTypeLines(self, link_type):
-        self.link_type = link_type
-        self.link_lines[link_type.name] = self.getLinkLines()
+        #for debug purposes
+        #todo remove debug statement
+        self.setLinkTypeLines()
+        self.getNumberOfLinks()
+
+    def setLinkTypeLines(self):
+        for link in self.span_data.data.links:
+            #get link type
+            shear_link = self.span_data.shear_links[link]
+            self.link_type = shear_link
+            self.link_lines[shear_link.name] = self.getLinkLines()
+            self.shear_links[shear_link.name] = shear_link
+        
+        
 
     def getLinkLines(self):
         left_line = self.getLeftLine()
@@ -66,3 +78,11 @@ class ShearCoords(SpanPoints):
 
         return EntityLine(right_line_top_point, right_line_bottom_point, 
             Constants.LAYER_SHEAR_LINKS)
+
+    def getNumberOfLinks(self):
+        #get the spacing
+        #get the total distance covered by links
+        #see how many links can fit within the minimum offset
+        for name, link in self.shear_links.items():
+            Messages.d("shear_coords-75", link.spacing)
+        pass
