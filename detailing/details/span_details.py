@@ -29,7 +29,7 @@ class SpanDetails:
             span_entities = []
             span_entities.extend(self.column_lines)
             span_entities.extend(self.section_lines)
-            span_entities.extend(self.getShearData().getLinesList())     
+            span_entities.extend(self.getShearData().getEntitiesList())     
             
             return span_entities
 

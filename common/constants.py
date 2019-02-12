@@ -15,6 +15,9 @@ class Constants:
     # GRID_LABEL_STYLE = "GridLabels"
     GRID_LABEL_STYLE = "GridLabels"
     GRID_TEXT_HEIGHT = 111.25
+    LINK_LABEL_TEXT_HEIGHT = 50.75
+    CHARACTER_LENGTH_FACTOR = 0.9659 #calculated for romans.ttf
+
 
     # scaling factors
     COLUMN_LINE_FACTOR = 1.2
@@ -81,3 +84,7 @@ class Constants:
     #LINKS DATA
     LINKS_DEFAULT_OFFSET = 0.05 #default offset is in m
     LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE = 20 # links offset from edge of beam in mm
+    LINK_TEXT = "LINKS"
+
+    #DIMENSIONING CONSTANTS
+    SHEAR_DIM_BOTTOM_OFFSET = 120

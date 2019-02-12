@@ -2,6 +2,7 @@ from .span_points import SpanPoints
 from common.constants import Constants
 from common.messages import Messages
 from detailing.dxf_entities.entity_line import EntityLine
+from detailing.dxf_entities.entity_text import EntityText
 
 class ShearCoords(SpanPoints):
 
@@ -14,20 +15,21 @@ class ShearCoords(SpanPoints):
         self.start_point_links = span_data.starting_point
         self.span_data = span_data
         self.link_lines = {}
-        self.shear_links = {}
+        self.label_entities = {}
 
         #for debug purposes
         #todo remove debug statement
         self.setLinkTypeLines()
-        self.getNumberOfLinks()
 
     def setLinkTypeLines(self):
+        # loop through the links contained within a single span
         for link in self.span_data.data.links:
             #get link type
             shear_link = self.span_data.shear_links[link]
             self.link_type = shear_link
-            self.link_lines[shear_link.name] = self.getLinkLines()
-            self.shear_links[shear_link.name] = shear_link
+            lines = self.getLinkLines()
+            self.link_lines[shear_link.name] = lines
+            self.label_entities[shear_link.name] = self.getLabelEntity(shear_link, lines[0])
         
         
 
@@ -36,12 +38,13 @@ class ShearCoords(SpanPoints):
         left_top_point = left_line.pt1
         return [left_line, self.getRightLine(left_top_point)]
 
-    def getLinesList(self):
-        lines = []
-        for link_lines in self.link_lines.values():
-            lines.extend(link_lines)
+    def getEntitiesList(self):
+        entities = []
+        for name, link_lines in self.link_lines.items():
+            entities.extend(link_lines)
+            entities.append(self.label_entities[name])
         
-        return lines
+        return entities
 
     def getLeftLine(self):
         
@@ -79,10 +82,34 @@ class ShearCoords(SpanPoints):
         return EntityLine(right_line_top_point, right_line_bottom_point, 
             Constants.LAYER_SHEAR_LINKS)
 
-    def getNumberOfLinks(self):
+    def getLabelEntity(self, link, left_line):
         #get the spacing
         #get the total distance covered by links
         #see how many links can fit within the minimum offset
-        for name, link in self.shear_links.items():
-            Messages.d("shear_coords-75", link.spacing)
-        pass
+        number_of_links = int(link.length * SpanPoints.ONE_M_IN_MM/link.spacing)
+        label = str(number_of_links)
+        label += link.diameter+"-"+link.bar_mark+"-"
+        label += str(int(link.spacing)) + Constants.LINK_TEXT
+        link.setLabel(label)
+        
+        return self.getTextEntity(link, left_line)
+        
+
+    def getTextEntity(self, link, left_line):
+        # find label length
+        text = EntityText(link.label, height=Constants.LINK_LABEL_TEXT_HEIGHT)
+        label_length = text.getTextLenth()
+        
+        # change y to a given constant distance from bottom beam line
+        pos = self.changeY(left_line.pt2, Constants.SHEAR_DIM_BOTTOM_OFFSET)
+
+        # change x to the center of the links length then back by the half label length
+        link_length = link.length * SpanPoints.ONE_M_IN_MM
+
+        if (link_length > label_length):
+            pos = self.changeX(pos, (link_length -label_length)/2)
+
+        text.setPos(pos)
+
+        return text
+        

@@ -29,7 +29,8 @@ class LinkType:
         self.shape_code = self.getValue(LinkType.SHAPE_CODE)
         self.spacing = float(self.getValue(LinkType.SPACING))
         self.offset = float(self.getOffset())
-        self.length = self.getLength() 
+        self.length = self.getLength()
+        self.label = None
 
     
     def getValue(self, key):
@@ -49,6 +50,9 @@ class LinkType:
         except KeyError:
             return Constants.LINKS_DEFAULT_OFFSET 
 
+    def setLabel(self, label):
+        self.label = label
+
     def toString(self):
         return ("\nName = " + str(self.name)  +
         "\nDiameter = " + str(self.diameter) +
@@ -56,7 +60,8 @@ class LinkType:
         "\nShape code = " + str(self.shape_code)  +
         "\nSpacing = " + str(self.spacing)  +
         "\nOffset = " + str(self.offset) +
-        "\nLength = " + str(self.length))
+        "\nLength = " + str(self.length) +
+        "\nLabel = " + str(self.label))
 
 
         
