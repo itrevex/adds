@@ -170,12 +170,7 @@ class SpanDetails:
             #check multiple links for lengths
             self.setLinkLengths(left_column_width, right_column_width)
 
-            shear_coord = ShearCoords(self.starting_point, self.data.span_length, 
-                    self.beam.data.beam_depth, left_column_width, right_column_width)
-            for link in self.data.links:
-                #get link type
-                shear_link = self.shear_links[link]
-                shear_coord.setLinkTypeLines(shear_link) 
+            shear_coord = ShearCoords(self, left_column_width, right_column_width) 
 
             return shear_coord
 
