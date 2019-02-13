@@ -41,6 +41,16 @@ class Messages:
 
     @staticmethod
     def i(*arg):
+        '''
+        More general kind of information
+        '''
+        print(*arg)
+
+    @staticmethod
+    def info(*arg):
+        '''
+        Information that needs to be highlighted
+        '''
         print()
         print(*arg)
 
@@ -59,10 +69,10 @@ class Messages:
         input(message)
 
     @staticmethod
-    def showError(message):
+    def showError(error):
         print()
-        print("ERROR!")
-        print(message)
+        print("ERROR!- CODE: %s"%error.code)
+        print(error.msg)
         print()
         print("Program terminated")
         sys.exit()
