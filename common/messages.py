@@ -27,10 +27,10 @@ class Messages:
             sys.exit()
 
     @staticmethod
-    def showWarning(message):
+    def showWarning(warning):
         print()
-        print("WARNING!")
-        print(message)
+        print("WARNING!- CODE: %s"%warning.code)
+        print(warning.msg)
         Messages.promptUser()
         
     @staticmethod
