@@ -1,6 +1,7 @@
 
 from common.constants import Constants
 from common.messages import Messages
+from common.message_codes import MessageCodes
 from detailing.dxf_entities.entity_line import EntityLine
 from detailing.dxf_entities.entity_circle import EntityCircle
 from detailing.dxf_entities.entity_text import EntityText
@@ -335,16 +336,19 @@ class SpanCoordinates(SpanPoints):
         #check to see if left section is deeper than beam 
         if pt2[EntityLine.Y] > pt4[EntityLine.Y] or \
             pt3[EntityLine.Y] > pt4[EntityLine.Y]:
-        
-            Messages.w("%s deeper than beam" 
-                %(left_section.name))
+
+            warning = MessageCodes.WARNING_DEEPER_SECTION
+            warning.setMsg(warning.msg%(left_section.name))
+            Messages.w(warning)
 
         #check to see if right section is deeper than beam 
         if pt6[EntityLine.Y] > pt8[EntityLine.Y] or \
             pt7[EntityLine.Y] > pt8[EntityLine.Y]: 
+            warning = MessageCodes.WARNING_DEEPER_SECTION
+            warning.setMsg(warning.msg%(right_section.name))
+            Messages.w(warning)
 
-            Messages.w("%s deeper than beam" %(right_section.name))
-            pass
+
 
     def getHalfWidth(self, column_width):
         '''

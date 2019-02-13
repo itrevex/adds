@@ -34,10 +34,10 @@ class Messages:
         Messages.promptUser()
         
     @staticmethod
-    def w(*arg):
+    def w(warning):
         print()
-        print("WARNING!")
-        print(*arg)
+        print("WARNING!- CODE: %s"%warning.code)
+        print(warning.msg)
 
     @staticmethod
     def i(*arg):

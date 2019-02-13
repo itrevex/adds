@@ -15,47 +15,55 @@ class MessageCodes:
     INFO_DATA_READ = "Collecting %s info . . ."
 
     #Error Constants
-    #EROOO1
+    #ER0001
     msg = "The file you are trying to run is from a later version of Trevexs Adds "
     msg += "\nPlease install the latest version to be able to run this file"
-    ERROR_LATER_VERSION = MessageCode(msg, "EROOO1")
+    ERROR_LATER_VERSION = MessageCode(msg, "ER0001")
 
-    #EROOO2
+    #ER0002
     msg = "Please check file path and try again"
-    ERROR_WRONG_FILE_PATH = MessageCode(msg, "EROOO2")
+    ERROR_WRONG_FILE_PATH = MessageCode(msg, "ER0002")
 
-    #EROOO3
+    #ER0003
     msg = "There is no data to use to generate output file"
-    ERROR_NO_INPUT_DATA = MessageCode(msg, "EROOO3")
+    ERROR_NO_INPUT_DATA = MessageCode(msg, "ER0003")
 
-    #EROOO4
+    #ER0004
     msg = "File \"%s\" has an error on line %s"
     msg += "\n\nMake sure there are no trailing or missing commas after input and"
     msg += "all text is in quotes."
     msg += "\nCross check with sample input and make sure inputs are of a similar format."
-    ERROR_INPUT_DATA_FORMAT = MessageCode(msg, "EROOO4")
+    ERROR_INPUT_DATA_FORMAT = MessageCode(msg, "ER0004")
 
-    #EROOO5
+    #ER0005
     msg = "Please check and make sure you specified beam sections"
-    ERROR_NO_BEAM_SECTIONS = MessageCode(msg, "EROOO5")
+    ERROR_NO_BEAM_SECTIONS = MessageCode(msg, "ER0005")
 
-    #EROOO6
+    #ER0006
     msg = "Please check number of supports provided for %s %s"
     msg += "\n\nThe number of supports should = spans + 1. Make sure the "
     msg += "\nnumber of supports are 1 greater than the number of spans"
-    ERROR_WRONG_NO_SUPPORTS= MessageCode(msg, "EROOO6")
+    ERROR_WRONG_NO_SUPPORTS= MessageCode(msg, "ER0006")
 
-    #EROOO7
+    #ER0007
     msg = "Dxf your are trying to create is being used by another program"
     msg += "\nPlease close the open dxf file or rename your input file to something else"
-    ERROR_OPEN_DXF= MessageCode(msg, "EROOO7")
+    ERROR_OPEN_DXF= MessageCode(msg, "ER0007")
 
     #Warning Constants
-    #WAROOO1
+    #WAR0001
     msg = "The file you are trying to run is not updated to fully work with the current version"
     msg += "\nApplication is running in compatible mode"
     msg += "\n\nPlease consider updating your file to the latest version"
-    WARNING_EARLIER_VERSION = MessageCode(msg, "WAROOO1")
+    WARNING_EARLIER_VERSION = MessageCode(msg, "WAR0001")
+
+    #WAR0002
+    msg = "%s %s links were not provided"
+    WARNING_NO_LINKS = MessageCode(msg, "WAR0002")
+
+    #WAR0003
+    msg = "%s deeper than beam"
+    WARNING_DEEPER_SECTION = MessageCode(msg, "WAR0003")
 
     def __init__(self):
         pass

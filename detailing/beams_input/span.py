@@ -48,7 +48,9 @@ class Span:
         try:
             links = props[Span.SPAN_LINKS]
         except KeyError:
-            Messages.showWarning("%s %s links were not provided"%(self.beam_name, self.name))
+            warning = MessageCodes.WARNING_NO_LINKS
+            warning.setMsg(warning.msg%(self.beam_name, self.name))
+            Messages.showWarning(warning)
 
         return links
 
