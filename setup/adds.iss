@@ -1,16 +1,18 @@
-; -- Example1.iss --
-; Demonstrates copying 3 files and creating an icon.
+; -- add.iss --
 
-; SEE THE DOCUMENTATION FOR DETAILS ON CREATING .ISS SCRIPT FILES!
+; Set up trevexs add project installer
 
 #define MyAppName "Trevexs Adds"
 #define MyAppSetUpName "adds_setup-"
 #define MyAppExeName "main.exe"
 #define MyAppIcoName "icon.ico"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "1.0.2"
 #define SourcePath "E:\Projects\ESAI\PROGRAMMING\PYTHON\adds\dist\main"
 ;
 [Setup]
+AppPublisher=Trevexs, Inc.
+AppPublisherURL=http://www.trevexs.com/
+SignTool=tr_signtool
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}
@@ -40,6 +42,7 @@ Source: "icon.ico"; DestDir: "{app}"
 ;Files in assests folder
 Source: "{#SourcePath}\assests\header_attribs.json"; DestDir: "{app}\assests"
 Source: "{#SourcePath}\assests\layers.json"; DestDir: "{app}\assests"
+Source: "{#SourcePath}\assests\text_styles.json"; DestDir: "{app}\assests"
 ;
 ;Files in ezdxf folder
 Source: "{#SourcePath}\ezdxf\templates\AC1024.dxf"; DestDir: "{app}\ezdxf\templates"
@@ -69,7 +72,9 @@ Source: "{#SourcePath}\{#MyAppExeName}"; DestDir: "{app}"
 Source: "{#SourcePath}\select.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\unicodedata.pyd"; DestDir: "{app}"
 Source: "{#SourcePath}\win32wnet.pyd"; DestDir: "{app}"
+Source: "{#SourcePath}\release_update.pdf"; DestDir: "{app}\docs"; Flags: isreadme
 Source: "{#SourcePath}\read_me.pdf"; DestDir: "{app}\docs"; Flags: isreadme
+
 
 [Icons]
 Name: "{group}\Trevexs Adds"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"
