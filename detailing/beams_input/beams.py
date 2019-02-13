@@ -6,6 +6,7 @@ from .section import Section
 from .link_type import LinkType
 from common.messages import Messages
 from common.constants import Constants
+from common.message_codes import MessageCodes
 
 class Beams:
     '''
@@ -34,15 +35,9 @@ class Beams:
 
     def checkBuild(self):
         if self.build > Constants.CURRENT_BUILD:
-            message = "The file you are trying to run is from a later version of Trevexs Adds "
-            message += "\nPlease install the latest version to be able to run this file"
-            Messages.showError(message)
-        elif self.build < Constants.CURRENT_BUILD:
-            message = "The file you are trying to run is not updated to fully work with the current version"
-            message += "\nApplication is running in compatible mode"
-            message += "\n\nPlease consider updating your file to the latest version"
-            
-            Messages.showWarning(message)
+            Messages.showError(MessageCodes.ERROR_LATER_VERSION)
+        elif self.build < Constants.CURRENT_BUILD:            
+            Messages.showWarning(MessageCodes.WARNING_EARLIER_VERSION)
         else:
             #build number and file being run are compatible
             pass
@@ -57,7 +52,9 @@ class Beams:
     def getBeams(self):
         beams = {}
         beams_raw_data = self.app_data[Beams.BEAMS]
+        
         for beam_name, beam_raw_data in beams_raw_data.items():
+            Messages.i(MessageCodes.INFO_DATA_READ%beam_name)
             beam_depth = beam_raw_data[Beams.BEAM_DEPTH]
             supports, grid_labels = self.getBeamSupports(beam_raw_data[Beams.SUPPORTS])
             spans = self.getBeamSpans(beam_raw_data[Beams.SPANS], beam_name)
@@ -90,6 +87,7 @@ class Beams:
     def getSections(self):
         sections = {}
         for name, props in self.app_data[Beams.SECTIONS].items():
+            Messages.i(MessageCodes.INFO_DATA_READ%name)
             sections[name] = Section(name, props)
 
         return sections
@@ -98,6 +96,7 @@ class Beams:
         link_types = {}
         if self.build > 1000:
             for name, props in self.app_data[Beams.LINK_TYPES].items():
+                Messages.i(MessageCodes.INFO_DATA_READ%name)
                 link_types[name] = LinkType(name, props)
 
         return link_types
@@ -105,6 +104,7 @@ class Beams:
     def getSupportTypes(self):
         support_types = {}
         for name, props in self.app_data[Beams.SUPPORT_TYPES].items():
+            Messages.i(MessageCodes.INFO_DATA_READ%name)
             column_top = self.getColumn(props, Beams.COLUMN_TOP)
             column_bottom = self.getColumn(props, Beams.COLUMN_BOTTOM)
             support_types[name] = SupportType(column_top, column_bottom)
@@ -119,14 +119,6 @@ class Beams:
 
     def getStartingPoint(self):
         return tuple(self.app_data[Beams.STARTING_POINT])
-    
 
-    def getBeamsPlotObjects(self, starting_point):
-        #go individual beams and get their plot objects
-        # each beam has supports and spans
-        # each support has centre_lines and column_lines
-        # each span has span(beam) lines
-
-        pass
 
     

@@ -1,6 +1,7 @@
 import copy
 
 from common.messages import Messages
+from common.message_codes import MessageCodes
 from detailing.coordinates.span_coord import SpanCoordinates
 from detailing.coordinates.shear_coords import ShearCoords
 from detailing.dxf_entities.entity_dimension import EntityDimension
@@ -154,10 +155,8 @@ class SpanDetails:
                 return [column_top_width, column_bottom_width]
 
             except IndexError:
-                message = "Please check number of supports provided for %s %s" %(self.name, self.beam.name)
-                message += "\n\nThe number of supports should = spans + 1. Make sure the "
-                message += "\nnumber of supports are 1 greater than the number of spans"
-
+                message = MessageCodes.ERROR_WRONG_NO_SUPPORTS
+                message.setMsg(message.msg%(self.name, self.beam.name))         
                 Messages.showError(message)
 
         def getShearData(self):

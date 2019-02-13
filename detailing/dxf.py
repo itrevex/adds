@@ -4,6 +4,7 @@ from common.constants import Constants
 
 from common.utils import Utils
 from common.messages import Messages
+from common.message_codes import MessageCodes
 
 SHOW_DIMENSIONS = False
 
@@ -27,9 +28,7 @@ class DxfDraw:
             self.dwg.saveas(output_path)
             Messages.i("Generated \"%s\" file"%output_path)
         except PermissionError:
-            message = "Dxf your are trying to create is being used by another program"
-            message += "\nPlease close the open dxf file or rename your input file to something else"
-            Messages.showError(message)
+            Messages.showError(MessageCodes.ERROR_OPEN_DXF)
         
         Messages.continuePrompt("Press any key to continue . . .")
 

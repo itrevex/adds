@@ -1,4 +1,5 @@
 from common.messages import Messages
+from common.message_codes import MessageCodes
 from common.constants import Constants
 
 class Span:
@@ -35,7 +36,7 @@ class Span:
                 try:
                     section = props[Span.SPAN_SECTION]
                 except KeyError:
-                    Messages.showError("Please check and make sure you specified beam sections")
+                    Messages.showError(MessageCodes.ERROR_NO_BEAM_SECTIONS)
 
 
         return section
@@ -62,7 +63,7 @@ class Span:
                 try:
                     section = props[Span.SPAN_SECTION]
                 except:
-                    Messages.showError("Please check and make sure you specified beam sections")
+                    Messages.showError(MessageCodes.ERROR_NO_BEAM_SECTIONS)
 
 
         return section
