@@ -2,6 +2,7 @@ from .span_details import SpanDetails
 from detailing.dxf_entities.entity_hatch import EntityHatch
 from detailing.dxf_entities.entity_line import EntityLine
 from common.messages import Messages
+from common.message_codes import MessageCodes
 
 class BeamDetails:
         def __init__(self, all_beams_data, beam_name, beam_data, start_point):
@@ -28,9 +29,7 @@ class BeamDetails:
 
             if self.data.beam_depth > deepest_section_depth:
                 self.data.beam_depth = deepest_section_depth
-                message = "Beam depth has been adjusted to the deepest section depth."
-                message += "\nIf this was the intended behaviour, please contact developer"
-                Messages.w(message)
+                Messages.w(MessageCodes.WARNING_BEAM_DEPTH_ALTERED)
             
 
         def getDeepestSection(self, section, deepest_section_depth):
