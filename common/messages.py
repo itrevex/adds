@@ -1,4 +1,5 @@
 import sys
+from inspect import stack, getframeinfo
 
 class Messages:
     '''
@@ -44,9 +45,12 @@ class Messages:
         print(*arg)
 
     @staticmethod
-    def d(TAG, *arg):
+    def d(TAG="", *arg):
         print()
-        print("Debug-Tag: ", TAG)
+        caller = getframeinfo(stack()[1][0])
+        print("File name: ", caller.filename)
+        print("line: : ", caller.lineno)
+        print()
         print(*arg)
 
     @staticmethod
