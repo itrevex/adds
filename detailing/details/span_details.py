@@ -13,6 +13,8 @@ class SpanDetails:
         beam lines are stored on the beam object
         '''
         def __init__(self, beam, span_name, span_data, start_point):
+
+            Messages.i(MessageCodes.INFO_CREATING_ENTITY%(beam.name, span_name))
             self.span_lines = []
             self.beam = beam
             self.data = span_data #Span input data object

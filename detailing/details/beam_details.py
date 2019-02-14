@@ -6,6 +6,7 @@ from common.message_codes import MessageCodes
 
 class BeamDetails:
         def __init__(self, all_beams_data, beam_name, beam_data, start_point):
+            Messages.i("") #add space at start of each beam info output
             self.all_beams_data = all_beams_data
             self.data = beam_data
             self.name = beam_name

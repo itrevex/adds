@@ -35,9 +35,11 @@ class Messages:
         
     @staticmethod
     def w(warning):
+        # Messages.showLineNumber()
         print()
         print("WARNING!- CODE: %s"%warning.code)
         print(warning.msg)
+        print()
 
     @staticmethod
     def i(*arg):
@@ -57,9 +59,7 @@ class Messages:
     @staticmethod
     def d(TAG="", *arg):
         print()
-        caller = getframeinfo(stack()[1][0])
-        print("File name: ", caller.filename)
-        print("line: : ", caller.lineno)
+        Messages.showLineNumber()
         print()
         print(*arg)
 
@@ -76,3 +76,9 @@ class Messages:
         print()
         print("Program terminated")
         sys.exit()
+
+    @staticmethod
+    def showLineNumber():
+        caller = getframeinfo(stack()[1][0])
+        print("File name: ", caller.filename)
+        print("line: : ", caller.lineno)
