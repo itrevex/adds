@@ -9,7 +9,7 @@ from common.message_codes import MessageCodes
 SHOW_DIMENSIONS = False
 
 class DxfDraw:
-    _beam_name = ""
+
     def __init__(self, app_data):
         self.dwg = ezdxf.new('R2010')  # create a new DXF R2010 drawing, official DXF version name: 'AC1024'
         self.msp = self.dwg.modelspace()  # add new entities to the model space
@@ -26,11 +26,12 @@ class DxfDraw:
         output_path = self.app_data.getOutPutFile()
         try:
             self.dwg.saveas(output_path)
-            Messages.i("Generated \"%s\" file"%output_path)
+            Messages.i("")
+            Messages.i(MessageCodes.INFO_DXF_GENERATED%output_path)
         except PermissionError:
             Messages.showError(MessageCodes.ERROR_OPEN_DXF)
         
-        Messages.continuePrompt("Press any key to continue . . .")
+        Messages.continuePrompt(MessageCodes.INFO_CONTINUE_PROMPT)
 
     def getFileName(self):
         return Utils.dateTimeString() +"-detail.dxf"

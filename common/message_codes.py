@@ -13,7 +13,9 @@ class MessageCodes:
 
     #Info constants
     INFO_DATA_READ = "Collecting %s info . . ."
-
+    INFO_DXF_GENERATED = "Generated \"%s\" file"
+    INFO_CONTINUE_PROMPT = "Press any key to continue . . ."
+    
     #Error Constants
     #ER0001
     msg = "The file you are trying to run is from a later version of Trevexs Adds "
