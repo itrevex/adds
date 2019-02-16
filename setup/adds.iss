@@ -10,9 +10,10 @@
 #define SourcePath "E:\Projects\ESAI\PROGRAMMING\PYTHON\adds\dist\main"
 ;
 [Setup]
-AppPublisher=Trevexs, Inc.
+AppPublisher=Trevexs, Inc.    s
 AppPublisherURL=http://www.trevexs.com/
-SignTool=tr_signtool
+;SignTool=mycustom sign /debug /f $qE:\Projects\ESAI\PROGRAMMING\PYTHON\adds\setup\trevexs.pfx$q /p sseka123 /n $qTrevexs Inc$q /t http://timestamp.verisign.com/scripts/timstamp.dll /d $qAdds Design Application$q $f
+;SignedUninstaller=yes
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}

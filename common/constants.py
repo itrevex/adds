@@ -8,7 +8,7 @@ class Constants:
     Z = 2
 
     #Build and app version
-    CURRENT_BUILD = 1001
+    CURRENT_BUILD = 1002
     APP_VERSION = "1.0.1"
 
     #Text factors

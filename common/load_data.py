@@ -12,6 +12,34 @@ class LoadData:
         self.fileDir = os.path.dirname(__file__)
         self.head, self.tail = os.path.split(self.fileDir)
         if(self.tail != 'layers.json'): self.fileDir = self.head
+    
+    def removeComments(self, lines):
+        # Messages.d(line)
+        lines_stripped = []
+        for line in lines:
+            if line != "" and re.search('^[*]', line) == None:
+                lines_stripped.append(line)
+        return lines_stripped
+
+    def readTradFile(self):
+        with open(self.getFile("input/input.trad")) as f:
+            lines = [line.strip() for line in f.readlines()]
+            
+        return self.removeComments(lines)            
+        # i = 0
+        # while i < len(lines):
+        #     store = False
+        #     if re.search("(?=^BEAM)(?=\\bBEAM\\b)", lines[i]):
+        #         print(lines[i].split(" "))
+        #         i+=1
+        #         store = True
+        #     while store:
+        #         if re.search("^END BEAM", lines[i]):
+        #             store = False
+        #         else:
+        #             print(lines[i])
+        #             i += 1
+        #     i += 1
 
     def getFile(self, file_path):
         return os.path.join(self.fileDir, file_path)

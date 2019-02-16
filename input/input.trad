@@ -1,0 +1,54 @@
+BUILD   1002 
+START   POINT   0.   0.   0.
+SECTIONS
+*Lines starting with an asterix (*) will be ignored. 'X' means parameter not required
+* Specifying square section with X's for non applicable parameters or parameter can be left out if it appears at the end
+*SECTION Name bf_top  bw   d    df   w_offset 
+SECTION  1    500     200  450  150  150
+SECTION  2    350     200  450  250  X
+SECTION  3    350     200  450  200  150
+SECTION  4    200     300 
+END SECTIONS
+
+LINKS
+*LINK Name diameter bar_mark shape_code spacing offset length
+LINK 1 T8 03 51 200 0.05 1
+LINK 2 T8 03 51 200 0.05 X 
+LINK 3 T8 03 51 150 X X
+END LINKS
+
+SUPPORTS
+*SUPPORT NAME TOP section_d section_b column_h_m BOTTOM section_d section_b column_h_m
+SUPPORT 1 TOP 200 200 3 BOTTOM 200 200 3
+*SUPPORT 2 has no bottom column so it is not specified
+SUPPORT 2 TOP 200 300 3
+SUPPORT 3 BOTTOM 200 300 3
+END SUPPORTS
+
+BEAMS
+*BEAM Name beam_depth
+BEAM 1 450
+*SPAN Name length_m section *links(meaning you can enter any number of links)
+SPAN 1 4.15 2 1
+SPAN 2 3 4 1
+SPAN 3 3.2 1 2
+SPAN 4 2 3 3
+*SUPPORT Name support_type grid_label
+SUPPORT 1 2 2
+SUPPORT 2 2 3
+SUPPORT 3 1 4
+SUPPORT 4 2 5
+SUPPORT 5 1 6
+END BEAM
+
+BEAM 2 450
+SPAN 1 4.15 2 1 2 3
+SPAN 2 3 4 1
+SPAN 3 3.2 1 2
+SPAN 4 2 3 3
+SUPPORT 1 2 2
+SUPPORT 2 2 3
+SUPPORT 3 1 4
+SUPPORT 4 2 5
+SUPPORT 5 1 6
+END BEAM

@@ -57,10 +57,9 @@ class Messages:
         print(*arg)
 
     @staticmethod
-    def d(TAG="", *arg):
+    def d(*arg):
         print()
         Messages.showLineNumber()
-        print()
         print(*arg)
 
     @staticmethod
@@ -79,6 +78,6 @@ class Messages:
 
     @staticmethod
     def showLineNumber():
-        caller = getframeinfo(stack()[1][0])
+        caller = getframeinfo(stack()[2][0])
         print("File name: ", caller.filename)
         print("line: : ", caller.lineno)

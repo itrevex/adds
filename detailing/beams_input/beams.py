@@ -1,3 +1,4 @@
+import re
 from .beam import Beam
 from .span import Span
 from .column import Column
@@ -29,9 +30,22 @@ class Beams:
 
     def __init__(self, app_data):
         self.app_data = app_data
-        self.starting_point = tuple(app_data[Beams.STARTING_POINT])
-        self.getBuildNumber()
+        self.build = self.getBuildNumber()
+        self.starting_point = self.getStartingPoint()
+
         self.checkBuild()
+
+    def getStartingPoint(self):
+        i = 0
+        start_point = (0.,0.,0.)
+        while i < len(self.app_data[i]):
+            if re.search("^(?=^START)(?=.*\\bPOINT\\b).*$", self.app_data[i]):
+                line = list(filter(None, self.app_data[i].split(" ")))
+                start_point = tuple([float(x) for x in line[-3:]])
+                self.app_data.pop(i)
+                return start_point
+            i += 1
+        
 
     def checkBuild(self):
         if self.build > Constants.CURRENT_BUILD:
@@ -43,11 +57,15 @@ class Beams:
             pass
 
     def getBuildNumber(self):
-        try: 
-            self.build = self.app_data[Beams.BUILD]
-        except KeyError:
-            self.build = 1000
-        
+        i = 0
+        while i < len(self.app_data[i]):
+            if re.search("^\\bBUILD\\b", self.app_data[i]):
+                line = list(filter(None, self.app_data[i].split(" ")))
+                build_number = int(line[1])
+                self.app_data.pop(i)
+                break
+            i += 1
+        return build_number
 
     def getBeams(self):
         beams = {}
@@ -86,9 +104,27 @@ class Beams:
 
     def getSections(self):
         sections = {}
-        for name, props in self.app_data[Beams.SECTIONS].items():
-            Messages.i(MessageCodes.INFO_DATA_READ%name)
-            sections[name] = Section(name, props)
+        i = 0
+        while i < len(self.app_data):
+            store = False
+            if re.search("^SECTIONS", self.app_data[i]):
+                i+=1
+                store = True
+            while store:
+                if re.search("^END SECTION", self.app_data[i]):
+                    self.app_data.pop(i)
+                    store = False #break out of inner loop
+                elif re.search("^\\bSECTION\\b", self.app_data[i]):
+                    section = list(filter(None, self.app_data[i].split(" ")))
+                    sections[section[Section.SECTION_NAME]] = Section(section)
+                    self.app_data.pop(i)
+                i += 1
+            i += 1
+
+        
+        # for name, props in self.app_data[Beams.SECTIONS].items():
+        #     Messages.i(MessageCodes.INFO_DATA_READ%name)
+        #     sections[name] = Section(name, props)
 
         return sections
 
@@ -116,9 +152,6 @@ class Beams:
             return Column(key, props[key])
         except KeyError:
             return None
-
-    def getStartingPoint(self):
-        return tuple(self.app_data[Beams.STARTING_POINT])
 
 
     

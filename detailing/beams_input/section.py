@@ -2,14 +2,14 @@ from ..coordinates.section_coord import SectionCoordinates
 
 class Section:
 
-    SECTIONS_B = "b" #b - total width of section
-    SECTIONS_BF_TOP = "bf_top" #bf_top - width  of flange on top
-    SECTIONS_BF_BOTTOM = "bf_bottom" #bf_bottom - width of flange at the bottom
-    SECTIONS_BW = "bw" #bw - width of web
-    SECTIONS_D = "d" #d - total depth of section
-    SECTIONS_DF = "df" #df - depth of flange
-    SECTIONS_W_OFFSET = "w_offset" #w_offset - off set of web from left starting point of section
-
+    # SECTIONS_B = "b" #b - total width of section
+    SECTIONS_BF_TOP = 2 #bf_top - width  of flange on top
+    # SECTIONS_BF_BOTTOM = "bf_bottom" #bf_bottom - width of flange at the bottom
+    SECTIONS_BW = 3 #bw - width of web
+    SECTIONS_D = 4 #d - total depth of section
+    SECTIONS_DF = 5 #df - depth of flange
+    SECTIONS_W_OFFSET = 6 #w_offset - off set of web from left starting point of section
+    SECTION_NAME = 1
     '''
     "b" stands for width and "d" stands for depth
     "f" stands for flange and "w" stands for web
@@ -24,26 +24,27 @@ class Section:
     '''
 
     
-    def __init__(self, name, props):
-        self.b = self.updateProp(props, Section.SECTIONS_B)
-        self.bf_top = self.updateProp(props, Section.SECTIONS_BF_TOP)
-        self.bf_bottom = self.updateProp(props, Section.SECTIONS_BF_BOTTOM)
-        self.bw = self.updateProp(props, Section.SECTIONS_BW)
-        self.d = self.updateProp(props, Section.SECTIONS_D)
-        self.df = self.updateProp(props, Section.SECTIONS_DF)
-        self.w_offset = self.updateProp(props, Section.SECTIONS_W_OFFSET)
+    def __init__(self, section_props):
+        self.b = 0.
+        self.section_props = section_props
+        self.bf_top = self.updateProp(Section.SECTIONS_BF_TOP)
+        self.bf_bottom = 0.
+        self.bw = self.updateProp(Section.SECTIONS_BW)
+        self.d = self.updateProp(Section.SECTIONS_D)
+        self.df = self.updateProp(Section.SECTIONS_DF)
+        self.w_offset = self.updateProp(Section.SECTIONS_W_OFFSET)
         self.bf = self.setBf()
-        self.name = name
+        self.name = self.section_props[Section.SECTION_NAME]
 
         #method has to be called after initializing other parameters
         self.type = self.getSectionType()
 
-    def updateProp(self, props, key):
+    def updateProp(self, key):
         try:
-            if(props[key] == ""):
+            if(self.section_props[key] == "X"):
                 return 0.
-            return float(props[key])
-        except KeyError:
+            return float(self.section_props[key])
+        except IndexError:
             return 0.
 
     def getSectionType(self):
@@ -97,3 +98,16 @@ class Section:
     def getCoordinates(self, starting_point, beam_depth):
         return SectionCoordinates(starting_point, self, beam_depth)
 
+    def toString(self):
+        string = ""
+        string +="\nb = " + str(self.b)
+        string +="\nbf_top = " + str(self.bf_top)
+        string +="\nbf_bottom = " + str(self.bf_bottom)
+        string +="\nbw = " + str(self.bw)
+        string +="\nd = " + str(self.d)
+        string +="\ndf = " + str(self.df)
+        string +="\nw_offset = " + str(self.w_offset)
+        string +="\nbf = " + str(self.bf)
+        string +="\nname = " + str(self.name)
+        
+        return string
