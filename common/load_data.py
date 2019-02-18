@@ -23,24 +23,11 @@ class LoadData:
 
     def readTradFile(self):
         self.path = self.getInputFilePath()
-        with open(self.getFile("input/input.trad")) as f:
+        with open(self.getFile(self.path)) as f:
             lines = [line.strip() for line in f.readlines()]
             
         return self.removeComments(lines)            
-        # i = 0
-        # while i < len(lines):
-        #     store = False
-        #     if re.search("(?=^BEAM)(?=\\bBEAM\\b)", lines[i]):
-        #         print(lines[i].split(" "))
-        #         i+=1
-        #         store = True
-        #     while store:
-        #         if re.search("^END BEAM", lines[i]):
-        #             store = False
-        #         else:
-        #             print(lines[i])
-        #             i += 1
-        #     i += 1
+
 
     def getFile(self, file_path):
         return os.path.join(self.fileDir, file_path)
