@@ -22,6 +22,7 @@ class LoadData:
         return lines_stripped
 
     def readTradFile(self):
+        self.path = self.getInputFilePath()
         with open(self.getFile("input/input.trad")) as f:
             lines = [line.strip() for line in f.readlines()]
             
@@ -101,5 +102,6 @@ class LoadData:
             file_name = tail.split('.')[0] + ".dxf"
             return os.path.join(head, file_name)
 
-        except AttributeError:
+        except AttributeError as e:
+            print(e)
             Messages.showError(MessageCodes.ERROR_NO_INPUT_DATA)

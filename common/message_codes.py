@@ -53,6 +53,11 @@ class MessageCodes:
     msg += "\nPlease close the open dxf file or rename your input file to something else"
     ERROR_OPEN_DXF= MessageCode(msg, "ER0007")
 
+    #ER0008
+    msg="There is an error in your input"
+    msg+="\nPlease %s line: \n%s"
+    ERROR_IN_INPUT= MessageCode(msg, "ER0008")
+
     #Warning Constants
     #WAR0001
     msg = "The file you are trying to run is not updated to fully work with the current version"

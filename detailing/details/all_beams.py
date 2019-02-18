@@ -6,8 +6,7 @@ from common.messages import Messages
 class AllBeamsDetails:
 
     def __init__(self, app_data):
-        
-        beams_data = Beams(app_data.getInputData())
+        beams_data = Beams(app_data.readTradFile())
         self.beams = beams_data.getBeams()
         self.sections = beams_data.getSections()
         self.support_types = beams_data.getSupportTypes()
@@ -16,7 +15,7 @@ class AllBeamsDetails:
         self.build = beams_data.build
         self.all_beams = {}
         self.getBeamDetails()
-    
+
     def getBeamDetails(self):
         beam_start_point = list(self.starting_point)
         for beam_name, beam_data in self.beams.items():

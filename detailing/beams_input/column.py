@@ -8,9 +8,11 @@ class Column:
 
     '''
 
-    COLUMN_B = "section_b"
-    COLUMN_D = "section_d"
-    COLUMN_H_M = "column_h_m"
+    COLUMN_B = 0
+    COLUMN_D = 1
+    COLUMN_H_M = 2
+    TOP = "top"
+    BOTTOM = "bottom"
 
     def __init__(self, type, props):
         self.type = type

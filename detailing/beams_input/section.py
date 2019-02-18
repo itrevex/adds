@@ -3,10 +3,10 @@ from ..coordinates.section_coord import SectionCoordinates
 class Section:
 
     # SECTIONS_B = "b" #b - total width of section
-    SECTIONS_BF_TOP = 2 #bf_top - width  of flange on top
+    SECTIONS_BF_TOP = 4 #bf_top - width  of flange on top
     # SECTIONS_BF_BOTTOM = "bf_bottom" #bf_bottom - width of flange at the bottom
-    SECTIONS_BW = 3 #bw - width of web
-    SECTIONS_D = 4 #d - total depth of section
+    SECTIONS_BW = 2 #bw - width of web
+    SECTIONS_D = 3 #d - total depth of section
     SECTIONS_DF = 5 #df - depth of flange
     SECTIONS_W_OFFSET = 6 #w_offset - off set of web from left starting point of section
     SECTION_NAME = 1
@@ -100,6 +100,7 @@ class Section:
 
     def toString(self):
         string = ""
+        string +="\nname = " + str(self.name)
         string +="\nb = " + str(self.b)
         string +="\nbf_top = " + str(self.bf_top)
         string +="\nbf_bottom = " + str(self.bf_bottom)
@@ -108,6 +109,5 @@ class Section:
         string +="\ndf = " + str(self.df)
         string +="\nw_offset = " + str(self.w_offset)
         string +="\nbf = " + str(self.bf)
-        string +="\nname = " + str(self.name)
-        
+
         return string

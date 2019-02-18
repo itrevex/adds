@@ -5,7 +5,7 @@ class SupportType:
     Check the column class to see how columns for each
     support type are defined
     '''
-
+    NAME = 1
     def __init__(self, column_top = None, column_bottom = None):
         self.column_top = column_top #column object see column class
         self.column_bottom = column_bottom

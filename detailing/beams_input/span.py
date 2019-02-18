@@ -10,36 +10,37 @@ class Span:
     '''
 
         #SPANS
-    SPAN_LENGTH = "length_m"
-    SPAN_SECTION_LEFT = "section_left"
-    SPAN_SECTION_RIGHT = "section_right"
-    SPAN_SECTION = "section"
-    SPAN_LINKS = "links"
+    SPAN_LENGTH = 2
+    SPAN_SECTION_LEFT = 3
+    SPAN_SECTION_RIGHT = 3
+    SPAN_SECTION = 3
+    SPAN_LINKS = 4
 
-    def __init__(self, name, props, beam_name, build, index = 0):
+    def __init__(self, name, props, beam_name, index = 0):
         self.name = name
+        self.props = props
         self.beam_name = beam_name
         self.span_length = float(props[Span.SPAN_LENGTH])
-        self.section_left = self.getSectionLeft(props)
-        self.section_right = self.getSectionRight(props)
-        self.links = self.getSpanLinks(props, build)
+        self.section_left = self.getSectionLeft()
+        self.section_right = self.getSectionLeft()
+        self.links = self.getLinks()
         self.index = index
-    
-    def getSectionLeft(self, props):
+
+    def getSectionLeft(self):
         section = ""
         try:
-           section = props[Span.SPAN_SECTION_LEFT]
-        except KeyError:
-            try:
-                section = props[Span.SPAN_SECTION_RIGHT]
-            except KeyError:
-                try:
-                    section = props[Span.SPAN_SECTION]
-                except KeyError:
-                    Messages.showError(MessageCodes.ERROR_NO_BEAM_SECTIONS)
+           section = self.props[Span.SPAN_SECTION_LEFT]
+        except ValueError:
+            #show error message to user
+            self.showErrorMsg("No column for span")
+            pass
 
 
         return section
+    def showErrorMsg(self, errorMsg=""):
+        msg = MessageCodes.ERROR_IN_INPUT
+        msg.setMsg(msg.msg%("Spans", " ".join(self.props)+"\n%s"%errorMsg))
+        Messages.showError(msg)
 
     def getSpanLinks(self, props, build):
         links = []
@@ -52,6 +53,10 @@ class Span:
             warning.setMsg(warning.msg%(self.beam_name, self.name))
             Messages.showWarning(warning)
 
+        return links
+
+    def getLinks(self):
+        links = self.props[ Span.SPAN_LINKS: ]
         return links
 
     def getSectionRight(self, props):
@@ -89,4 +94,12 @@ class Span:
         self.name = name
 
     def toString(self):
+        string = ""
+        string += "\nName = " + str(self.name)
+        string += "\nbeam_name = " + str(self.beam_name)
+        string += "\nspan_length = " + str(self.span_length) 
+        string += "\nsection_left = " + str(self.section_left)
+        string += "\nsection_right = " + str(self.section_right)
+        string += "\nlinks = " + str(self.links)
+        string += "\nindex = " + str(self.index)
         pass
