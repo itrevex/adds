@@ -15,7 +15,7 @@ class MessageCodes:
     INFO_DATA_READ = "Collecting %s info . . ."
     INFO_DXF_GENERATED = "Generated \"%s\" file"
     INFO_CONTINUE_PROMPT = "Press any key to continue . . ."
-    INFO_CREATING_ENTITY = "Generating %s %s entities . . ."
+    INFO_CREATING_ENTITY = "Generating BEAM-%s SPAN-%s entities . . ."
 
     #Error Constants
     #ER0001
