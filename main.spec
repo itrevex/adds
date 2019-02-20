@@ -6,6 +6,7 @@ allFiles = [
     ('./assests/', 'assests'),
     ('./input/', 'input'),
     ( './read_me.pdf/', '.' ),
+    ( './release_update.pdf/', '.' ),
     ( './run.bat/', '.' ),
     ( 'C:\\Users\\treve\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages\\ezdxf\\templates', 'ezdxf/templates' ),
     ]
