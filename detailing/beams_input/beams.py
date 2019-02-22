@@ -113,7 +113,11 @@ class Beams:
                         support = list(filter(None, self.app_data[i].split(" ")))
                         support_name = support[1]
                         supports[support_name] = support[2]
-                        grid_labels[support_name] = support[3]
+                        try:
+                            grid_labels[support_name] = support[3]
+                        except IndexError:
+                            grid_labels[support_name] = ""
+                            
                         self.app_data.pop(i)
                     else:
                         self.app_data.pop(i)
