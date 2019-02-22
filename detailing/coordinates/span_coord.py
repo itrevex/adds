@@ -72,8 +72,11 @@ class SpanCoordinates(SpanPoints):
         return left_right_lines
 
     def getGridText(self, text, circle):
-        x_value = -circle.radius * Constants.CIRCLE_TEXT_OFFSET_FACTOR
-        pos = self.changeXY(circle.centre, x_value, x_value)
+        # Messages.d(len(text))
+        text_len = len(text)
+        x_value = -circle.radius * Constants.CIRCLE_TEXT_OFFSET_FACTOR * text_len
+        y_value = -circle.radius * Constants.CIRCLE_TEXT_OFFSET_FACTOR 
+        pos = self.changeXY(circle.centre, x_value, y_value)
         return EntityText(text, pos, layer=Constants.LAYER_GRID_LABELS)
         
     def getCentreLineCircle(self, centre_line):

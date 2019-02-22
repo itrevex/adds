@@ -117,7 +117,6 @@ class Beams:
                             grid_labels[support_name] = support[3]
                         except IndexError:
                             grid_labels[support_name] = ""
-                            
                         self.app_data.pop(i)
                     else:
                         self.app_data.pop(i)
