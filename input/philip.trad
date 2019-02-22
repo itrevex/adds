@@ -13,12 +13,18 @@ LINKS
 LINK  1    H8       03A      51         200     x      X
 LINK  2    H8       03       51         175     x      X
 LINK  3    H8       03       51         150     x      X
+*20/02/2019 todo 
+*empty grid label to mean no grid label
 END LINKS
 SUPPORTS
 *SUPPORT NAME TOP section_d section_b column_h_m BOTTOM section_d section_b column_h_m
 SUPPORT  1    TOP 200       200       3          BOTTOM 200       200       3
 SUPPORT  2    BOTTOM 200       200       3
-SUPPORT  3    TOP 200       200       3 * no columns
+SUPPORT  3    TOP 200       200       3 
+*20/02/2019 todo 
+* no columns(specify h as 0) - for beams supported on other beams
+* column offset from centre line
+* for cantilever, given that spans are entered centre to centre, how do we know support width to use
 END SUPPORTS
 
 BEAMS
@@ -27,9 +33,9 @@ BEAM  1    450
 *SPAN Name length_m section *link_name
 SPAN  1    0.9     1        2
 SPAN  2    2.45    2        1
-SPAN  4    1.25    3        3
-SPAN  5    2.1     1        2
-SPAN  6    1.0     2        1
+SPAN  3    1.25    3        3
+SPAN  4    2.1     1        2
+SPAN  5    1.0     2        1
 SPAN  6    2.1     3        3
 *SUPPORT Name support_type grid_label
 SUPPORT 1 3 A

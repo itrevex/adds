@@ -1,0 +1,14 @@
+Create beam
+ -show window to input beam name
+ -beam depth
+
+I will have a window with several options - icon indicators
+-add span, add support, and links
+-a span with no links should work
+-a span with no - at specify support width (cantilever)
+
+span - span window comes up (has span lengths and some recently used spans)
+add support, click nodes a long span to add support, support like think, i show b, w,h
+with a 3d diagram to depict what those mean
+
+add links(choose link), choose span hight 
