@@ -145,8 +145,8 @@ class SpanDetails:
                 support_types = self.beam.all_beams_data.support_types
                 support = self.beam.beam_supports[index] #could be left or right support
 
-                column_top_width = support_types[support].getColumnTopWidth()
-                column_bottom_width = support_types[support].getColumnBottomWidth()
+                column_top_width = support_types[support].column_top.b
+                column_bottom_width = support_types[support].column_bottom.b
 
                 if column_top_width == 0.:
                     column_top_width = column_bottom_width
@@ -162,7 +162,7 @@ class SpanDetails:
                 Messages.showError(message)
 
         def getShearData(self):
-             #column left bigger width,
+             #column left bigger width, data==span
             left_column_width = max(self.getColumnWidth(self.data.index))
 
              #column right bigger width,
@@ -219,9 +219,8 @@ class SpanDetails:
             layer = supports
             '''
             support_type = self.beam.all_beams_data.support_types[support]
-            column_top_width = support_type.getColumnTopWidth()
-            column_bottom_width = support_type.getColumnBottomWidth()
-
+            column_top_width = support_type.column_top.b
+            column_bottom_width = support_type.column_bottom.b
             
-            return self.span_coords.getColumnLines(column_top_width, 
-                column_bottom_width, grid_label, left_column)
+            return self.span_coords.getColumnLines(support_type, grid_label, left_column)
+ 

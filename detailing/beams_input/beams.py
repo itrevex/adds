@@ -171,7 +171,6 @@ class Beams:
                 elif re.search("^\\bSECTION\\b", self.app_data[i], re.IGNORECASE):
                     section = list(filter(None, self.app_data[i].split(" ")))
                     sections[section[Section.SECTION_NAME]] = Section(section)
-                    Messages.d(sections[section[Section.SECTION_NAME]].toString())
                     self.app_data.pop(i)
                 else:
                     self.app_data.pop(i)
@@ -242,7 +241,6 @@ class Beams:
         return support_types
 
     def getColumn(self, support, column, key):
-        Messages.d("pop bottom or top if they exist in the list")
         try:
             top_index = [item.lower() for item in support].index(column.lower()) + 1
             props = support[top_index: top_index + 4]
@@ -253,7 +251,7 @@ class Beams:
             
             return Column(key, props)
         except ValueError:
-            return None
+            return Column(key, [])
         
 
     

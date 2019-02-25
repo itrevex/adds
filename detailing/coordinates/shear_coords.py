@@ -12,7 +12,7 @@ class ShearCoords(SpanPoints):
 
         self.left_column_width = left_column
         self.right_column_width = right_column
-        self.start_point_links = span_data.starting_point
+        self.start_point_links = tuple(span_data.starting_point)
         self.span_data = span_data
         self.link_lines = {}
         self.label_entities = {}
@@ -47,7 +47,7 @@ class ShearCoords(SpanPoints):
         return entities
 
     def getLeftLine(self):
-        
+        Messages.d(self.start_point_links)
         left_line_top_point = self.changeXY(self.start_point_links, 
             self.left_column_width/2 + self.link_type.offset * SpanPoints.ONE_M_IN_MM,
             -Constants.LINKS_CUT_OFF_FROM_EDGE_OF_BEAM_LINE)

@@ -3,9 +3,9 @@ class Column:
     '''
     Column has the column section properties
     and the column height
-    column_b - column section width, represents length along beam
-    column_d - column section height
-    column_h_m - column height in m
+    b - column section width, represents length along beam
+    d - column section height
+    h - column height in m
 
     '''
 
@@ -18,11 +18,10 @@ class Column:
 
     def __init__(self, type, props):
         self.type = type
-        Messages.d(props)
         self.props = props
-        self.column_b = float(props[Column.COLUMN_B])
-        self.column_d = float(props[Column.COLUMN_D])
-        self.column_h_m = self.getValue(Column.COLUMN_H_M)
+        self.b = self.getValue(Column.COLUMN_B)
+        self.d = self.getValue(Column.COLUMN_D)
+        self.h = self.getValue(Column.COLUMN_H_M)
         self.offset = self.getValue(Column.COLUMN_OFFSET) 
     
     def getValue(self, index):
@@ -31,14 +30,14 @@ class Column:
         except (IndexError):
             return 0.
 
-    def setB(self, column_b):
-        self.column_b = float(column_b)
+    def setB(self, b):
+        self.b = float(b)
 
-    def setD(self, column_d):
-        self.column_d = float(column_d)
+    def setD(self, d):
+        self.d = float(d)
 
-    def setHm(self, column_h_m):
-        self.column_h_m = float(column_h_m)
+    def setHm(self, h):
+        self.h = float(h)
 
     def setType(self, type):
         self.type = type

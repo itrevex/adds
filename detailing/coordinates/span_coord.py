@@ -15,19 +15,19 @@ class SpanCoordinates(SpanPoints):
     def getSpanLine(self):
         return EntityLine(self.start_point, self.end_point)
 
-    def getColumnLines(self, top_width, bottom_width, grid_text, is_left_column = True):
+    def getColumnLines(self, support, grid_text, is_left_column = True):
         column_lines = []
 
         #check to see if there is a top column
-        if top_width != 0.0:
+        if support.column_top.h != 0.0:
             #draw left and right lines of the column
-            left_right_lines = self.getTopLeftRightColumnLines(top_width, is_left_column)
+            left_right_lines = self.getTopLeftRightColumnLines(support.column_top.b, is_left_column)
             column_lines.extend(left_right_lines)
 
         #check to see if there is a bottom column
-        if bottom_width != 0.0:
+        if support.column_bottom.h != 0.0:
             
-            left_right_lines = self.getLeftRightColumnLines(bottom_width, is_left_column)
+            left_right_lines = self.getLeftRightColumnLines(support.column_bottom.b, is_left_column)
             column_lines.extend(left_right_lines)
 
         #get the centerline for column
@@ -120,10 +120,10 @@ class SpanCoordinates(SpanPoints):
 
         top_point = self.changeY(start_point, 
             self.beam_depth * Constants.CENTER_LINE_FACTOR)
-        bottom_line = self.changeY(start_point, 
+        bottom_point = self.changeY(start_point, 
             -self.beam_depth - self.beam_depth * Constants.CENTER_LINE_FACTOR)
 
-        return EntityLine(top_point, bottom_line, Constants.LAYER_CENTER_LINES)
+        return EntityLine(top_point, bottom_point, Constants.LAYER_CENTER_LINES)
 
     def drawZ(self, column_width, end_left, end_right):
 
