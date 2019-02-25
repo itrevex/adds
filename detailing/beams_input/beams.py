@@ -242,9 +242,15 @@ class Beams:
         return support_types
 
     def getColumn(self, support, column, key):
+        Messages.d("pop bottom or top if they exist in the list")
         try:
             top_index = [item.lower() for item in support].index(column.lower()) + 1
-            props = support[top_index: top_index + 3]
+            props = support[top_index: top_index + 4]
+            if key == Column.BOTTOM:
+                props = [param for param in props if param.lower() != Column.TOP.lower()]
+            else:
+                props = [param for param in props if param.lower() != Column.BOTTOM.lower()]
+            
             return Column(key, props)
         except ValueError:
             return None
