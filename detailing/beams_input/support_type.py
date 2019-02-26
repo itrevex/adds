@@ -6,7 +6,8 @@ class SupportType:
     support type are defined
     '''
     NAME = 1
-    def __init__(self, column_top = None, column_bottom = None):
+    def __init__(self, name, column_top = None, column_bottom = None):
+        self.name = name
         self.column_top = column_top #column object see column class
         self.column_bottom = column_bottom
 
@@ -17,9 +18,12 @@ class SupportType:
         self.column_bottom = column_bottom
 
     
+    def toString(self):
+        string = "\nSupport - " + self.name
+        string += "\nColumn Top" + self.column_top.toString()
+        string += "\nColumn Bottom" + self.column_bottom.toString()
 
-
-    
+        return string
 
 
 

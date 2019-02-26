@@ -143,16 +143,17 @@ class SpanDetails:
             '''
             try:
                 support_types = self.beam.all_beams_data.support_types
-                support = self.beam.beam_supports[index] #could be left or right support
-
-                column_top_width = support_types[support].column_top.b
-                column_bottom_width = support_types[support].column_bottom.b
-
-                if column_top_width == 0.:
-                    column_top_width = column_bottom_width
+                support_index = self.beam.beam_supports[index] #could be left or right support
+                support = support_types[support_index]
                 
-                if column_bottom_width == 0.:
-                    column_bottom_width = column_top_width
+                column_top_width = support.column_top.b
+                column_bottom_width = support.column_bottom.b
+
+                # if column_top_width == 0.:
+                #     column_top_width = column_bottom_width
+                
+                # if column_bottom_width == 0.:
+                #     column_bottom_width = column_top_width
 
                 return [column_top_width, column_bottom_width]
 

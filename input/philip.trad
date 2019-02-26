@@ -17,10 +17,10 @@ LINK  3    H8       03       51         150     x      X
 *empty grid label to mean no grid label
 END LINKS
 SUPPORTS
-*SUPPORT NAME TOP section_d section_b column_h_m  offset BOTTOM section_d section_b column_h_m
-SUPPORT  1    TOP    200    200       3           20     BOTTOM 200       200       3
-SUPPORT  2    BOTTOM 200    200       3                  BOTTOM 200       200       3
-SUPPORT  3    TOP    200    200        
+*SUPPORT NAME TOP     section_d  section_b column_h_m  offset BOTTOM section_d section_b column_h_m
+SUPPORT  1    TOP     200        200       3           20     BOTTOM 200       400       3
+SUPPORT  2    BOTTOM  200        200       3                  TOP    200       200       3
+SUPPORT  3    TOP     200        200       X          
 *20/02/2019 todo 
 * no columns(specify h as 0) - for beams supported on other beams
 * column offset from centre line
@@ -37,12 +37,12 @@ SPAN  4    2.1     1        2
 SPAN  5    1.0     2        1
 SPAN  6    2.1     3        3
 *SUPPORT Name support_type grid_label
-SUPPORT 1 3 A
-SUPPORT 2 1 B
-SUPPORT 3 2 B1
-SUPPORT 4 3 
-SUPPORT 5 2 C
-SUPPORT 6 1 D
-SUPPORT 7 3 D1
+SUPPORT  1    3            A
+SUPPORT  2    1            B
+SUPPORT  3    2            B1
+SUPPORT  4    3 
+SUPPORT  5    2            C
+SUPPORT  6    1            D
+SUPPORT  7    3            D1
 END BEAM 
 END BEAMS 

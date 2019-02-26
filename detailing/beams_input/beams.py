@@ -225,8 +225,9 @@ class Beams:
                     support = list(filter(None, self.app_data[i].split(" ")))
                     column_top = self.getColumn(support, Column.TOP, Beams.COLUMN_TOP)
                     column_bottom = self.getColumn(support, Column.BOTTOM, Beams.COLUMN_BOTTOM)
-                    
-                    support_types[support[SupportType.NAME]] = SupportType(column_top, column_bottom)
+                    support_name = support[SupportType.NAME]
+                    support_type = SupportType(support_name, column_top, column_bottom)
+                    support_types[support_name] = support_type
                     self.app_data.pop(i)
                 else:
                     i += 1
@@ -241,17 +242,14 @@ class Beams:
         return support_types
 
     def getColumn(self, support, column, key):
-        try:
+        props = []
+        if column in [item.lower() for item in support]:
             top_index = [item.lower() for item in support].index(column.lower()) + 1
             props = support[top_index: top_index + 4]
-            if key == Column.BOTTOM:
-                props = [param for param in props if param.lower() != Column.TOP.lower()]
-            else:
-                props = [param for param in props if param.lower() != Column.BOTTOM.lower()]
-            
-            return Column(key, props)
-        except ValueError:
-            return Column(key, [])
+            props = [param for param in props if param.lower() != Column.TOP.lower()]
+            props = [param for param in props if param.lower() != Column.BOTTOM.lower()]
+
+        return Column(key, props)
         
 
     

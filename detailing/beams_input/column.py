@@ -23,9 +23,11 @@ class Column:
         self.d = self.getValue(Column.COLUMN_D)
         self.h = self.getValue(Column.COLUMN_H_M)
         self.offset = self.getValue(Column.COLUMN_OFFSET) 
-    
+        
     def getValue(self, index):
         try:
+            if self.props[index].lower() == 'x':
+                return 0.
             return float(self.props[index])
         except (IndexError):
             return 0.
@@ -41,3 +43,12 @@ class Column:
 
     def setType(self, type):
         self.type = type
+
+    def toString(self):
+        string = "\ntype = "+ str(self.type)
+        string += "\nb = " + str(self.b)
+        string += "\nd = " + str(self.d)
+        string += "\nh = " + str(self.h)
+        string += "\noffset = " + str(self.offset)
+
+        return string
