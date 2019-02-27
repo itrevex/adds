@@ -10,7 +10,7 @@ END SECTIONS
 LINKS
 *Name diameter bar_mark shape_code and spacing have to be passed other they throw
 *LINK Name diameter bar_mark shape_code spacing offset length
-LINK  1    H8       03A      51         200     x      X
+LINK  1    H8       03A      51         200     50     X
 LINK  2    H8       03       51         175     x      X
 LINK  3    H8       03       51         150     x      X
 *20/02/2019 todo 
@@ -31,12 +31,12 @@ BEAMS
 *BEAM Name beam_depth
 BEAM  1    450
 *SPAN Name length_m section *link_name
-SPAN  1    0.9     1        2
-SPAN  2    2.45    2        1
-SPAN  3    1.25    3        3
-SPAN  4    2.1     1        2
-SPAN  5    1.0     2        1
-SPAN  6    2.1     3        3
+SPAN  1    900     1        2
+SPAN  2    2450    2        1
+SPAN  3    1250    3        3
+SPAN  4    2100    1        2
+SPAN  5    1000    2        1
+SPAN  6    2100    3        3
 *SUPPORT Name support_type grid_label
 SUPPORT  1    3            A
 SUPPORT  2    1            B

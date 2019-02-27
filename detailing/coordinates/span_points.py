@@ -13,7 +13,7 @@ class SpanPoints(ChoordChange):
 
      start_point is at top beam_line on the left
     '''
-    ONE_M_IN_MM = 1000.
+    ONE_M_IN_MM = 1.
 
     def __init__(self, starting_point, span_length, beam_depth, scale_factor = 1):
         
