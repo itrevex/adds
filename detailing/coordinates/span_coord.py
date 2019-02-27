@@ -21,13 +21,13 @@ class SpanCoordinates(SpanPoints):
         #check to see if there is a top column
         if support.column_top.h != 0.0:
             #draw left and right lines of the column
-            left_right_lines = self.getTopLeftRightColumnLines(support.column_top.b, is_left_column)
+            left_right_lines = self.getColumn(support, is_left_column)
             column_lines.extend(left_right_lines)
 
         #check to see if there is a bottom column
         if support.column_bottom.h != 0.0:
             
-            left_right_lines = self.getLeftRightColumnLines(support.column_bottom.b, is_left_column)
+            left_right_lines = self.getColumn(support, is_left_column, False)
             column_lines.extend(left_right_lines)
 
         #get the centerline for column
@@ -45,7 +45,7 @@ class SpanCoordinates(SpanPoints):
 
         return column_lines, center_line.pt1
 
-    def getLeftRightColumnLines(self, column_width, is_left_column):
+    def getBottomColumnLines(self, column_width, is_left_column):
         left_right_lines = []
         left_line = self.getColumnBottomLine(-column_width/2, is_left_column)
         right_line = self.getColumnBottomLine(column_width/2, is_left_column)
@@ -58,12 +58,26 @@ class SpanCoordinates(SpanPoints):
 
         return left_right_lines
 
-    def getTopLeftRightColumnLines(self, column_width, is_left_column):
-        left_right_lines = []
-        left_line = self.getColumnTopLine(-column_width/2, is_left_column)
-        right_line = self.getColumnTopLine(column_width/2, is_left_column)
+    def getLeftRightColumnLines(self, support, is_left_column, is_top):
+        # Messages.d(support.name, )
+        if is_top:
+            width = support.column_top.b
+            offset = support.column_top.offset
+            left_line = self.getColumnTopLine(-width/2+offset, is_left_column)
+            right_line = self.getColumnTopLine(width/2+offset, is_left_column)
+        else:
+            width = support.column_bottom.b
+            offset = support.column_bottom.offset
+            left_line = self.getColumnBottomLine(-width/2-offset, is_left_column)
+            right_line = self.getColumnBottomLine(width/2-offset, is_left_column)
 
-        z_lines = self.drawZ(column_width, left_line.pt2, right_line.pt2)
+        return left_line, right_line, width
+
+    def getColumn(self, support, is_left_column, is_top=True):
+        left_right_lines = []
+        
+        left_line, right_line, width = self.getLeftRightColumnLines(support, is_left_column, is_top)
+        z_lines = self.drawZ(width, left_line.pt2, right_line.pt2)
 
         left_right_lines.append(left_line)
         left_right_lines.append(right_line)

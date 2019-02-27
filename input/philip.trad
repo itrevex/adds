@@ -18,7 +18,7 @@ LINK  3    H8       03       51         150     x      X
 END LINKS
 SUPPORTS
 *SUPPORT NAME TOP     section_d  section_b column_h_m  offset BOTTOM section_d section_b column_h_m
-SUPPORT  1    TOP     200        200       3           20     BOTTOM 200       400       3
+SUPPORT  1    TOP     200        200       3           50     BOTTOM 200       400       3
 SUPPORT  2    BOTTOM  200        200       3                 
 SUPPORT  3    TOP     200        200       X          
 SUPPORT  4    TOP     200        200       3                

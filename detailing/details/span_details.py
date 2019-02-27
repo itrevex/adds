@@ -220,8 +220,6 @@ class SpanDetails:
             layer = supports
             '''
             support_type = self.beam.all_beams_data.support_types[support]
-            column_top_width = support_type.column_top.b
-            column_bottom_width = support_type.column_bottom.b
-            
+
             return self.span_coords.getColumnLines(support_type, grid_label, left_column)
  
