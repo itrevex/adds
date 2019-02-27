@@ -149,11 +149,11 @@ class SpanDetails:
                 column_top_width = support.column_top.b
                 column_bottom_width = support.column_bottom.b
 
-                # if column_top_width == 0.:
-                #     column_top_width = column_bottom_width
+                if column_top_width == 0.:
+                    column_top_width = column_bottom_width
                 
-                # if column_bottom_width == 0.:
-                #     column_bottom_width = column_top_width
+                if column_bottom_width == 0.:
+                    column_bottom_width = column_top_width
 
                 return [column_top_width, column_bottom_width]
 

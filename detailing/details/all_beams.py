@@ -4,9 +4,11 @@ from common.constants import Constants
 from common.messages import Messages
 
 class AllBeamsDetails:
-
     def __init__(self, app_data):
         beams_data = Beams(app_data.readTradFile())
+        Messages.d("Plot proper support sizes for both bottom and top")
+        Messages.d("Input all values in mm")
+        Messages.d("catch error in repeated entries")
         self.beams = beams_data.getBeams()
         self.sections = beams_data.getSections()
         self.support_types = beams_data.getSupportTypes()
