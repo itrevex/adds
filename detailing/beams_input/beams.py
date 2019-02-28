@@ -87,6 +87,13 @@ class Beams:
                         return beams
                     elif re.search("^END BEAM", self.app_data[i], re.IGNORECASE):
                         #store data and reset parameters
+
+                        if beam_name in beams.keys():
+                            error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                            error_msg.setMsg(error_msg.msg%("BEAM-%s"%beam_name, 
+                                "BEAMS \n\n%s"%self.app_data[i]))
+                            Messages.showError(error_msg)
+
                         beams[beam_name] = Beam(beam_depth, spans, 
                             supports, grid_labels, beam_name)
                         #reset data at the end of each beam
@@ -106,12 +113,26 @@ class Beams:
                     elif re.search("^\\bSPAN\\b", self.app_data[i], re.IGNORECASE):
                         span = list(filter(None, self.app_data[i].split(" ")))
                         span_name = span[1]
+
+                        if span_name in spans.keys():
+                            error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                            error_msg.setMsg(error_msg.msg%("SPAN-%s"%span_name, 
+                                "BEAM-%s SPANS \n\n%s"%(beam_name, self.app_data[i])))
+                            Messages.showError(error_msg)
+
                         spans[span_name] = Span(span_name, span, beam_name, span_index)
                         span_index += 1
                         self.app_data.pop(i)
                     elif re.search("^\\bSUPPORT\\b", self.app_data[i], re.IGNORECASE):
                         support = list(filter(None, self.app_data[i].split(" ")))
                         support_name = support[1]
+                        
+                        if support_name in supports.keys():
+                            error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                            error_msg.setMsg(error_msg.msg%("SUPPORT-%s"%support_name, 
+                                "BEAM-%s SUPPORTS \n\n%s"%(beam_name, self.app_data[i])))
+                            Messages.showError(error_msg)
+                        
                         supports[support_name] = support[2]
                         try:
                             grid_labels[support_name] = support[3]
@@ -170,7 +191,15 @@ class Beams:
                     return sections
                 elif re.search("^\\bSECTION\\b", self.app_data[i], re.IGNORECASE):
                     section = list(filter(None, self.app_data[i].split(" ")))
-                    sections[section[Section.SECTION_NAME]] = Section(section)
+                    section_name = section[Section.SECTION_NAME]
+
+                    if section_name in sections.keys():
+                        error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                        error_msg.setMsg(error_msg.msg%("SECTION-%s"%section_name, 
+                            "SECTIONS \n\n%s"%self.app_data[i]))
+                        Messages.showError(error_msg)
+                    
+                    sections[section_name] = Section(section)
                     self.app_data.pop(i)
                 else:
                     self.app_data.pop(i)
@@ -200,7 +229,16 @@ class Beams:
                     return link_types
                 elif re.search("^\\bLINK\\b", self.app_data[i], re.IGNORECASE):
                     link = list(filter(None, self.app_data[i].split(" ")))
-                    link_types[link[LinkType.LINK_NAME]] = LinkType(link)
+
+                    link_name = link[LinkType.LINK_NAME]
+
+                    if link_name in link_types.keys():
+                        error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                        error_msg.setMsg(error_msg.msg%("LINK-%s"%link_name, 
+                            "LINKS \n\n%s"%self.app_data[i]))
+                        Messages.showError(error_msg)
+
+                    link_types[link_name] = LinkType(link)
                     self.app_data.pop(i)
                 else:
                     self.app_data.pop(i)
@@ -227,6 +265,13 @@ class Beams:
                     column_bottom = self.getColumn(support, Column.BOTTOM, Beams.COLUMN_BOTTOM)
                     support_name = support[SupportType.NAME]
                     support_type = SupportType(support_name, column_top, column_bottom)
+                    
+                    if support_name in support_types.keys():
+                        error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
+                        error_msg.setMsg(error_msg.msg%("SUPPORT-%s"%support_name, 
+                            "SUPPORTS \n\n%s"%self.app_data[i]))
+                        Messages.showError(error_msg)
+
                     support_types[support_name] = support_type
                     self.app_data.pop(i)
                 else:

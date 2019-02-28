@@ -58,6 +58,11 @@ class MessageCodes:
     msg+="\nPlease %s line: \n%s"
     ERROR_IN_INPUT= MessageCode(msg, "ER0008")
 
+    #ER0009
+    msg="The \"Name\" parameter value should be unique and cannot be used morethan once"
+    msg+="\nPlease check %s under %s"
+    ERROR_UNIQUE_PARAM_NAME= MessageCode(msg, "ER0009")
+
     #Warning Constants
     #WAR0001
     msg = "The file you are trying to run is not updated to fully work with the current version"
