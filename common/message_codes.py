@@ -63,6 +63,21 @@ class MessageCodes:
     msg+="\nPlease check %s under %s"
     ERROR_UNIQUE_PARAM_NAME= MessageCode(msg, "ER0009")
 
+    #ER0010
+    msg = "Section-%s specified for span-%s beam-%s is not listed under sections \n"
+    msg += "Please make you have specified section with 'Name' \"%s\" under sections"
+    ERROR_SPAN_SECTION_NOT_SPECIFIED= MessageCode(msg, "ER0010")
+
+    #ER0011
+    msg = "Link-%s specified for span-%s beam-%s is not listed under links \n"
+    msg += "Please make you have specified link with 'Name' \"%s\" under links"
+    ERROR_SPAN_LINKS_NOT_SPECIFIED= MessageCode(msg, "ER0011")
+
+    #ER0011
+    msg = "Support_type-%s specified for support %s beam-%s is not listed under supports \n"
+    msg += "Please make you have specified support_type with 'Name' \"%s\" under supports types"
+    ERROR_SUPPORT_NOT_SPECIFIED= MessageCode(msg, "ER0011")
+
     #Warning Constants
     #WAR0001
     msg = "The file you are trying to run is not updated to fully work with the current version"

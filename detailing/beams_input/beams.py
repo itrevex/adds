@@ -251,15 +251,15 @@ class Beams:
         i = 0
         while i < len(self.app_data):
             store = False
-            if re.search("^SUPPORTS", self.app_data[i], re.IGNORECASE):
+            if re.search("^SUPPORT_TYPES", self.app_data[i], re.IGNORECASE):
                 self.app_data.pop(i)
                 store = True
             while store:
-                if re.search("^END SUPPORTS", self.app_data[i], re.IGNORECASE):
+                if re.search("^END SUPPORT_TYPES", self.app_data[i], re.IGNORECASE):
                     self.app_data.pop(i)
                     store = False #break out of inner loop
                     return support_types
-                elif re.search("^\\bSUPPORT\\b", self.app_data[i], re.IGNORECASE):
+                elif re.search("^\\bSUPPORT_TYPE\\b", self.app_data[i], re.IGNORECASE):
                     support = list(filter(None, self.app_data[i].split(" ")))
                     column_top = self.getColumn(support, Column.TOP, Beams.COLUMN_TOP)
                     column_bottom = self.getColumn(support, Column.BOTTOM, Beams.COLUMN_BOTTOM)
@@ -268,8 +268,8 @@ class Beams:
                     
                     if support_name in support_types.keys():
                         error_msg = MessageCodes.ERROR_UNIQUE_PARAM_NAME
-                        error_msg.setMsg(error_msg.msg%("SUPPORT-%s"%support_name, 
-                            "SUPPORTS \n\n%s"%self.app_data[i]))
+                        error_msg.setMsg(error_msg.msg%("SUPPORT_TYPE-%s"%support_name, 
+                            "SUPPORT_TYPES \n\n%s"%self.app_data[i]))
                         Messages.showError(error_msg)
 
                     support_types[support_name] = support_type

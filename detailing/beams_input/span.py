@@ -102,4 +102,4 @@ class Span:
         string += "\nsection_right = " + str(self.section_right)
         string += "\nlinks = " + str(self.links)
         string += "\nindex = " + str(self.index)
-        pass
+        return string
