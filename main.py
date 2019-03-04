@@ -1,5 +1,5 @@
 from detailing.details.all_beams import AllBeamsDetails
-from detailing.dxf import DxfDraw
+from dxf.dxf import DxfDraw
 from common.load_data import LoadData
 from common.messages import Messages
 # import detailing.dimensions.trial_dim 
