@@ -12,5 +12,8 @@ REM py -3.7-64 -c "import site; print(site.getsitepackages())"
 REM py -3.7-64 -m PyInstaller main.spec
 REM py -3.7-64 main.py 
 REM git rm --cached *.dxf
-py -3.7-64 main.py "input/philip.trad"
+REM py -3.7-64 main.py "input/philip.trad"
+REM "dist/main/main" input/philip.trad
+REM iscc "setup/adds.iss"
+REM "setup/setups/adds_setup-1.0.3"
 

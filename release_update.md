@@ -1,11 +1,15 @@
 # RELEASE UPDATES
 
+**Release Date:** Saturday 02 March, 2019
+
+*Catch possible mistakes while inputing data
+
 ## 1002. Build 1002 Release updates
 
 **Release Date:** Monday 18 February, 2019
 
 This update changes the program entirely and there is no support for input files created using earlier versions.
-
+1. 
 Each part of the input file starts with the `PART` name and ends with `END PART`. Values that have to be changed are indicated in _italics_. The commands that tell the program what to do have been `highlighted`.  The order of how these parts are added to the input file does not matter.
 
 `COMMAND` _value1_ _value2_. Items are separated using spaces. The case of the commands and values is ignored, commands are only entered as upper case for clarity.

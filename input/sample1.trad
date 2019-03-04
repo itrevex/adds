@@ -1,56 +1,49 @@
 BUILD   1002 
 START   POINT   0.   0.   0.
-SECTIoNS
+SECTIONS
 *SECTION Name bw   d    bf_top  df   w_offset 
-SECTION  1    200  450  500     150  150
-SECTION  2    200  450  350     250  X  
-SECTION  3    200  450  350     200  150
-SECTION  4    300  800    
+SECTION  1    200  450  400     200  200
+SECTION  2    200  500  500     150  150  
+SECTION  3    200  450  
 END SECTIONS
 
 LINKS
 *Name diameter bar_mark shape_code and spacing have to be passed other they throw
 *LINK Name diameter bar_mark shape_code spacing offset length
-LINK 1 T8 03 51 200 0.05 X
-LINK 2 T8 03 51 200 0.05 X 
-LINK 3 T8 03 51 150 X 1.3
+LINK  1    H8       03A      51         200     50     X
+LINK  2    H8       03       51         175     x      X
+LINK  3    H8       03       51         150     x      X
+*20/02/2019 todo 
+*empty grid label to mean no grid label
 END LINKS
-
-SUPPORTS
-*SUPPORT NAME TOP section_d section_b column_h_m BOTTOM section_d section_b column_h_m
-SUPPORT  1    TOP 200       200       3          BOTTOM 200       200       3
-*SUPPORT 2 has no bottom column so it is not specified
-SUPPORT 2 TOP 200 300 3
-SUPPORT 3 BOTTOM 200 300 3
-END SUPPORTS
-
+SUPPORT_TYPES
+*SUPPORT_TYPE NAME TOP     section_d  section_b column_h_m  offset BOTTOM section_d section_b column_h_m
+SUPPORT_TYPE  1    TOP     200        200       3           50     BOTTOM 200       400       3
+SUPPORT_TYPE  2    BOTTOM  200        200       3                 
+SUPPORT_TYPE  3    TOP     200        200       X          
+SUPPORT_TYPE  4    TOP     200        200       3                
+*20/02/2019 todo 
+* no columns(specify h as 0) - for beams supported on other beams
+* column offset from centre line
+* for cantilever, given that spans are entered centre to centre, how do we know support width to use
+END SUPPORT_TYPES
 BEAMS
 *BEAM Name beam_depth
-BEAM 1 450
-*SPAN Name length_m section *link name('*' means you can enter any number of link names) if link entered can't be found, it is ignored
-SPAN  1    4.15     2        1
-SPAN  2    3        4        1
-* space left in between items is of no consquence, it is the order of the items that really matters
-SPAN 3 3.2 1 2 
-SPAN 4 2 3 3
+BEAM  1    450
+*SPAN Name length_m section *link_name1, link_name2, ...
+SPAN  1    900     1        2 
+SPAN  2    2450    2        1
+SPAN  3    1250    3        3
+SPAN  4    2100    1        2
+SPAN  5    1000    2        1
+SPAN  6    2100    3        3
 *SUPPORT Name support_type grid_label
-SUPPORT  1    2            2
-SUPPORT 2 1 3
-SUPPORT 3 1 4
-SUPPORT 4 3 5
-SUPPORT 5 2 6
-END BEAM *this statement is very import otherwise program won't where to stop and values will be over written
-
-BEAM 2 450
-SPAN 1 4.15 2 1 2 3
-SPAN 2 3 4 1
-SPAN 3 3.2 1 2
-SPAN 4 2 3 3
-SUPPORT 1 1 2
-SUPPORT 2 3 3
-SUPPORT 3 1 4
-SUPPORT 4 2 5
-SUPPORT 5 1 6
-END BEAM
-
-END BEAMS *no when everything is done
+SUPPORT  1    3            A
+SUPPORT  2    1            B
+SUPPORT  3    2            B1
+SUPPORT  4    4 
+SUPPORT  5    2            C
+SUPPORT  6    1            D
+SUPPORT  7    2            D1
+END BEAM 
+END BEAMS 
