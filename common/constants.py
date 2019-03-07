@@ -22,6 +22,7 @@ class Constants:
     # scaling factors
     COLUMN_LINE_FACTOR = 1.2
     CENTER_LINE_FACTOR = 1.75 
+    CENTER_LINE_FACTOR_TOP = 2.5
     SCALE_FACTOR_COLUMNS = 1.
     CIRCLE_TEXT_OFFSET_FACTOR = 0.3333
 

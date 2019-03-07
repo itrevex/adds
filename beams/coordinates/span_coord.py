@@ -133,7 +133,7 @@ class SpanCoordinates(SpanPoints):
             start_point = list(self.end_point)
 
         top_point = self.changeY(start_point, 
-            self.beam_depth * Constants.CENTER_LINE_FACTOR)
+            self.beam_depth * Constants.CENTER_LINE_FACTOR_TOP)
         bottom_point = self.changeY(start_point, 
             -self.beam_depth - self.beam_depth * Constants.CENTER_LINE_FACTOR)
 
