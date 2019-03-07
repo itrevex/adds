@@ -1,4 +1,4 @@
-from detailing.dxf_entities.entity_line import EntityLine
+from beams.dxf_entities.entity_line import EntityLine
 from .coord_change import ChoordChange
 
 class SectionCoordinates(ChoordChange):

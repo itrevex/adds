@@ -1,6 +1,6 @@
 from .span_details import SpanDetails
-from detailing.dxf_entities.entity_hatch import EntityHatch
-from detailing.dxf_entities.entity_line import EntityLine
+from beams.dxf_entities.entity_hatch import EntityHatch
+from beams.dxf_entities.entity_line import EntityLine
 from common.messages import Messages
 from common.message_codes import MessageCodes
 

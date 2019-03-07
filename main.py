@@ -1,8 +1,8 @@
-from detailing.details.all_beams import AllBeamsDetails
+from beams.details.all_beams import AllBeamsDetails
 from dxf.dxf import DxfDraw
 from common.load_data import LoadData
 from common.messages import Messages
-# import detailing.dimensions.trial_dim 
+# import beams.dimensions.trial_dim 
 
 app_data = LoadData()
 
@@ -17,5 +17,5 @@ if __name__ == "__main__":
         pass
     except:
         print("There is an unknown error in the program, contact developers")
-    # detailing.availableLineTypes()
+    # beams.availableLineTypes()
     pass

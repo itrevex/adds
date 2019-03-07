@@ -222,7 +222,7 @@ Links represent share reinforcement in the beam. This section in the input file 
 At this point, only the parameters below are required.
 
 1. The `bar diameter` entered as `diameter`. Since no mathematics is done using this value, it is entered as a string literal (text). For example `H8` means an 8mm high strength bar.
-2. The `shape code` of the bar entered as `shape_code`. Refer to `BS 8666: 2005` for standard shape codes used in detailing.
+2. The `shape code` of the bar entered as `shape_code`. Refer to `BS 8666: 2005` for standard shape codes used in beams.
 3. The `bar mark`; This is important for dimensioning, the bar bending schedule and when making the sections
 
 ### 5. Beams data
