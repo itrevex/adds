@@ -1,8 +1,8 @@
 from .span_points import SpanPoints
 from common.constants import Constants
 from common.messages import Messages
-from beams.dxf_entities.entity_line import EntityLine
-from beams.dxf_entities.entity_text import EntityText
+from dxf.dxf_entities.entity_line import EntityLine
+from dxf.dxf_entities.entity_text import EntityText
 
 class ShearCoords(SpanPoints):
 

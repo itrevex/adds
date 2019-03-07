@@ -2,9 +2,9 @@
 from common.constants import Constants
 from common.messages import Messages
 from common.message_codes import MessageCodes
-from beams.dxf_entities.entity_line import EntityLine
-from beams.dxf_entities.entity_circle import EntityCircle
-from beams.dxf_entities.entity_text import EntityText
+from dxf.dxf_entities.entity_line import EntityLine
+from dxf.dxf_entities.entity_circle import EntityCircle
+from dxf.dxf_entities.entity_text import EntityText
 from .span_points import SpanPoints
 
 class SpanCoordinates(SpanPoints):
