@@ -365,8 +365,6 @@ class SpanCoordinates(SpanPoints):
             warning.setMsg(warning.msg%(right_section.name))
             Messages.w(warning)
 
-
-
     def getHalfWidth(self, column_width):
         '''
         This is done to prevent the divide by zero error incase of cantilevered
