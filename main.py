@@ -1,4 +1,4 @@
-from beams.details.all_beams import AllBeamsDetails
+from beams.details.beams import DetailsBeams
 from dxf.dxf import DxfDraw
 from common.load_data import LoadData
 from common.messages import Messages
@@ -9,7 +9,7 @@ app_data = LoadData()
 if __name__ == "__main__":
     # appData.getInputFilePath()
     Messages.i("")
-    all_beams = AllBeamsDetails(app_data)
+    all_beams = DetailsBeams(app_data)
     dxfDraw = DxfDraw(app_data)
     dxfDraw.makeDxf(all_beams.getAllBeamsEntities(), all_beams.number_of_beams)
     

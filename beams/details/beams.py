@@ -4,7 +4,7 @@ from common.constants import Constants
 from common.messages import Messages
 from common.message_codes import MessageCodes
 
-class AllBeamsDetails:
+class DetailsBeams:
     def __init__(self, app_data):
         beams_data = Beams(app_data.readTradFile())
         self.beams = beams_data.getBeams()
