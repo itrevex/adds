@@ -1,4 +1,4 @@
-from .span_details import SpanDetails
+from .span import SpanDetails
 from dxf.dxf_entities.entity_hatch import EntityHatch
 from dxf.dxf_entities.entity_line import EntityLine
 from common.messages import Messages

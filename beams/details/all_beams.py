@@ -1,5 +1,5 @@
 from beams.input.beams import Beams
-from .beam_details import BeamDetails
+from .beam import BeamDetails
 from common.constants import Constants
 from common.messages import Messages
 from common.message_codes import MessageCodes
