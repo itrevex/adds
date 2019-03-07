@@ -16,6 +16,7 @@ class AllBeamsDetails:
         self.all_beams = {}
         self.checkMissingBeamParameter()
         self.getBeamDetails()
+        self.number_of_beams = len(self.beams)
 
     def checkMissingBeamParameter(self):
         # Messages.d(self.support_types.keys())

@@ -5,6 +5,7 @@ from common.constants import Constants
 from common.utils import Utils
 from common.messages import Messages
 from common.message_codes import MessageCodes
+from .vport import VPort
 
 SHOW_DIMENSIONS = False
 
@@ -19,10 +20,14 @@ class DxfDraw:
         self.setHeaderAttribs()
 
         #setup dimstyles
-        dimstyles.setup(self.dwg)
+        # dimstyles.setup(self.dwg)
         pass
     
-    def makeDxf(self):
+    def makeDxf(self, entities, number_of_beams):
+        self.drawEntities(entities)
+        #setup viewports
+        VPort(self.dwg, number_of_beams)
+
         output_path = self.app_data.getOutPutFile()
         try:
             self.dwg.saveas(output_path)

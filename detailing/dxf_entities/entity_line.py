@@ -27,3 +27,9 @@ class EntityLine:
     def setLayer(self, layer):
         self.layer = layer
 
+    def minMaxY(self):
+        if self.pt1[EntityLine.Y] > self.pt2[EntityLine.Y]:
+            return self.pt2[EntityLine.Y], self.pt1[EntityLine.Y]
+
+        return self.pt1[EntityLine.Y],  self.pt2[EntityLine.Y]
+

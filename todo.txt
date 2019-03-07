@@ -8,3 +8,9 @@ specify one section per span --done
     2. get previous offset for shear link if any and use it as offset left
     3. Show warning if shear link is beyond span, this is likely to happen in multiple shear link
     4. Show warning if user specifies multiple links but length 
+
+04/03/2019 
+    1. Change view port
+    3. Add dimensions
+    2. Make center line longer on the top to allow for dimensioning
+    4. Add main reinforcement

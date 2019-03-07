@@ -11,8 +11,7 @@ if __name__ == "__main__":
     Messages.i("")
     all_beams = AllBeamsDetails(app_data)
     dxfDraw = DxfDraw(app_data)
-    dxfDraw.drawEntities(all_beams.getAllBeamsEntities())
-    dxfDraw.makeDxf()
+    dxfDraw.makeDxf(all_beams.getAllBeamsEntities(), all_beams.number_of_beams)
     
     try:
         pass
