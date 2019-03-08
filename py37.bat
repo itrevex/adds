@@ -15,6 +15,6 @@ REM git rm --cached *.dxf
 REM "dist/main/main" input/philip.trad
 REM iscc "setup/adds.iss"
 REM "setup/setups/adds_setup-1.0.3"
-REM py -3.7-64 main.py "input/philip.trad"
-py -3.7-64 todo.py
+py -3.7-64 main.py "input/philip.trad"
+REM py -3.7-64 todo.py
 

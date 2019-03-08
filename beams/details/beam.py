@@ -28,7 +28,7 @@ class BeamDetails:
             for section in self.data.sections:
                 deepest_section_depth = self.getDeepestSection(section, deepest_section_depth)
 
-            if self.data.beam_depth > deepest_section_depth:
+            if self.data.beam_depth < deepest_section_depth:
                 self.data.beam_depth = deepest_section_depth
                 Messages.w(MessageCodes.WARNING_BEAM_DEPTH_ALTERED)
             

@@ -11,9 +11,9 @@ specify one section per span --done
 
 04/03/2019 
     1. Change view port
-    3. Add dimensions
     2. Make center line longer on the top to allow for dimensioning
-    4. Add main reinforcement
+    3. Add main reinforcement
+    4. Add dimensions
 
 07/03/2019
     1. Update ER0006 text

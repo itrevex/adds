@@ -94,7 +94,7 @@ class MessageCodes:
     WARNING_DEEPER_SECTION = MessageCode(msg, "WAR0003")
 
     #WAR0004
-    msg = "Beam depth has been adjusted to the deepest section depth."
+    msg = "Beam depth has been adjusted to meet the deepest section requirements."
     msg += "\nIf this was the intended behaviour, please contact developer"
     WARNING_BEAM_DEPTH_ALTERED = MessageCode(msg, "WAR0004")
 
