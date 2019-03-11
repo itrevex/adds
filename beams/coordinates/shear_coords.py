@@ -86,7 +86,8 @@ class ShearCoords(SpanPoints):
         #get the spacing
         #get the total distance covered by links
         #see how many links can fit within the minimum offset
-        number_of_links = int(link.length * SpanPoints.ONE_M_IN_MM/link.spacing)
+        #add 0.5 to cater for rounding off and 1 for the extra link after diving
+        number_of_links = int(link.length * SpanPoints.ONE_M_IN_MM/link.spacing + 0.5 + 1)
         label = str(number_of_links)
         label += link.diameter+"-"+link.bar_mark+"-"
         label += str(int(link.spacing)) + Constants.LINK_TEXT
