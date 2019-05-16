@@ -1,4 +1,18 @@
-# RELEASE UPDATES
+# RELEASE UPDATE
+
+**Release Date:**
+
+## 1003. Build 1003 Release Updates.
+
+### 1003.1.1. Main Reinforcement
+
+The `BAR` command is used to specify the main reinforcing bars.
+
+`BAR` _bar_1_name_ _bar_label_ _bar_mark_ _shape_code_ _span_ _bar_offset_ _length_ _layer_
+
+layer can **B**, **T**, or **M**, to mean Bottom, Top or Midway bar respectively.
+
+The parameters are in mm. The bar length can also be entered as beam or span to beam the bar runs through the entire beam length or the entire span length.
 
 **Release Date:** Saturday 02 March, 2019
 

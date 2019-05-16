@@ -6,6 +6,7 @@ REM py -3.7-64 setup.py py2exe
 REM py -3.7-64 -m pip install PyInstaller
 REM py -3.7-64 -m pip install docopt
 REM py -3.7-64 -m pip install dxfwrite
+REM py -3.7-64 -m pip install -U pytest
 REM py -3.7-64 -m pypi main.spec
 REM py -3.7-64 hello.py
 REM py -3.7-64 -c "import site; print(site.getsitepackages())"

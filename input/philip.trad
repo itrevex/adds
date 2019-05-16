@@ -3,16 +3,11 @@ START   POINT   0.   0.   0.
 SECTIONS
 *SECTION Name bw   d    bf_top  df   w_offset 
 SECTION  1    200  550  500     200  0
-SECTION  2    200  500  500     150  150  
-SECTION  3    200  450  
 END SECTIONS
-
 LINKS
 *Name diameter bar_mark shape_code and spacing have to be passed other they throw
 *LINK Name diameter bar_mark shape_code spacing offset length
 LINK  1    T10      03       51         125     50     X
-LINK  2    H8       03       51         175     x      X
-LINK  3    H8       03       51         150     x      X
 *20/02/2019 todo 
 *empty grid label to mean no grid label
 END LINKS
@@ -47,5 +42,10 @@ SUPPORT  5    1            7
 SUPPORT  6    1            8
 SUPPORT  7    1            10
 SUPPORT  8    1            11
+*BAR Name LABEL MARK SC SPAN H_OFFSET LENGTH LAYER HOOK; length is in mm. It can be specified as beam or span
+BAR  1    2T16  01   34 1    30       beam   B
+BAR  2    2T16  04   34 1    30       beam   T
+BAR  3    2T16  06   34 1    30       beam   M
+
 END BEAM 
 END BEAMS 
