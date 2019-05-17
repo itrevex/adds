@@ -1,7 +1,5 @@
 class Constants:
 
-    def __init__(self):
-        pass
     # coordinate identifiers inside list for a single point in drawing space
     X = 0
     Y = 1

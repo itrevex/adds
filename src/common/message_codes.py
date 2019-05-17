@@ -98,5 +98,3 @@ class MessageCodes:
     msg += "\nIf this was the intended behaviour, please contact developer"
     WARNING_BEAM_DEPTH_ALTERED = MessageCode(msg, "WAR0004")
 
-    def __init__(self):
-        pass
