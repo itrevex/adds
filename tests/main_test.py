@@ -1,5 +1,5 @@
 # from beams.details.all_beams import AllBeams
-from common.load_data import LoadData
+from src.common.load_data import LoadData
 from tests.snaps.input.layers import Layers
 
 app_data = LoadData()
