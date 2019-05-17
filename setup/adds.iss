@@ -63,11 +63,11 @@ Source: "{#SourcePath}\input\sample1.trad"; DestDir: "{localappdata}\{#MyAppName
 ; Source: "{#SourcePath}\_socket.pyd"; DestDir: "{app}"
 ; Source: "{#SourcePath}\_ssl.pyd"; DestDir: "{app}"
 ; Source: "{#SourcePath}\base_library.zip"; DestDir: "{app}"
-Source: "{#SourcePath}\libcrypto-1_1-x64.dll"; DestDir: "{app}"; CopyMode: alwaysskipifsameorolder; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
-Source: "{#SourcePath}\libssl-1_1-x64.dll"; DestDir: "{app}"; CopyMode: alwaysskipifsameorolder; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
-Source: "{#SourcePath}\python37.dll"; DestDir: "{app}"; CopyMode: alwaysskipifsameorolder; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
-Source: "{#SourcePath}\pywintypes37.dll"; DestDir: "{app}"; CopyMode: alwaysskipifsameorolder; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
-Source: "{#SourcePath}\VCRUNTIME140.dll"; DestDir: "{app}"; CopyMode: alwaysskipifsameorolder; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
+Source: "{#SourcePath}\libcrypto-1_1-x64.dll"; DestDir: "{app}"; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
+Source: "{#SourcePath}\libssl-1_1-x64.dll"; DestDir: "{app}"; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
+Source: "{#SourcePath}\python37.dll"; DestDir: "{app}"; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
+Source: "{#SourcePath}\pywintypes37.dll"; DestDir: "{app}"; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
+Source: "{#SourcePath}\VCRUNTIME140.dll"; DestDir: "{app}"; Flags: onlyifdoesntexist restartreplace sharedfile 64bit; Check: IsWin64
 ; Source: "{#SourcePath}\main.exe"; DestDir: "{app}"
 ; Source: "{#SourcePath}\main.exe.manifest"; DestDir: "{app}"
 ; Source: "{#SourcePath}\pyexpat.pyd"; DestDir: "{app}"

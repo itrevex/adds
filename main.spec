@@ -3,7 +3,7 @@
 block_cipher = None
 
 allFiles = [
-    ('./assests/', 'assests'),
+    ('./src/assests/', 'assests'),
     ('./input/', 'input'),
     ( './read_me.pdf/', '.' ),
     ( './release_update.pdf/', '.' ),
@@ -11,7 +11,7 @@ allFiles = [
     ( 'C:\\Users\\treve\\AppData\\Local\\Programs\\Python\\Python37\\lib\\site-packages\\ezdxf\\templates', 'ezdxf/templates' ),
     ]
 
-a = Analysis(['main.py'],
+a = Analysis(['src\\main.py'],
              pathex=['E:\\Projects\\ESAI\\PROGRAMMING\\PYTHON\\adds'],
              binaries=[],
              datas=allFiles,
