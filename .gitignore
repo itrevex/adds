@@ -5,6 +5,9 @@
 #batch files
 *.bat
 
+#coverage files
+htmlcov/
+
 #docs
 .docs/
 
