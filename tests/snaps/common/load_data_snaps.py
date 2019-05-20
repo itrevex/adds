@@ -1,4 +1,4 @@
-class Layers:
+class LoadDataSnaps:
     def getLayerContent(self):
         return { 'CenterLines': {'layername': 'S-CENTRE', 'color': 1, 'linetype': 'CENTER'}, 
             'BeamLines': {'layername': 'S-CONCRETE', 'color': 150, 'linetype': 'Continuous'}, 
@@ -10,3 +10,15 @@ class Layers:
             'SectionLines': {'layername': 'S-CONCRETE', 'color': 1, 'linetype': 'CENTER'}, 
             'Dimensions': {'layername': 'S-DIM-FAKE', 'color': 1, 'linetype': 'Continuous'}, 
             'ShearLinks': {'layername': 'S-35', 'color': 3, 'linetype': 'Continuous'}}
+
+    def lines(self):
+        return [
+            '',
+            'The boy is going to school'
+        ]
+
+    def strippedLines(self):
+        return [
+            'The boy is going to school'
+        ]
+
