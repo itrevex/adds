@@ -49,7 +49,7 @@ class LoadData:
     def getInputData(self):
         self.path = self.getInputFilePath()
         if (self.path == ""):
-            Messages.showError(MessageCodes.ERROR_WRONG_FILE_PATH)
+            return Messages.showError(MessageCodes.ERROR_WRONG_FILE_PATH)
         return self.loadJson(self.path)
 
     def loadJson(self, file_name):
@@ -62,15 +62,15 @@ class LoadData:
                 line += re.search('line (.+?) column', str(err)).group(1)
             except AttributeError:
                 line = ""
+            finally:
+                # message = "File \"%s\" has an error %s "%(file_name, line)
+                # message += "\n\nMake sure there are no trailing commas after input and"
+                # message += "\nall text is in quotes."
+                # message += "\nCross check with sample input and make sure inputs are of a similar format"
+                error = MessageCodes.ERROR_INPUT_DATA_FORMAT
+                error.setMsg(error.msg%(file_name, line))
 
-            # message = "File \"%s\" has an error %s "%(file_name, line)
-            # message += "\n\nMake sure there are no trailing commas after input and"
-            # message += "\nall text is in quotes."
-            # message += "\nCross check with sample input and make sure inputs are of a similar format"
-            error = MessageCodes.ERROR_INPUT_DATA_FORMAT
-            error.setMsg(error.msg%(file_name, line))
-
-            Messages.showError(error)
+                Messages.showError(error)
 
     def getInputFilePath(self):
         # if called with no arguments, call app data pick file from there
