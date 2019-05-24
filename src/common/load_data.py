@@ -1,8 +1,4 @@
-import json
-import io
-import os
-import re
-import sys
+import json, io, os, re, sys
 
 from .messages import Messages
 from .message_codes import MessageCodes
