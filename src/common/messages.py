@@ -20,7 +20,7 @@ class Messages:
         response = input(Messages.CONTINUE)
         if (response.lower() == 'yes' or response.lower() == 'y' or response == ""):
             #continue to detail with the errors
-            pass
+            return
         else:
             print()
             print("Program terminated")
