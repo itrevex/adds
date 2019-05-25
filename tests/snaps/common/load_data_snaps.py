@@ -22,3 +22,13 @@ class LoadDataSnaps:
             'The boy is going to school'
         ]
 
+    def getHeaderAttribs(self):
+        return {'ltscale': {'attrib_name': '$LTSCALE', 'attrib_value': 18.0}, 
+        'upper_right': {'attrib_name': '$EXTMAX', 'attrib_value': [10500, 1600, 0]}, 
+        'lower_right': {'attrib_name': '$EXTMIN', 'attrib_value': [-600, -1800, 0]}}
+
+    def getTextStyles(self):
+        return {
+            '175': {}, 
+            'GridLabels': {'font': 'romans.ttf', 'height': 111.25, 'oblique': 0, 'width': 1}}
+

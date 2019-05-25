@@ -2,7 +2,7 @@
 from src.common.load_data import LoadData
 from src.common.messages import Messages
 from src.common.message_codes import MessageCode, MessageCodes
-import pytest, io, sys, json
+import pytest, io, sys, json, os
 import unittest.mock as mock
 from json.decoder import JSONDecodeError
 
@@ -20,7 +20,7 @@ class FakeLoadData:
         raise json.decoder.JSONDecodeError("An error occured", "me", 4)
 
     @staticmethod
-    def fake_loadJsonAttributeException(self, encoding=None):
+    def fake_raiseAttributeError(self, encoding=None):
         raise AttributeError("Wrong attribute error test")
 
     @staticmethod
@@ -32,9 +32,13 @@ class FakeLoadData:
         return 'fake input path'
 
     @staticmethod
-    def fake_getMsg(self, msg=""):
+    def fake_setMsg(self, msg=""):
         return 'fake msg'
 
+    @staticmethod
+    def fake_os_path_split(self, path="fake/path"):
+        return "head/path", "tail.ext"
+    
 class TestLoadData:
 
     def test_input(self, LoadDataLayerContent):
@@ -69,14 +73,14 @@ class TestLoadData:
     def test_loadJson_attribute_exception(self):
         
         with mock.patch('src.common.load_data.json.load') as fake_json_load, \
-            mock.patch('src.common.load_data.re.search', FakeLoadData.fake_loadJsonAttributeException), \
+            mock.patch('src.common.load_data.re.search', FakeLoadData.fake_raiseAttributeError), \
             mock.patch.object(MessageCode, 'setMsg') as fake_setMsg, \
             mock.patch.object(MessageCodes, 'ERROR_INPUT_DATA_FORMAT') as fake_MessageCode, \
             mock.patch('src.common.load_data.sys.exit') as fake_sys_exit, \
             mock.patch('src.common.load_data.io.open') as fake_io_open:
             fake_io_open.return_value = "file opened"
             fake_sys_exit.return_value = "System exit"
-            fake_setMsg.side_effect = FakeLoadData.fake_getMsg
+            fake_setMsg.side_effect = FakeLoadData.fake_setMsg
             # type(fake_MessageCode.return_value).msg = mock.PropertyMock(return_value="fake error msg")
             fake_json_load.side_effect = FakeLoadData.fake_loadJsonException
             assert LoadData().loadJson('fake path') is None
@@ -135,7 +139,33 @@ class TestLoadData:
             mock.patch.object(LoadData, 'loadJson', FakeLoadData.fake_loadJson):
             assert LoadData().getInputData() == 'system exited'
         
-        
+    @mock.patch('src.common.load_data.sys.exit') 
+    def test_getOutPutFile(self, fake_sys_exit):
+        fake_sys_exit.return_value = "system existed"
+        with mock.patch('src.common.load_data.os.path.split') as fake_os_path_split, \
+            mock.patch('src.common.load_data.os.path.join') as fake_os_path_join:
+            fake_os_path_split.return_value = ("head path", "tail.trad")
+            fake_os_path_join.side_effect = FakeLoadData.fake_setMsg
+
+            assert LoadData().getOutPutFile() == 'fake msg'
+
+    @mock.patch('src.common.load_data.sys.exit') 
+    def test_getOutPutFileException(self, fake_sys_exit):
+        fake_sys_exit.return_value = "system existed"
+        with mock.patch('src.common.load_data.os.path.split') as fake_os_path_split, \
+            mock.patch('src.common.load_data.os.path.join') as fake_os_path_join:
+            fake_os_path_split.return_value = ("head path", "tail.trad")
+            fake_os_path_join.side_effect = FakeLoadData.fake_raiseAttributeError
+            assert LoadData().getOutPutFile() is None
+    
+
+    def test_getHeaderAttribs(self, LoadDataHeaderAttribs):
+        assert LoadData().getHeaderAttribs() == LoadDataHeaderAttribs
+                
+    def test_getTextStyles(self, LoadDataTextStyles):
+        assert LoadData().getTextStyles() == LoadDataTextStyles
+
+
         
         # assert LoadData().getInputData() == "system exited"
 

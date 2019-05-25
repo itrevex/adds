@@ -6,6 +6,14 @@ def LoadDataLayerContent():
     return LoadDataSnaps().getLayerContent()
 
 @pytest.fixture
+def LoadDataHeaderAttribs():
+    return LoadDataSnaps().getHeaderAttribs()
+
+@pytest.fixture
+def LoadDataTextStyles():
+    return LoadDataSnaps().getTextStyles()
+
+@pytest.fixture
 def LoadDataLines():
     return [LoadDataSnaps().lines(), LoadDataSnaps().strippedLines()]
 

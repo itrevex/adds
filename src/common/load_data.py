@@ -6,6 +6,7 @@ from .message_codes import MessageCodes
 class LoadData:
     def __init__(self):
         self.fileDir = os.path.dirname(__file__)
+        self.path = None
         self.head, self.tail = os.path.split(self.fileDir)
         if(self.tail != 'layers.json'): self.fileDir = self.head
     
