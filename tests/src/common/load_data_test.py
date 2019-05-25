@@ -12,6 +12,10 @@ class FakeLoadData:
         return fake_path
 
     @staticmethod
+    def fake_open(self, path="fake path"):
+        return io.StringIO("\n*input file\n\nFake line 1\nFake line 2")
+
+    @staticmethod
     def fake_loadJson(self, file_name):
         return "json_loaded: " + file_name
 
@@ -38,6 +42,10 @@ class FakeLoadData:
     @staticmethod
     def fake_os_path_split(self, path="fake/path"):
         return "head/path", "tail.ext"
+
+    @staticmethod
+    def fake_print(self, value = ""):
+        return value
     
 class TestLoadData:
 
@@ -75,7 +83,7 @@ class TestLoadData:
         with mock.patch('src.common.load_data.json.load') as fake_json_load, \
             mock.patch('src.common.load_data.re.search', FakeLoadData.fake_raiseAttributeError), \
             mock.patch.object(MessageCode, 'setMsg') as fake_setMsg, \
-            mock.patch.object(MessageCodes, 'ERROR_INPUT_DATA_FORMAT') as fake_MessageCode, \
+            mock.patch.object(MessageCodes, 'ERROR_INPUT_DATA_FORMAT'), \
             mock.patch('src.common.load_data.sys.exit') as fake_sys_exit, \
             mock.patch('src.common.load_data.io.open') as fake_io_open:
             fake_io_open.return_value = "file opened"
@@ -165,7 +173,20 @@ class TestLoadData:
     def test_getTextStyles(self, LoadDataTextStyles):
         assert LoadData().getTextStyles() == LoadDataTextStyles
 
+    def test_printData(self):
+        with mock.patch('builtins.print') as mock_print:
+            mock_print.side_effect = FakeLoadData.fake_print
+            LoadData().printData()
+            mock_print.assert_called()
+            assert mock_print.call_count == 3
+            
+    def test_readTradFile(self):
+        with mock.patch.object(LoadData, 'getInputFilePath') as fake_getPath, \
+            mock.patch.object(LoadData, 'getFile', FakeLoadData.fake_getFile),\
+            mock.patch('builtins.open', FakeLoadData.fake_open):
 
-        
-        # assert LoadData().getInputData() == "system exited"
+            assert LoadData().readTradFile() == ["Fake line 1","Fake line 2"]
+            fake_getPath.assert_called()
+            
 
+            pass

@@ -27,6 +27,7 @@ class LoadData:
 
 
     def getFile(self, file_path):
+        ''' Returns file path'''
         return os.path.join(self.fileDir, file_path)
 
     def printData(self):
