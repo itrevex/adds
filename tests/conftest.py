@@ -1,20 +1,20 @@
 import pytest
-from tests.snaps.common.load_data_snaps import LoadDataSnaps
+from tests.mocks.common.load_data_mocks import LoadDataMocks
 
 @pytest.fixture
 def LoadDataLayerContent():
-    return LoadDataSnaps().getLayerContent()
+    return LoadDataMocks().getLayerContent()
 
 @pytest.fixture
 def LoadDataHeaderAttribs():
-    return LoadDataSnaps().getHeaderAttribs()
+    return LoadDataMocks().getHeaderAttribs()
 
 @pytest.fixture
 def LoadDataTextStyles():
-    return LoadDataSnaps().getTextStyles()
+    return LoadDataMocks().getTextStyles()
 
 @pytest.fixture
 def LoadDataLines():
-    return [LoadDataSnaps().lines(), LoadDataSnaps().strippedLines()]
+    return [LoadDataMocks().lines(), LoadDataMocks().strippedLines()]
 
 
