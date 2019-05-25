@@ -2,7 +2,7 @@ import io
 
 class SharedMocks():
     @staticmethod
-    def fake_print(self, value = ""):
+    def fake_print(self=None, value = ""):
         return value
 
     @staticmethod
@@ -12,3 +12,7 @@ class SharedMocks():
     @staticmethod
     def fake_raiseAttributeError(self, encoding=None):
         raise AttributeError("Wrong attribute error test")
+
+    @staticmethod
+    def fake_input(self, value = "fake input"):
+        return value

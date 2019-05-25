@@ -4,7 +4,7 @@ from src.common.messages import Messages
 from src.common.message_codes import MessageCode, MessageCodes
 from tests.mocks.common.load_data_mocks import LoadDataMocks
 from tests.mocks.shared_mocks import SharedMocks
-import pytest, io, sys, json, os
+import sys, pytest
 import unittest.mock as mock
 from json.decoder import JSONDecodeError
 
