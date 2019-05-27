@@ -8,13 +8,17 @@ class Utils:
         pass
 
     @staticmethod
+    def getNow():
+        return datetime.datetime.now()
+
+    @staticmethod
     def dateString():
         '''
         Return date string 
         190111
         '''
-
-        return "%s%02d%d" %(str(Utils.now.year)[-2:], Utils.now.month, Utils.now.day)
+        now = Utils.getNow()
+        return "%s%02d%02d" %(str(now.year)[-2:], now.month, now.day)
 
     @staticmethod
     def timeString():
@@ -24,7 +28,7 @@ class Utils:
         '''
 
         now = datetime.datetime.now()
-        return "%02d%02d" %(Utils.now.hour, Utils.now.minute)
+        return "%02d%02d" %(now.hour, now.minute)
 
     @staticmethod
     def dateTimeString():
