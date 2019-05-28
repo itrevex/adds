@@ -1,3 +1,4 @@
+@echo off
 REM py -3.7-64 -m pip install py2exe 
 rem py -3.7-64 -m pip install pyinstaller
 REM py -3.7-64 -m pip install --upgrade pip
@@ -10,7 +11,7 @@ REM py -3.7-64 -m pip install -U pytest
 REM py -3.7-64 -m pip install coverage
 REM py -3.7-64 -m pip install pytest-cov
 REM py -3.7-64 -m pip install pylint --upgrade
-py -3.7-64 -m pip install freezegun
+REM py -3.7-64 -m pip install freezegun
 REM py -3.7-64 -m pypi main.spec
 REM py -3.7-64 hello.py
 REM py -3.7-64 -c "import site; print(site.getsitepackages())"
@@ -21,6 +22,6 @@ REM git rm --cached *.dxf
 REM "dist/main/main" input/philip.trad
 REM iscc "setup/adds.iss"
 REM "setup/setups/adds_setup-1.0.3"
-REM py -3.7-64 src/main.py "../input/philip.trad"
+py -3.7-64 src/main.py "../input/philip.trad"
 REM py -3.7-64 todo.py
 
