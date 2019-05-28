@@ -1,10 +1,10 @@
 import ezdxf
 from ezdxf.addons import dimstyles, LinearDimension
-from common.constants import Constants
+from src.common.constants import Constants
 
-from common.utils import Utils
-from common.messages import Messages
-from common.message_codes import MessageCodes
+from src.common.utils import Utils
+from src.common.messages import Messages
+from src.common.message_codes import MessageCodes
 from .vport import VPort
 
 SHOW_DIMENSIONS = False
