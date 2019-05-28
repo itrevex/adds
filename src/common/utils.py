@@ -4,9 +4,6 @@ class Utils:
     
     now = datetime.datetime.now()
 
-    def __init__(self):
-        pass
-
     @staticmethod
     def getNow():
         return datetime.datetime.now()
@@ -27,7 +24,7 @@ class Utils:
         0633
         '''
 
-        now = datetime.datetime.now()
+        now = Utils.getNow()
         return "%02d%02d" %(now.hour, now.minute)
 
     @staticmethod
@@ -38,7 +35,3 @@ class Utils:
         '''
 
         return Utils.dateString() + "_" + Utils.timeString()
-
-    @staticmethod
-    def checkBuild(app_data):
-        pass
