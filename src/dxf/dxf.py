@@ -53,7 +53,7 @@ class DxfDraw:
         self.msp.add_circle(circle.centre, circle.radius,  
             dxfattribs={'layer': layer})  
 
-    def addDxfTexT(self, text):
+    def addDxfText(self, text):
         # add a Text entity
 
         # self.msp .add_circle(center, radius,  dxfattribs={'layer': layer}) 
@@ -156,7 +156,7 @@ class DxfDraw:
                 pass
             elif entity.type == Constants.ENTITY_TEXT: 
                 #draw text
-                self.addDxfTexT(entity)
+                self.addDxfText(entity)
                 pass
             elif entity.type == Constants.ENTITY_HATCH: 
                 #draw hatch
