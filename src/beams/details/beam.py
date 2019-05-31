@@ -1,8 +1,8 @@
 from .span import SpanDetails
-from dxf.dxf_entities.entity_hatch import EntityHatch
-from dxf.dxf_entities.entity_line import EntityLine
-from common.messages import Messages
-from common.message_codes import MessageCodes
+from src.dxf.dxf_entities.entity_hatch import EntityHatch
+from src.dxf.dxf_entities.entity_line import EntityLine
+from src.common.messages import Messages
+from src.common.message_codes import MessageCodes
 
 class BeamDetails:
         def __init__(self, all_beams_data, beam_name, beam_data, start_point):

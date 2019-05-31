@@ -1,4 +1,5 @@
-from common.messages import Messages
+from src.common.messages import Messages
+
 class Column:
     '''
     Column has the column section properties

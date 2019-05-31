@@ -1,6 +1,6 @@
-from common.messages import Messages
-from common.message_codes import MessageCodes
-from common.constants import Constants
+from src.common.messages import Messages
+from src.common.message_codes import MessageCodes
+from src.common.constants import Constants
 
 class Span:
     '''

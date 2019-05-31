@@ -1,8 +1,8 @@
-from beams.input.beams import Beams
+from src.beams.input.beams import Beams
 from .beam import BeamDetails
-from common.constants import Constants
-from common.messages import Messages
-from common.message_codes import MessageCodes
+from src.common.constants import Constants
+from src.common.messages import Messages
+from src.common.message_codes import MessageCodes
 
 class AllBeams:
     def __init__(self, app_data):

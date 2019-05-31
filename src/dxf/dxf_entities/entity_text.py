@@ -1,5 +1,5 @@
-from common.constants import Constants
-from common.messages import Messages
+from src.common.constants import Constants
+from src.common.messages import Messages
 class EntityText:
     '''
     Text entity base class

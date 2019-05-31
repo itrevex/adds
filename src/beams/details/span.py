@@ -1,11 +1,11 @@
 import copy
 
-from common.messages import Messages
-from common.message_codes import MessageCodes
-from beams.coordinates.span_coord import SpanCoordinates
-from beams.coordinates.shear_coords import ShearCoords
-from dxf.dxf_entities.entity_dimension import EntityDimension
-from beams.coordinates.span_points import SpanPoints
+from src.common.messages import Messages
+from src.common.message_codes import MessageCodes
+from src.beams.coordinates.span_coord import SpanCoordinates
+from src.beams.coordinates.shear_coords import ShearCoords
+from src.dxf.dxf_entities.entity_dimension import EntityDimension
+from src.beams.coordinates.span_points import SpanPoints
 
 class SpanDetails: 
         '''
