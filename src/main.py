@@ -1,7 +1,7 @@
-from src.beams.details.all_beams import AllBeams
-from src.dxf.dxf import DxfDraw
-from src.common.load_data import LoadData
-from src.common.messages import Messages
+from beams.details.all_beams import AllBeams
+from dxf.dxf import DxfDraw
+from common.load_data import LoadData
+from common.messages import Messages
 # import beams.dimensions.trial_dim 
 
 app_data = LoadData()

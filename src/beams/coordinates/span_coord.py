@@ -1,10 +1,10 @@
 
-from src.common.constants import Constants
-from src.common.messages import Messages
-from src.common.message_codes import MessageCodes
-from src.dxf.dxf_entities.entity_line import EntityLine
-from src.dxf.dxf_entities.entity_circle import EntityCircle
-from src.dxf.dxf_entities.entity_text import EntityText
+from common.constants import Constants
+from common.messages import Messages
+from common.message_codes import MessageCodes
+from dxf.dxf_entities.entity_line import EntityLine
+from dxf.dxf_entities.entity_circle import EntityCircle
+from dxf.dxf_entities.entity_text import EntityText
 from .span_points import SpanPoints
 
 class SpanCoordinates(SpanPoints):

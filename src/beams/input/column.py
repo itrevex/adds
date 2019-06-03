@@ -1,4 +1,4 @@
-from src.common.messages import Messages
+from common.messages import Messages
 
 class Column:
     '''

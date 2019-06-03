@@ -5,9 +5,9 @@ from .column import Column
 from .support_type import SupportType
 from .section import Section
 from .link_type import LinkType
-from src.common.messages import Messages
-from src.common.constants import Constants
-from src.common.message_codes import MessageCodes
+from common.messages import Messages
+from common.constants import Constants
+from common.message_codes import MessageCodes
 
 class Beams:
     '''

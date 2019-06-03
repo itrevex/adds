@@ -1,4 +1,4 @@
-from src.common.constants import Constants
+from common.constants import Constants
 
 class EntityCircle:
     '''
