@@ -2,8 +2,8 @@
 from src.common.load_data import LoadData
 from src.common.messages import Messages
 from src.common.message_codes import MessageCode, MessageCodes
-from tests.mocks.common.load_data_mocks import LoadDataMocks
-from tests.mocks.shared_mocks import SharedMocks
+from mocks.common.load_data_mocks import LoadDataMocks
+from mocks.shared_mocks import SharedMocks
 import sys, pytest
 import unittest.mock as mock
 from json.decoder import JSONDecodeError
@@ -69,11 +69,10 @@ class TestLoadData:
         except JSONDecodeError:
             pass
 
-    @mock.patch.object(LoadData, 'getFile')
-    @mock.patch.object(sys, 'argv')
-    def test_getInputFilePath(self, fake_getFile, fake_sys_argv):
-        fake_getFile.side_effect = LoadDataMocks.fake_getFile
-        fake_sys_argv.return_value = None
+    # @mock.patch.object(sys, 'argv', "../../mocks/philip.trad")
+    def test_getInputFilePath(self):
+        sys.argv = ["me", "../../mocks/philip.trad"]
+        # fake_sys_argv.return_value = "../../mocks/philip.trad"
         assert LoadData().getInputFilePath() == None
 
     # @mock.patch.object(LoadData, 'getFile')

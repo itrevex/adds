@@ -1,0 +1,51 @@
+BUILD   1002 
+START   POINT   0.   0.   0.
+SECTIONS
+*SECTION Name bw   d    bf_top  df   w_offset 
+SECTION  1    200  550  500     200  0
+END SECTIONS
+LINKS
+*Name diameter bar_mark shape_code and spacing have to be passed other they throw
+*LINK Name diameter bar_mark shape_code spacing offset length
+LINK  1    T10      03       51         125     50     X
+*20/02/2019 todo 
+*empty grid label to mean no grid label
+END LINKS
+SUPPORT_TYPES
+*SUPPORT_TYPE NAME TOP     section_d  section_b column_h_m  offset BOTTOM section_d section_b column_h_m
+SUPPORT_TYPE  1    TOP     200        200       3           0      BOTTOM 200       400       3
+SUPPORT_TYPE  2    BOTTOM  200        200       3                 
+SUPPORT_TYPE  3    TOP     200        200       X          
+SUPPORT_TYPE  4    TOP     200        200       3                
+*20/02/2019 todo 
+* no columns(specify h as 0) - for beams supported on other beams
+* column offset from centre line
+* for cantilever, given that spans are entered centre to centre, how do we know support width to use
+END SUPPORT_TYPES
+BEAMS
+*BEAM Name beam_depth
+BEAM  1    450
+*SPAN Name length_m section *link_name1, link_name2, ...
+SPAN  1    3625    1        1 
+SPAN  2    2000    1        1
+SPAN  3    3300    1        1
+SPAN  4    2450    1        1
+SPAN  5    3300    1        1
+SPAN  6    2000    1        1
+SPAN  7    3625    1        1
+*SUPPORT Name support_type grid_label
+SUPPORT  1    1            1
+SUPPORT  2    1            2
+SUPPORT  3    1            4
+SUPPORT  4    1            5
+SUPPORT  5    1            7
+SUPPORT  6    1            8
+SUPPORT  7    1            10
+SUPPORT  8    1            11
+*BAR Name LABEL MARK SC SPAN H_OFFSET LENGTH LAYER HOOK; length is in mm. It can be specified as beam or span
+BAR  1    2T16  01   34 1    30       beam   B
+BAR  2    2T16  04   34 1    30       beam   T
+BAR  3    2T16  06   34 1    30       beam   M
+
+END BEAM 
+END BEAMS 
