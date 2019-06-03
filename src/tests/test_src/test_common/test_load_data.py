@@ -17,9 +17,9 @@ class TestLoadData:
         lines_stripped = LoadData().removeComments(LoadDataLines[0])
         assert lines_stripped == LoadDataLines[1]
 
-    @mock.patch.object(LoadData, 'getFile', LoadDataMocks.fake_getFile)
     def test_getFile(self):
-        assert LoadData().getFile("fake_path") == 'fake_path'
+        path = LoadData().getFile("fake_path.dxf")
+        assert os.path.basename(path) == 'fake_path.dxf'
 
     @mock.patch.object(LoadData, 'loadJson', LoadDataMocks.fake_loadJson)
     @mock.patch('src.common.load_data.json.load')
