@@ -73,12 +73,14 @@ class LoadData:
     def getInputFilePath(self):
         # if called with no arguments, call app data pick file from there
         path = ""
+        print (sys.argv)
         if (len(sys.argv) > 1):
             path = self.getFile(sys.argv[1])
             
         else:
             path = self.getFile(os.getenv('LOCALAPPDATA') + "\\Trevexs Adds\\data\\sample1.trad")
         
+        print(path)
         return path
 
     def getOutPutFile(self):

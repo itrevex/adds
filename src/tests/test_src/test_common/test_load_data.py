@@ -1,11 +1,11 @@
-# from beams.details.all_beams import AllBeams
+import sys, pytest, os
+import unittest.mock as mock
+
 from common.load_data import LoadData
 from common.messages import Messages
 from common.message_codes import MessageCode, MessageCodes
 from tests.test_mocks.test_mocks_common.load_data_mocks import LoadDataMocks
 from tests.test_mocks.shared_mocks import SharedMocks
-import sys, pytest
-import unittest.mock as mock
 from json.decoder import JSONDecodeError
 
 class TestLoadData:
@@ -71,9 +71,10 @@ class TestLoadData:
 
     # @mock.patch.object(sys, 'argv', "../../mocks/philip.trad")
     def test_getInputFilePath(self):
-        sys.argv = ["me", "../../mocks/philip.trad"]
-        # fake_sys_argv.return_value = "../../mocks/philip.trad"
-        assert LoadData().getInputFilePath() == None
+        sys.argv = ["test file path", "./tests/test_mocks/philip.trad"]
+        path = LoadData().getInputFilePath()
+        tail = os.path.basename(path)
+        assert tail == "philip.trad"
 
     # @mock.patch.object(LoadData, 'getFile')
     @mock.patch.object(sys, 'argv', ["d", "e"])
@@ -141,12 +142,6 @@ class TestLoadData:
             assert mock_print.call_count == 3
             
     def test_readTradFile(self):
-        with mock.patch.object(LoadData, 'getInputFilePath') as fake_getPath, \
-            mock.patch.object(LoadData, 'getFile', LoadDataMocks.fake_getFile),\
-            mock.patch('builtins.open', SharedMocks.fake_open):
-
-            assert LoadData().readTradFile() == ["Fake line 1","Fake line 2"]
-            fake_getPath.assert_called()
-            
-
-            pass
+        sys.argv = ["test file path", "./tests/test_mocks/philip.trad"]
+        line_13 = LoadData().readTradFile()[12]
+        assert line_13 == "SUPPORT_TYPE  4    TOP     200        200       3" 
