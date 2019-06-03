@@ -1,0 +1,142 @@
+{
+    "build": 1001,
+    "starting_point": [0,0,0],
+    "sections":{
+        "section_1":{
+            "bf_top": "500",
+            "bw": "200",
+            "d": "450",
+            "df": "150",
+            "w_offset": "150"
+        },
+        "section_2":{
+            "bf_top": "350",
+            "bw": "200",
+            "d": "450",
+            "df": "250"
+        },
+        "section_3": { 
+            "bf_top": "350",
+            "bw": "200",
+            "d": "450",
+            "df": "200",
+            "w_offset": "150"
+        },
+        "section_4": {
+            "bw": "200",
+            "d": "300"
+        }
+    },
+    "link_types": {
+        "link_type_1":{
+            "diameter": "T8",
+            "bar_mark": "03",
+            "shape_code": 51,
+            "spacing": 200,
+            "offset": 0.05,
+            "length": 1
+        },
+        "link_type_2":{
+            "diameter": "T8",
+            "bar_mark": "03",
+            "shape_code": 51,
+            "spacing": 200,
+            "offset": 0.05
+        },
+        "link_type_3":{
+            "diameter": "T8",
+            "bar_mark": "03",
+            "shape_code": 51,
+            "spacing": 150
+        }
+        
+    },
+    "supports_types":{
+        "support_type_1":{
+            "column_top": {
+                "section_d": "200",
+                "section_b": "200",
+                "column_h_m": "3"
+            },
+            "column_bottom": {
+                "section_d": "200",
+                "section_b": "200",
+                "column_h_m": "3"
+            }
+        },
+        "support_type_2":{
+            "column_bottom": {
+                "section_d": "200",
+                "section_b": "300",
+                "column_h_m": "3"
+            }
+        }
+    },
+    "beams":{
+        "beam_1": {
+            "beam_depth": "450.",
+            "spans":{
+                "span_1":{
+                    "length_m": "4.15",
+                    "section": "section_1",
+                    "links": ["link_type_1", "link_type_2", "link_type_3"]
+                },
+                "span_2":{
+                    "length_m": "3",
+                    "section_left": "section_1",
+                    "links": ["link_type_3"]
+                },
+                "span_3":{
+                    "length_m": "3.2",
+                    "section_left": "section_4",
+                    "section_right": "section_4",
+                    "links": ["link_type_2"]
+                },
+                "span_4":{
+                    "length_m": "2",
+                    "section_left": "section_3",
+                    "links": ["link_type_3"]
+                }
+            },
+            "supports":{
+                "support_1": ["support_type_1", "A"],
+                "support_2": ["support_type_2", "B"],
+                "support_3": ["support_type_1", "C"],
+                "support_4": ["support_type_2", "D"],
+                "support_5": ["support_type_1", "E"]
+            }
+        },
+        "beam_2": {
+            "beam_depth": "450.",
+            "spans":{
+                "span_1":{
+                    "length_m": "4.15",
+                    "section_left": "section_2",
+                    "links": ["link_type_3"]
+                },
+                "span_2":{
+                    "length_m": "3",
+                    "section_right": "section_4",
+                    "links": ["link_type_1"]
+                },
+                "span_3":{
+                    "length_m": "3.2",
+                    "section": "section_1",
+                    "links": ["link_type_2"]
+                },
+                "span_4":{
+                    "length_m": "2",
+                    "section_left": "section_3",
+                    "links": ["link_type_3"]
+                }
+            },
+            "supports":{
+                "support_1": ["support_type_1", "2"],
+                "support_2": ["support_type_2", "3"],
+                "support_3": ["support_type_1", "4"],
+                "support_4": ["support_type_2", "5"],
+                "support_5": ["support_type_1", "6"]
+            }
+        }
+    }
+}

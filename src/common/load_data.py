@@ -45,6 +45,10 @@ class LoadData:
         return self.loadJson("assests/header_attribs.json")
 
     def getInputData(self):
+        '''
+        Method used to load json input data. 
+        This has been deprecated and now trad files are being used to load data
+        '''
         self.path = self.getInputFilePath()
         if (self.path == ""):
             return Messages.showError(MessageCodes.ERROR_WRONG_FILE_PATH)

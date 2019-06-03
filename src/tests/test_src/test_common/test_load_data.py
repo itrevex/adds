@@ -8,9 +8,11 @@ from tests.test_mocks.test_mocks_common.load_data_mocks import LoadDataMocks
 from tests.test_mocks.shared_mocks import SharedMocks
 from json.decoder import JSONDecodeError
 
+sys.argv = ["test file path", "./tests/test_mocks/philip.trad"]
+
 class TestLoadData:
 
-    def test_input(self, LoadDataLayerContent):
+    def test_getLayers(self, LoadDataLayerContent):
         assert LoadData().getLayers() == LoadDataLayerContent
 
     def test_removeComments(self, LoadDataLines):
@@ -21,13 +23,13 @@ class TestLoadData:
         path = LoadData().getFile("fake_path.dxf")
         assert os.path.basename(path) == 'fake_path.dxf'
 
-    @mock.patch.object(LoadData, 'loadJson', LoadDataMocks.fake_loadJson)
-    @mock.patch('src.common.load_data.json.load')
-    @mock.patch('src.common.load_data.io.open')
-    def test_loadJson(self, fake_json_load, fake_io_open):
-        fake_json_load.return_value = "json_loaded"
-        fake_io_open.return_value = 'file_opened'
-        assert LoadData().loadJson('fake path') == 'json_loaded: fake path'
+    def test_loadJson(self):
+        path = LoadData().getInputFilePath()
+        head = os.path.split(path)[0]
+        path = os.path.join(head, "input_data.json")
+        beam_supports = LoadData().loadJson(path)["beams"]["beam_2"]["supports"]["support_1"]
+
+        assert beam_supports == ["support_type_1", "2"]
 
     @mock.patch('src.common.load_data.json.load')
     @mock.patch('src.common.load_data.io.open')
@@ -71,7 +73,6 @@ class TestLoadData:
 
     # @mock.patch.object(sys, 'argv', "../../mocks/philip.trad")
     def test_getInputFilePath(self):
-        sys.argv = ["test file path", "./tests/test_mocks/philip.trad"]
         path = LoadData().getInputFilePath()
         tail = os.path.basename(path)
         assert tail == "philip.trad"
@@ -91,9 +92,12 @@ class TestLoadData:
 
         fake_sys_exit.return_value = "system exited"
         fake_showError.return_value == "an error occured"
-        with mock.patch.object(LoadData, 'getInputFilePath', LoadDataMocks.fake_getInputFilePath):
-            with mock.patch.object(LoadData, 'loadJson', LoadDataMocks.fake_loadJson):
-                assert LoadData().getInputData() == 'json_loaded: fake input path'
+        path = LoadData().getInputFilePath()
+        with mock.patch.object(LoadData, 'getInputFilePath') as fake_file_input:
+            head = os.path.split(path)[0]
+            fake_file_input.return_value = os.path.join(head, "input_data.json")
+            assert LoadData().getInputData()['beams']['beam_1']['beam_depth'] == '450.'
+        
 
     @mock.patch('src.common.load_data.sys.exit')
     @mock.patch.object(Messages, 'showError')
@@ -104,9 +108,10 @@ class TestLoadData:
 
         fake_sys_exit.return_value = "system exited"
         fake_showError.return_value == "an error occured"
-        with mock.patch.object(LoadData, 'getInputFilePath', return_value=""),\
-            mock.patch.object(LoadData, 'loadJson', LoadDataMocks.fake_loadJson):
+
+        with mock.patch.object(LoadData, 'getInputFilePath', return_value=""):
             assert LoadData().getInputData() == 'system exited'
+
         
     @mock.patch('src.common.load_data.sys.exit') 
     def test_getOutPutFile(self, fake_sys_exit):
@@ -142,6 +147,5 @@ class TestLoadData:
             assert mock_print.call_count == 3
             
     def test_readTradFile(self):
-        sys.argv = ["test file path", "./tests/test_mocks/philip.trad"]
         line_13 = LoadData().readTradFile()[12]
         assert line_13 == "SUPPORT_TYPE  4    TOP     200        200       3" 
