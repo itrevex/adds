@@ -1,5 +1,5 @@
 import pytest
-from tests.mocks.common.load_data_mocks import LoadDataMocks
+from tests.test_mocks.test_mocks_common.load_data_mocks import LoadDataMocks
 
 @pytest.fixture
 def LoadDataLayerContent():

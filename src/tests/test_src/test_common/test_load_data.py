@@ -1,9 +1,9 @@
 # from beams.details.all_beams import AllBeams
-from src.common.load_data import LoadData
-from src.common.messages import Messages
-from src.common.message_codes import MessageCode, MessageCodes
-from mocks.common.load_data_mocks import LoadDataMocks
-from mocks.shared_mocks import SharedMocks
+from common.load_data import LoadData
+from common.messages import Messages
+from common.message_codes import MessageCode, MessageCodes
+from tests.test_mocks.test_mocks_common.load_data_mocks import LoadDataMocks
+from tests.test_mocks.shared_mocks import SharedMocks
 import sys, pytest
 import unittest.mock as mock
 from json.decoder import JSONDecodeError

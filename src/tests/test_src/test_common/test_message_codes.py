@@ -1,4 +1,4 @@
-from src.common.message_codes import MessageCode
+from common.message_codes import MessageCode
 
 class TestLoadData:
     def init(self):

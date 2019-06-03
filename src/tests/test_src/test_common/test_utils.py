@@ -1,7 +1,7 @@
 from unittest.mock import patch, PropertyMock, Mock
 import datetime
-from src.common.utils import Utils
-from tests.mocks.common.utils_mocks import UtilsMocks
+from common.utils import Utils
+from tests.test_mocks.test_mocks_common.utils_mocks import UtilsMocks
 from freezegun import freeze_time
 
 class TestUtils():

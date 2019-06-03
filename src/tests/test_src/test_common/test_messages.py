@@ -1,9 +1,9 @@
 import unittest.mock as mock
 import sys, inspect
 
-from src.common.messages import Messages
-from tests.mocks.shared_mocks import SharedMocks
-from tests.mocks.common.messages_mocks import MessagesMocks
+from common.messages import Messages
+from tests.test_mocks.shared_mocks import SharedMocks
+from tests.test_mocks.test_mocks_common.messages_mocks import MessagesMocks
 
 class TestMessages():
     def test_promptUser(self):
