@@ -83,13 +83,13 @@ class DxfDraw:
                 dim.points, dim.angle, layer=layer)
             dimline.render(self.msp)
 
-    def getLayer(self, layer_name):
+    def getLayer(self, layer_name='0'):
         try:
             return self.layers[layer_name][Constants.LAYER_NAME]
         except KeyError:
             return '0'
         
-    def getLayerColor(self, layer_name):
+    def getLayerColor(self, layer_name='0'):
         try:
             return self.layers[layer_name][Constants.LAYER_COLOR]
         except KeyError:
